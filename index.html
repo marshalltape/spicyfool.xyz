@@ -55,17 +55,33 @@ h1 {
 .enter-arrow {
     font-size: 3rem;
     color: red;
-    margin-top: 25px;
+    margin-bottom: 20px;
     animation: float 1.5s infinite ease-in-out;
     text-shadow: 0 0 15px red;
 }
 
-a {
+.telegram-arrow {
+    font-size: 2rem;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    animation: float 1.5s infinite ease-in-out;
+}
+
+.telegram-btn {
     color: red;
     text-decoration: none;
-    font-size: 1.5rem;
-    margin-top: 20px;
+    font-size: 1.3rem;
+    border: 2px solid red;
+    padding: 12px 28px;
+    border-radius: 999px;
     text-shadow: 0 0 10px red;
+    box-shadow: 0 0 15px rgba(255,0,0,0.5);
+    transition: 0.3s;
+}
+
+.telegram-btn:hover {
+    background: red;
+    color: black;
 }
 
 @keyframes flicker {
@@ -82,7 +98,7 @@ a {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(10px);
+        transform: translateY(8px);
     }
     100% {
         transform: translateY(0px);
@@ -96,20 +112,22 @@ a {
 <div class="scanlines"></div>
 
 <div id="enter" onclick="enterSite()">
+    <div class="enter-arrow">↑</div>
     <h1>SOFICATED</h1>
-    <div class="enter-arrow">↓</div>
 </div>
 
 <div id="main">
     <h1>@spicefool</h1>
 
-    <a href="https://t.me/soficateded" target="_blank">
+    <div class="telegram-arrow">↓</div>
+
+    <a class="telegram-btn" href="https://t.me/soficateded" target="_blank">
         TELEGRAM
     </a>
 </div>
 
 <audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+    <source src="OsamaSon — X & Sex (www.lightaudio.ru).mp3" type="audio/mpeg">
 </audio>
 
 <script>

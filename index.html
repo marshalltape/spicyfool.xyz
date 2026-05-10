@@ -6,133 +6,123 @@
 <title>spicyfool.xyz</title>
 
 <style>
-body {
-    margin: 0;
+body{
+    margin:0;
     background:
-        linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+        linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.88)),
         url('https://i.imgur.com/5QFZ6yX.jpeg');
-    background-size: cover;
-    background-position: center;
-    color: red;
-    font-family: monospace;
-    overflow: hidden;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-size:cover;
+    background-position:center;
+    color:red;
+    font-family:monospace;
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.scanlines {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
+.scanlines{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:repeating-linear-gradient(
         to bottom,
         rgba(255,0,0,0.03),
         rgba(255,0,0,0.03) 1px,
         transparent 1px,
         transparent 4px
     );
-    pointer-events: none;
+    pointer-events:none;
 }
 
-#enter {
-    text-align: center;
-    cursor: pointer;
+#enter,
+#bio,
+#main{
+    position:absolute;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 }
 
-#main {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
+#bio,
+#main{
+    display:none;
 }
 
-.enter-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.enter-wrapper{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    cursor:pointer;
 }
 
-.enter-arrow {
-    font-size: 3rem;
-    color: red;
-    animation: pulse 1.2s infinite;
-    text-shadow: 0 0 15px red;
+.enter-arrow{
+    font-size:3rem;
+    animation:pulseX 1.2s infinite;
+    text-shadow:0 0 15px red;
 }
 
-h1 {
-    font-size: 4rem;
-    text-shadow: 0 0 20px red;
-    animation: flicker 1.5s infinite alternate;
-    margin: 0;
+h1{
+    font-size:4rem;
+    text-shadow:0 0 20px red;
+    margin:0;
+    animation:flicker 1.5s infinite alternate;
 }
 
-.telegram-arrow {
-    font-size: 2rem;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    animation: pulseY 1.2s infinite;
-    text-shadow: 0 0 10px red;
+#typed-text{
+    width:85%;
+    max-width:1100px;
+    font-size:1.4rem;
+    line-height:2.4rem;
+    text-shadow:0 0 10px red;
+    white-space:pre-line;
 }
 
-.telegram-btn {
-    color: red;
-    text-decoration: none;
-    font-size: 1.3rem;
-    border: 2px solid red;
-    padding: 12px 28px;
-    border-radius: 999px;
-    text-shadow: 0 0 10px red;
-    box-shadow: 0 0 15px rgba(255,0,0,0.5);
-    background: rgba(0,0,0,0.5);
-    transition: 0.3s;
+.telegram-arrow{
+    font-size:2rem;
+    margin-top:25px;
+    margin-bottom:10px;
+    animation:pulseY 1.2s infinite;
+    text-shadow:0 0 10px red;
 }
 
-.telegram-btn:hover {
-    background: red;
-    color: black;
+.telegram-btn{
+    color:red;
+    text-decoration:none;
+    font-size:1.3rem;
+    border:2px solid red;
+    padding:12px 28px;
+    border-radius:999px;
+    text-shadow:0 0 10px red;
+    box-shadow:0 0 15px rgba(255,0,0,0.5);
+    background:rgba(0,0,0,0.45);
+    transition:0.3s;
 }
 
-@keyframes flicker {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0.75;
-    }
+.telegram-btn:hover{
+    background:red;
+    color:black;
 }
 
-@keyframes pulse {
-    0% {
-        transform: translateX(0px);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(8px);
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateX(0px);
-        opacity: 1;
-    }
+@keyframes flicker{
+    from{opacity:1;}
+    to{opacity:0.72;}
 }
 
-@keyframes pulseY {
-    0% {
-        transform: translateY(0px);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(8px);
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(0px);
-        opacity: 1;
-    }
+@keyframes pulseX{
+    0%{transform:translateX(0px);}
+    50%{transform:translateX(8px);}
+    100%{transform:translateX(0px);}
+}
+
+@keyframes pulseY{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(8px);}
+    100%{transform:translateY(0px);}
 }
 </style>
 </head>
@@ -141,13 +131,15 @@ h1 {
 
 <div class="scanlines"></div>
 
-<div id="enter" onclick="enterSite()">
-
-    <div class="enter-wrapper">
+<div id="enter">
+    <div class="enter-wrapper" onclick="startSequence()">
         <div class="enter-arrow">→</div>
         <h1>SOFICATED</h1>
     </div>
+</div>
 
+<div id="bio">
+    <div id="typed-text"></div>
 </div>
 
 <div id="main">
@@ -167,40 +159,73 @@ h1 {
 </audio>
 
 <script>
-function enterSite() {
+
+const text =
+"𝚜𝚘𝚏𝚒𝚌𝚊𝚝𝚎𝚍\n\n𝚘𝚜𝚒𝚗𝚝 • 𝚍𝚒𝚐𝚒𝚝𝚊𝚕 𝚏𝚘𝚘𝚝𝚙𝚛𝚒𝚗𝚝 𝚊𝚗𝚊𝚕𝚢𝚜𝚒𝚜 • 𝚝𝚛𝚊𝚌𝚎 𝚖𝚒𝚗𝚒𝚖𝚒𝚣𝚊𝚝𝚒𝚘𝚗\n\n𝚍𝚊𝚝𝚊 𝚌𝚘𝚛𝚛𝚎𝚕𝚊𝚝𝚒𝚘𝚗\n𝚙𝚛𝚒𝚟𝚊𝚌𝚢 𝚛𝚎𝚜𝚎𝚊𝚛𝚌𝚑\n𝚍𝚒𝚐𝚒𝚝𝚊𝚕 𝚊𝚗𝚘𝚗𝚢𝚖𝚒𝚝𝚢";
+
+function startSequence(){
 
     const enter = document.getElementById("enter");
+    const bio = document.getElementById("bio");
     const main = document.getElementById("main");
+    const typed = document.getElementById("typed-text");
     const music = document.getElementById("music");
 
     enter.style.transition = "all 0.8s ease";
     enter.style.opacity = "0";
-    enter.style.transform = "scale(1.08)";
 
     setTimeout(() => {
 
         enter.style.display = "none";
+        bio.style.display = "flex";
 
-        setTimeout(() => {
+        music.play();
 
-            main.style.display = "flex";
-            main.style.opacity = "0";
-            main.style.transform = "translateY(60px)";
+        let i = 0;
 
-            setTimeout(() => {
+        const typing = setInterval(() => {
 
-                main.style.transition = "all 1.2s ease";
-                main.style.opacity = "1";
-                main.style.transform = "translateY(0px)";
+            typed.innerHTML += text.charAt(i);
 
-            }, 50);
+            i++;
 
-            music.play();
+            if(i >= text.length){
 
-        }, 1000);
+                clearInterval(typing);
 
-    }, 800);
+                setTimeout(() => {
+
+                    bio.style.transition = "all 1s ease";
+                    bio.style.opacity = "0";
+
+                    setTimeout(() => {
+
+                        bio.style.display = "none";
+
+                        main.style.display = "flex";
+                        main.style.opacity = "0";
+                        main.style.transform = "translateY(60px)";
+
+                        setTimeout(() => {
+
+                            main.style.transition = "all 1.2s ease";
+                            main.style.opacity = "1";
+                            main.style.transform = "translateY(0px)";
+
+                        },50);
+
+                    },1000);
+
+                },2000);
+
+            }
+
+        },18);
+
+    },800);
+
 }
+
 </script>
 
 </body>

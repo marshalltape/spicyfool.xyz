@@ -74,20 +74,17 @@ h1{
 }
 
 #typed-text{
-    width:85%;
-    max-width:1100px;
-    font-size:1.4rem;
-    line-height:2.4rem;
+    width:80%;
+    max-width:900px;
+    font-size:1.6rem;
+    line-height:2.2rem;
     text-shadow:0 0 10px red;
     white-space:pre-line;
 }
 
-.telegram-arrow{
-    font-size:2rem;
-    margin-top:25px;
-    margin-bottom:10px;
-    animation:pulseY 1.2s infinite;
-    text-shadow:0 0 10px red;
+.telegram-container{
+    margin-top:40px;
+    opacity:0;
 }
 
 .telegram-btn{
@@ -95,17 +92,30 @@ h1{
     text-decoration:none;
     font-size:1.3rem;
     border:2px solid red;
-    padding:12px 28px;
+    padding:14px 32px;
     border-radius:999px;
-    text-shadow:0 0 10px red;
-    box-shadow:0 0 15px rgba(255,0,0,0.5);
+    text-shadow:0 0 12px red;
+    box-shadow:0 0 20px rgba(255,0,0,0.5);
     background:rgba(0,0,0,0.45);
-    transition:0.3s;
+    display:inline-block;
 }
 
-.telegram-btn:hover{
-    background:red;
-    color:black;
+.telegram-logo{
+    width:90px;
+    margin-top:30px;
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(14%)
+        sepia(96%)
+        saturate(7161%)
+        hue-rotate(356deg)
+        brightness(104%)
+        contrast(124%);
+}
+
+.glitch{
+    animation:glitch 0.22s infinite;
 }
 
 @keyframes flicker{
@@ -119,10 +129,92 @@ h1{
     100%{transform:translateX(0px);}
 }
 
-@keyframes pulseY{
-    0%{transform:translateY(0px);}
-    50%{transform:translateY(8px);}
-    100%{transform:translateY(0px);}
+@keyframes glitch {
+
+    0%{
+        opacity:1;
+        filter:
+        drop-shadow(0 0 8px red);
+        clip-path: inset(0 0 0 0);
+    }
+
+    8%{
+        clip-path: inset(15% 0 55% 0);
+        filter:
+        drop-shadow(-6px 0 red)
+        drop-shadow(6px 0 darkred);
+    }
+
+    12%{
+        clip-path: inset(80% 0 5% 0);
+    }
+
+    18%{
+        clip-path: inset(25% 0 35% 0);
+        opacity:0.65;
+    }
+
+    24%{
+        clip-path: inset(60% 0 12% 0);
+    }
+
+    30%{
+        clip-path: inset(8% 0 72% 0);
+        filter:
+        drop-shadow(8px 0 red)
+        drop-shadow(-8px 0 darkred);
+    }
+
+    36%{
+        clip-path: inset(45% 0 22% 0);
+    }
+
+    42%{
+        clip-path: inset(5% 0 80% 0);
+        opacity:0.8;
+    }
+
+    48%{
+        clip-path: inset(70% 0 10% 0);
+    }
+
+    54%{
+        clip-path: inset(18% 0 45% 0);
+        filter:
+        drop-shadow(-5px 0 red)
+        drop-shadow(5px 0 darkred);
+    }
+
+    60%{
+        clip-path: inset(85% 0 3% 0);
+    }
+
+    68%{
+        clip-path: inset(38% 0 28% 0);
+        opacity:0.7;
+    }
+
+    76%{
+        clip-path: inset(12% 0 65% 0);
+    }
+
+    84%{
+        clip-path: inset(55% 0 18% 0);
+    }
+
+    92%{
+        clip-path: inset(20% 0 40% 0);
+        filter:
+        drop-shadow(10px 0 red)
+        drop-shadow(-10px 0 darkred);
+    }
+
+    100%{
+        opacity:1;
+        clip-path: inset(0 0 0 0);
+        filter:
+        drop-shadow(0 0 18px red);
+    }
 }
 </style>
 </head>
@@ -146,11 +238,20 @@ h1{
 
     <h1>@spicefool</h1>
 
-    <div class="telegram-arrow">↓</div>
+    <div class="telegram-container">
 
-    <a class="telegram-btn" href="https://t.me/soficateded" target="_blank">
-        TELEGRAM
-    </a>
+        <a class="telegram-btn glitch"
+           href="https://t.me/soficateded"
+           target="_blank">
+            TELEGRAM
+        </a>
+
+        <br>
+
+        <img class="telegram-logo glitch"
+        src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+
+    </div>
 
 </div>
 
@@ -161,7 +262,7 @@ h1{
 <script>
 
 const text =
-"𝚜𝚘𝚏𝚒𝚌𝚊𝚝𝚎𝚍\n\n𝚘𝚜𝚒𝚗𝚝 • 𝚍𝚒𝚐𝚒𝚝𝚊𝚕 𝚏𝚘𝚘𝚝𝚙𝚛𝚒𝚗𝚝 𝚊𝚗𝚊𝚕𝚢𝚜𝚒𝚜 • 𝚝𝚛𝚊𝚌𝚎 𝚖𝚒𝚗𝚒𝚖𝚒𝚣𝚊𝚝𝚒𝚘𝚗\n\n𝚍𝚊𝚝𝚊 𝚌𝚘𝚛𝚛𝚎𝚕𝚊𝚝𝚒𝚘𝚗\n𝚙𝚛𝚒𝚟𝚊𝚌𝚢 𝚛𝚎𝚜𝚎𝚊𝚛𝚌𝚑\n𝚍𝚒𝚐𝚒𝚝𝚊𝚕 𝚊𝚗𝚘𝚗𝚢𝚖𝚒𝚝𝚢";
+"𝚜𝚘𝚏𝚒𝚌𝚊𝚝𝚎𝚍\n\n𝚘𝚜𝚒𝚗𝚝 • 𝚙𝚛𝚒𝚟𝚊𝚌𝚢 • 𝚍𝚒𝚐𝚒𝚝𝚊𝚕 𝚊𝚗𝚘𝚗𝚢𝚖𝚒𝚝𝚢";
 
 function startSequence(){
 
@@ -170,6 +271,7 @@ function startSequence(){
     const main = document.getElementById("main");
     const typed = document.getElementById("typed-text");
     const music = document.getElementById("music");
+    const tg = document.querySelector(".telegram-container");
 
     enter.style.transition = "all 0.8s ease";
     enter.style.opacity = "0";
@@ -214,13 +316,28 @@ function startSequence(){
 
                         },50);
 
+                        setTimeout(() => {
+
+                            tg.style.transition = "opacity 0.3s ease";
+                            tg.style.opacity = "1";
+
+                            setTimeout(() => {
+
+                                document.querySelectorAll(".glitch").forEach(el=>{
+                                    el.classList.remove("glitch");
+                                });
+
+                            },4000);
+
+                        },1000);
+
                     },1000);
 
                 },2000);
 
             }
 
-        },18);
+        },40);
 
     },800);
 

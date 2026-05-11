@@ -32,10 +32,10 @@ body{
 
     font-family:'Press Start 2P', monospace;
 
-    color:#ff3434;
+    color:#ff3131;
 }
 
-/* background */
+/* BACKGROUND */
 
 .bg{
 
@@ -43,21 +43,23 @@ body{
     inset:0;
 
     background:
-    linear-gradient(rgba(0,0,0,.92), rgba(0,0,0,.97)),
+    linear-gradient(rgba(0,0,0,.94), rgba(0,0,0,.98)),
     url('https://i.imgur.com/5QFZ6yX.jpeg');
 
     background-size:cover;
     background-position:center;
 
     filter:
-    brightness(.08)
-    contrast(1.55)
-    saturate(.12);
+    brightness(.06)
+    contrast(1.7)
+    saturate(.08);
 
     transform:scale(1.08);
+
+    image-rendering:pixelated;
 }
 
-/* crt */
+/* CRT */
 
 .crt{
 
@@ -76,18 +78,18 @@ body{
 
     repeating-linear-gradient(
         to right,
-        rgba(255,0,0,.02),
-        rgba(255,0,0,.02) 1px,
+        rgba(255,0,0,.025),
+        rgba(255,0,0,.025) 1px,
         transparent 1px,
         transparent 3px
     );
 
-    opacity:.2;
+    opacity:.24;
 
     pointer-events:none;
 }
 
-/* vignette */
+/* VIGNETTE */
 
 .vignette{
 
@@ -97,14 +99,14 @@ body{
     background:
     radial-gradient(
         circle at center,
-        transparent 45%,
-        rgba(0,0,0,.75) 100%
+        transparent 40%,
+        rgba(0,0,0,.84) 100%
     );
 
     pointer-events:none;
 }
 
-/* sections */
+/* SECTIONS */
 
 #enter,
 #bio,
@@ -131,52 +133,65 @@ body{
     display:none;
 }
 
-/* first */
+/* FIRST */
 
 .enter{
 
     display:flex;
 
     align-items:center;
+    justify-content:center;
 
-    gap:14px;
+    gap:22px;
 
     cursor:pointer;
+
+    transform:translateY(-8px);
 }
 
 .arrow{
 
     font-size:22px;
 
-    color:#ff3434;
+    color:#ff3131;
+
+    opacity:.72;
 
     animation:pulse 1s infinite;
 }
+
+/* PIXEL OVAL */
 
 .logo{
 
     position:relative;
 
-    font-size:clamp(26px,5vw,56px);
+    font-size:clamp(20px,5vw,48px);
 
-    color:#ff3434;
+    color:#ff3131;
 
     text-transform:uppercase;
+
+    padding:28px 42px;
+
+    background:#040404;
+
+    border:3px solid #ff3131;
+
+    border-radius:999px;
 
     text-shadow:
     0 0 10px rgba(255,0,0,.18);
 
-    border:2px solid #ff3434;
-
-    padding:22px 34px;
-
-    background:#050505;
-
     box-shadow:
-    0 0 14px rgba(255,0,0,.08);
+    0 0 16px rgba(255,0,0,.08);
+
+    animation:
+    logoGlitch 2.2s infinite,
+    logoFloat 4s ease-in-out infinite;
 }
 
-/* second */
+/* SECOND */
 
 #typed{
 
@@ -184,17 +199,17 @@ body{
 
     max-width:1200px;
 
-    line-height:2.3;
+    line-height:2.6;
 
     font-size:14px;
 
-    color:#ff3434;
+    color:#ff3131;
 
     text-shadow:
     0 0 6px rgba(255,0,0,.1);
 }
 
-/* third */
+/* THIRD */
 
 .telegram-box{
 
@@ -214,11 +229,13 @@ body{
 
     padding:18px 30px;
 
-    border:2px solid #ff3434;
+    border:2px solid #ff3131;
 
-    background:#050505;
+    border-radius:999px;
 
-    color:#ff3434;
+    background:#040404;
+
+    color:#ff3131;
 
     text-decoration:none;
 
@@ -232,10 +249,10 @@ body{
     width:18px;
     height:18px;
 
-    fill:#ff3434;
+    fill:#ff3131;
 }
 
-/* windows */
+/* WINDOWS */
 
 .fake-windows{
 
@@ -256,7 +273,7 @@ body{
 
     background:#050505;
 
-    border:2px solid #ff3434;
+    border:2px solid #ff3131;
 
     overflow:hidden;
 
@@ -275,7 +292,7 @@ body{
 
     height:18px;
 
-    background:#ff3434;
+    background:#ff3131;
 }
 
 .window::after{
@@ -301,29 +318,33 @@ body{
 
     image-rendering:pixelated;
 
+    mix-blend-mode:screen;
+
+    transform:
+    scale(1.12)
+    translateZ(0);
+
     filter:
 
     grayscale(1)
 
     contrast(2)
 
-    brightness(.55)
+    brightness(.52)
 
     sepia(1)
 
     hue-rotate(-45deg)
 
-    saturate(15);
+    saturate(16);
 
     opacity:.34;
-
-    transform:scale(1.08);
 }
 
-/* popup */
+/* POPUP */
 
 .popup{
-    animation:popup .08s linear forwards;
+    animation:popup .22s cubic-bezier(.16,.84,.44,1) forwards;
 }
 
 @keyframes popup{
@@ -333,8 +354,21 @@ body{
         opacity:0;
 
         transform:
-        scale(.86)
-        translateY(12px);
+        scale(.78)
+        translateY(20px);
+
+        filter:blur(4px);
+    }
+
+    60%{
+
+        opacity:1;
+
+        transform:
+        scale(1.03)
+        translateY(-2px);
+
+        filter:blur(0);
     }
 
     to{
@@ -344,20 +378,22 @@ body{
         transform:
         scale(1)
         translateY(0);
+
+        filter:blur(0);
     }
 }
 
-/* misc */
+/* MISC */
 
 .fade{
-    animation:fade .7s ease forwards;
+    animation:fade .8s ease forwards;
 }
 
 @keyframes fade{
 
     from{
         opacity:0;
-        transform:translateY(12px);
+        transform:translateY(14px);
     }
 
     to{
@@ -405,13 +441,55 @@ body{
     }
 
     50%{
-        transform:translateX(6px);
+        transform:translateX(7px);
         opacity:1;
     }
 
     100%{
         transform:translateX(0);
         opacity:.4;
+    }
+}
+
+@keyframes logoGlitch{
+
+    0%{
+        transform:translate(0);
+    }
+
+    2%{
+        transform:translate(-2px,1px);
+    }
+
+    4%{
+        transform:translate(2px,-1px);
+    }
+
+    6%{
+        transform:translate(-1px,2px);
+    }
+
+    8%{
+        transform:translate(0);
+    }
+
+    100%{
+        transform:translate(0);
+    }
+}
+
+@keyframes logoFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-3px);
+    }
+
+    100%{
+        transform:translateY(0);
     }
 }
 
@@ -424,7 +502,7 @@ body{
 <div class="crt"></div>
 <div class="vignette"></div>
 
-<!-- windows -->
+<!-- WINDOWS -->
 
 <div class="fake-windows">
 
@@ -454,21 +532,21 @@ body{
 
 </div>
 
-<!-- first -->
+<!-- FIRST -->
 
 <div id="enter">
 
 <div class="enter" onclick="startSequence()">
 
-<div class="arrow">>></div>
+<div class="arrow">>>></div>
 
-<div class="arrow">></div>
+<div class="arrow">>></div>
 
 <div class="logo">
 SOFICATED
 </div>
 
-<div class="arrow"><</div>
+<div class="arrow"><<</div>
 
 <div class="arrow"><<<</div>
 
@@ -476,7 +554,7 @@ SOFICATED
 
 </div>
 
-<!-- second -->
+<!-- SECOND -->
 
 <div id="bio">
 
@@ -484,7 +562,7 @@ SOFICATED
 
 </div>
 
-<!-- third -->
+<!-- THIRD -->
 
 <div id="main">
 
@@ -534,7 +612,7 @@ const tg = document.querySelector(".telegram-box");
 
 const windows = document.querySelectorAll(".window");
 
-enter.style.transition=".6s ease";
+enter.style.transition=".7s ease";
 enter.style.opacity="0";
 
 setTimeout(()=>{
@@ -575,7 +653,7 @@ setTimeout(()=>{
 tg.style.transition="1s ease";
 tg.style.opacity="1";
 
-/* first wave */
+/* FIRST WAVE */
 
 windows.forEach((win,index)=>{
 
@@ -587,7 +665,7 @@ win.classList.add("popup");
 
 });
 
-/* second wave */
+/* SECOND MASSIVE WAVE */
 
 setTimeout(()=>{
 
@@ -598,7 +676,19 @@ const positions = [
 { top:"76%", left:"36%" },
 { top:"64%", left:"82%" },
 { top:"42%", left:"52%" },
-{ top:"82%", left:"68%" }
+{ top:"82%", left:"68%" },
+
+{ top:"12%", left:"48%" },
+{ top:"26%", left:"12%" },
+{ top:"74%", left:"58%" },
+{ top:"52%", left:"28%" },
+{ top:"20%", left:"58%" },
+{ top:"62%", left:"12%" },
+
+{ top:"8%", left:"56%" },
+{ top:"44%", left:"84%" },
+{ top:"72%", left:"76%" },
+{ top:"28%", left:"40%" }
 
 ];
 
@@ -612,8 +702,8 @@ clone.classList.remove("popup");
 
 clone.style.opacity = "0";
 
-clone.style.top = positions[index].top;
-clone.style.left = positions[index].left;
+clone.style.top = positions[index % positions.length].top;
+clone.style.left = positions[index % positions.length].left;
 
 document.querySelector(".fake-windows")
 .appendChild(clone);
@@ -624,13 +714,13 @@ clone.classList.add("popup");
 
 });
 
-},index * 500);
+},index * 650);
 
 });
 
 },3000);
 
-/* remove glitch */
+/* KEEP GLITCH LONGER */
 
 setTimeout(()=>{
 
@@ -640,7 +730,7 @@ el.classList.remove("glitch");
 
 });
 
-},9000);
+},16000);
 
 },700);
 

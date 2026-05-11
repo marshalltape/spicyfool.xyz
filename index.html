@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>spicefool</title>
+<title>spicyfool.xyz</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
@@ -22,26 +22,20 @@
     -webkit-font-smoothing:none;
 }
 
-html{
-    image-rendering:pixelated;
-}
-
 body{
 
     background:#000;
 
     overflow:hidden;
 
-    font-family:'Press Start 2P', monospace;
-
     height:100vh;
 
-    color:#ff2d2d;
+    font-family:'Press Start 2P', monospace;
 
-    text-rendering:geometricPrecision;
+    color:#ff3131;
 }
 
-/* bg */
+/* background */
 
 .bg{
 
@@ -61,8 +55,6 @@ body{
     saturate(.15);
 
     transform:scale(1.08);
-
-    image-rendering:pixelated;
 }
 
 /* crt */
@@ -76,8 +68,8 @@ body{
 
     repeating-linear-gradient(
         to bottom,
-        rgba(255,255,255,.05),
-        rgba(255,255,255,.05) 1px,
+        rgba(255,255,255,.045),
+        rgba(255,255,255,.045) 1px,
         transparent 1px,
         transparent 4px
     ),
@@ -106,13 +98,13 @@ body{
     radial-gradient(
         circle at center,
         transparent 45%,
-        rgba(0,0,0,.75) 100%
+        rgba(0,0,0,.76) 100%
     );
 
     pointer-events:none;
 }
 
-/* windows */
+/* fake windows */
 
 .fake-windows{
 
@@ -133,7 +125,7 @@ body{
 
     background:#050505;
 
-    border:2px solid #ff2d2d;
+    border:2px solid #ff3131;
 
     overflow:hidden;
 
@@ -152,7 +144,7 @@ body{
 
     height:18px;
 
-    background:#ff2d2d;
+    background:#ff3131;
 }
 
 .window::after{
@@ -210,7 +202,7 @@ body{
         opacity:0;
 
         transform:
-        scale(.85)
+        scale(.86)
         translateY(12px);
     }
 
@@ -251,7 +243,7 @@ body{
     display:none;
 }
 
-/* first */
+/* first slide */
 
 .enter{
 
@@ -259,7 +251,7 @@ body{
 
     align-items:center;
 
-    gap:14px;
+    gap:16px;
 
     cursor:pointer;
 }
@@ -268,26 +260,22 @@ body{
 
     font-size:28px;
 
-    color:#ff2d2d;
-
     animation:pulse 1s infinite;
 }
 
 .logo{
 
-    font-size:clamp(18px, 4vw, 42px);
+    font-size:clamp(18px,4vw,42px);
 
-    line-height:1.6;
+    color:#ff3131;
 
-    color:#ff2d2d;
+    text-transform:uppercase;
 
     text-shadow:
     0 0 8px rgba(255,0,0,.2);
-
-    text-transform:uppercase;
 }
 
-/* second */
+/* second slide */
 
 #typed{
 
@@ -295,17 +283,17 @@ body{
 
     max-width:900px;
 
-    line-height:2.2;
+    line-height:2.4;
 
     font-size:12px;
 
-    color:#ff2d2d;
+    color:#ff3131;
 
     text-shadow:
-    0 0 6px rgba(255,0,0,.1);
+    0 0 6px rgba(255,0,0,.12);
 }
 
-/* third */
+/* third slide */
 
 .telegram-box{
 
@@ -325,11 +313,11 @@ body{
 
     padding:18px 28px;
 
-    border:2px solid #ff2d2d;
+    border:2px solid #ff3131;
 
     background:#050505;
 
-    color:#ff2d2d;
+    color:#ff3131;
 
     text-decoration:none;
 
@@ -343,7 +331,7 @@ body{
     width:18px;
     height:18px;
 
-    fill:#ff2d2d;
+    fill:#ff3131;
 }
 
 /* glitch */
@@ -379,17 +367,17 @@ body{
     }
 }
 
-/* misc */
+/* fade */
 
 .fade{
-    animation:fade .6s ease forwards;
+    animation:fade .7s ease forwards;
 }
 
 @keyframes fade{
 
     from{
         opacity:0;
-        transform:translateY(10px);
+        transform:translateY(12px);
     }
 
     to{
@@ -397,6 +385,8 @@ body{
         transform:translateY(0);
     }
 }
+
+/* pulse */
 
 @keyframes pulse{
 
@@ -513,7 +503,7 @@ TELEGRAM
 <script>
 
 const text =
-"OSINT • PRIVACY • DIGITAL ANONYMITY";
+"osint • privacy tools • network research";
 
 function startSequence(){
 
@@ -570,7 +560,7 @@ setTimeout(()=>{
 tg.style.transition="1s ease";
 tg.style.opacity="1";
 
-/* windows */
+/* first wave */
 
 windows.forEach((win,index)=>{
 
@@ -582,6 +572,32 @@ win.classList.add("popup");
 
 });
 
+/* second wave */
+
+setTimeout(()=>{
+
+windows.forEach((win,index)=>{
+
+setTimeout(()=>{
+
+const clone = win.cloneNode(true);
+
+clone.style.opacity = "0";
+
+document.querySelector(".fake-windows").appendChild(clone);
+
+setTimeout(()=>{
+
+clone.classList.add("popup");
+
+},20);
+
+},index * 500);
+
+});
+
+},3000);
+
 /* remove glitch */
 
 setTimeout(()=>{
@@ -592,17 +608,17 @@ el.classList.remove("glitch");
 
 });
 
-},4500);
+},5000);
 
 },700);
 
 },900);
 
-},1700);
+},1200);
 
 }
 
-},60);
+},110);
 
 },650);
 

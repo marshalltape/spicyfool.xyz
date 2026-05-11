@@ -106,7 +106,7 @@ body{
     pointer-events:none;
 }
 
-/* BLOOD RAIN */
+/* BLOOD */
 
 .blood-rain{
 
@@ -191,7 +191,17 @@ body{
     display:none;
 }
 
-/* DELAY INTRO */
+/* REAL INTRO DELAY */
+
+#enter{
+
+    opacity:0;
+
+    animation:
+    enterShow .2s linear forwards;
+
+    animation-delay:2s;
+}
 
 #enter .enter{
 
@@ -200,7 +210,14 @@ body{
     animation:
     introReveal 1.4s ease forwards;
 
-    animation-delay:2s;
+    animation-delay:2.1s;
+}
+
+@keyframes enterShow{
+
+    to{
+        opacity:1;
+    }
 }
 
 @keyframes introReveal{
@@ -494,8 +511,7 @@ body{
 
     mix-blend-mode:screen;
 
-    transform:
-    scale(1.12);
+    transform:scale(1.12);
 
     filter:
 
@@ -866,12 +882,8 @@ enter.style.display="none";
 
 bio.style.display="flex";
 
-/* stop intro */
-
 intro.pause();
 intro.currentTime = 0;
-
-/* start main */
 
 music.play();
 
@@ -905,8 +917,6 @@ setTimeout(()=>{
 tg.style.transition="1s ease";
 tg.style.opacity="1";
 
-/* first wave */
-
 windows.forEach((win,index)=>{
 
 setTimeout(()=>{
@@ -916,80 +926,6 @@ win.classList.add("popup");
 },index * 500);
 
 });
-
-/* second wave */
-
-setTimeout(()=>{
-
-const positions = [
-
-{ top:"6%", left:"32%" },
-{ top:"18%", left:"82%" },
-{ top:"76%", left:"36%" },
-{ top:"64%", left:"82%" },
-{ top:"42%", left:"52%" },
-{ top:"82%", left:"68%" },
-
-{ top:"12%", left:"48%" },
-{ top:"26%", left:"12%" },
-{ top:"74%", left:"58%" },
-{ top:"52%", left:"28%" },
-{ top:"20%", left:"58%" },
-{ top:"62%", left:"12%" },
-
-{ top:"8%", left:"56%" },
-{ top:"44%", left:"84%" },
-{ top:"72%", left:"76%" },
-{ top:"28%", left:"40%" }
-
-];
-
-for(let i = 0; i < 18; i++){
-
-setTimeout(()=>{
-
-const source =
-windows[i % windows.length];
-
-const clone =
-source.cloneNode(true);
-
-clone.classList.remove("popup");
-
-clone.style.opacity = "0";
-
-clone.style.top =
-positions[i % positions.length].top;
-
-clone.style.left =
-positions[i % positions.length].left;
-
-document.querySelector(".fake-windows")
-.appendChild(clone);
-
-requestAnimationFrame(()=>{
-
-clone.classList.add("popup");
-
-});
-
-},i * 650);
-
-}
-
-},3000);
-
-/* remove glitch later */
-
-setTimeout(()=>{
-
-document.querySelectorAll(".glitch").forEach(el=>{
-
-el.classList.remove("glitch");
-
-});
-
-},16000);
 
 },700);
 

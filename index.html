@@ -35,7 +35,7 @@ body{
     color:#ff3131;
 }
 
-/* BACKGROUND */
+/* BG */
 
 .bg{
 
@@ -106,6 +106,64 @@ body{
     pointer-events:none;
 }
 
+/* BLOOD RAIN */
+
+.blood-rain{
+
+    position:fixed;
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    opacity:.22;
+
+    mix-blend-mode:screen;
+}
+
+.drop{
+
+    position:absolute;
+
+    top:-20%;
+
+    width:2px;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(255,0,0,0),
+        rgba(255,0,0,.9)
+    );
+
+    filter:blur(.4px);
+
+    animation:bloodFall linear infinite;
+}
+
+@keyframes bloodFall{
+
+    from{
+
+        transform:
+        translateY(-120vh);
+
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    to{
+
+        transform:
+        translateY(120vh);
+
+        opacity:.7;
+    }
+}
+
 /* SECTIONS */
 
 #enter,
@@ -133,6 +191,54 @@ body{
     display:none;
 }
 
+/* DELAY INTRO */
+
+#enter .enter{
+
+    opacity:0;
+
+    animation:
+    introReveal 1.4s ease forwards;
+
+    animation-delay:2s;
+}
+
+@keyframes introReveal{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(24px)
+        scale(.92);
+
+        filter:blur(10px);
+    }
+
+    60%{
+
+        opacity:1;
+
+        transform:
+        translateY(-2px)
+        scale(1.02);
+
+        filter:blur(0);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0)
+        scale(1);
+
+        filter:blur(0);
+    }
+}
+
 /* ENTER */
 
 .enter{
@@ -145,8 +251,6 @@ body{
     gap:20px;
 
     cursor:pointer;
-
-    transform:translateY(-10px);
 }
 
 .arrow{
@@ -201,7 +305,7 @@ body{
     logoFloat 4s ease-in-out infinite;
 }
 
-/* REAL GLITCH */
+/* GLITCH */
 
 .logo::before,
 .logo::after{
@@ -268,9 +372,6 @@ body{
     font-size:14px;
 
     color:#ff3131;
-
-    text-shadow:
-    0 0 6px rgba(255,0,0,.1);
 }
 
 /* THIRD */
@@ -394,8 +495,7 @@ body{
     mix-blend-mode:screen;
 
     transform:
-    scale(1.12)
-    translateZ(0);
+    scale(1.12);
 
     filter:
 
@@ -456,7 +556,7 @@ body{
     }
 }
 
-/* MISC */
+/* ANIMS */
 
 .fade{
     animation:fade .8s ease forwards;
@@ -604,6 +704,27 @@ body{
 <div class="crt"></div>
 <div class="vignette"></div>
 
+<!-- BLOOD -->
+
+<div class="blood-rain">
+
+<div class="drop" style="left:2%;height:320px;animation-duration:7s;"></div>
+<div class="drop" style="left:6%;height:260px;animation-duration:5s;"></div>
+<div class="drop" style="left:12%;height:410px;animation-duration:8s;"></div>
+<div class="drop" style="left:18%;height:340px;animation-duration:6s;"></div>
+<div class="drop" style="left:24%;height:290px;animation-duration:7s;"></div>
+<div class="drop" style="left:31%;height:460px;animation-duration:9s;"></div>
+<div class="drop" style="left:39%;height:300px;animation-duration:5s;"></div>
+<div class="drop" style="left:46%;height:380px;animation-duration:8s;"></div>
+<div class="drop" style="left:54%;height:270px;animation-duration:6s;"></div>
+<div class="drop" style="left:63%;height:430px;animation-duration:9s;"></div>
+<div class="drop" style="left:71%;height:330px;animation-duration:7s;"></div>
+<div class="drop" style="left:79%;height:260px;animation-duration:5s;"></div>
+<div class="drop" style="left:87%;height:410px;animation-duration:8s;"></div>
+<div class="drop" style="left:94%;height:300px;animation-duration:6s;"></div>
+
+</div>
+
 <!-- WINDOWS -->
 
 <div class="fake-windows">
@@ -691,11 +812,30 @@ TELEGRAM
 
 </div>
 
+<!-- INTRO MUSIC -->
+
+<audio id="introMusic" loop>
+<source src="memo.mp3.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN MUSIC -->
+
 <audio id="music">
 <source src="sound.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+
+window.addEventListener("load",()=>{
+
+const intro =
+document.getElementById("introMusic");
+
+intro.volume = 0.7;
+
+intro.play().catch(()=>{});
+
+});
 
 const text =
 "osint • privacy tools • network research";
@@ -710,6 +850,9 @@ const typed = document.getElementById("typed");
 
 const music = document.getElementById("music");
 
+const intro =
+document.getElementById("introMusic");
+
 const tg = document.querySelector(".telegram-box");
 
 const windows = document.querySelectorAll(".window");
@@ -722,6 +865,13 @@ setTimeout(()=>{
 enter.style.display="none";
 
 bio.style.display="flex";
+
+/* stop intro */
+
+intro.pause();
+intro.currentTime = 0;
+
+/* start main */
 
 music.play();
 
@@ -755,7 +905,7 @@ setTimeout(()=>{
 tg.style.transition="1s ease";
 tg.style.opacity="1";
 
-/* FIRST WAVE */
+/* first wave */
 
 windows.forEach((win,index)=>{
 
@@ -767,7 +917,7 @@ win.classList.add("popup");
 
 });
 
-/* SECOND WAVE */
+/* second wave */
 
 setTimeout(()=>{
 
@@ -829,7 +979,7 @@ clone.classList.add("popup");
 
 },3000);
 
-/* KEEP LONGER */
+/* remove glitch later */
 
 setTimeout(()=>{
 

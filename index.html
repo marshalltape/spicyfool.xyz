@@ -1,51 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>spicyfool.xyz</title>
+
+<title>spicefool</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
-body{
+
+*{
     margin:0;
-    background:
-        linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.88)),
-        url('https://i.imgur.com/5QFZ6yX.jpeg');
-    background-size:cover;
-    background-position:center;
-    color:red;
-    font-family:monospace;
-    overflow:hidden;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    padding:0;
+    box-sizing:border-box;
+
+    image-rendering:pixelated;
+    image-rendering:crisp-edges;
+
+    -webkit-font-smoothing:none;
 }
 
-.scanlines{
+html{
+    image-rendering:pixelated;
+}
+
+body{
+
+    background:#000;
+
+    overflow:hidden;
+
+    font-family:'Press Start 2P', monospace;
+
+    height:100vh;
+
+    color:#ff2d2d;
+
+    text-rendering:geometricPrecision;
+}
+
+/* bg */
+
+.bg{
+
     position:fixed;
-    width:100%;
-    height:100%;
-    background:repeating-linear-gradient(
+    inset:0;
+
+    background:
+    linear-gradient(rgba(0,0,0,.93), rgba(0,0,0,.97)),
+    url('https://i.imgur.com/5QFZ6yX.jpeg');
+
+    background-size:cover;
+    background-position:center;
+
+    filter:
+    brightness(.08)
+    contrast(1.6)
+    saturate(.15);
+
+    transform:scale(1.08);
+
+    image-rendering:pixelated;
+}
+
+/* crt */
+
+.crt{
+
+    position:fixed;
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
         to bottom,
-        rgba(255,0,0,0.03),
-        rgba(255,0,0,0.03) 1px,
+        rgba(255,255,255,.05),
+        rgba(255,255,255,.05) 1px,
         transparent 1px,
         transparent 4px
+    ),
+
+    repeating-linear-gradient(
+        to right,
+        rgba(255,0,0,.02),
+        rgba(255,0,0,.02) 1px,
+        transparent 1px,
+        transparent 3px
     );
+
+    opacity:.2;
+
     pointer-events:none;
 }
+
+/* vignette */
+
+.vignette{
+
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at center,
+        transparent 45%,
+        rgba(0,0,0,.75) 100%
+    );
+
+    pointer-events:none;
+}
+
+/* windows */
+
+.fake-windows{
+
+    position:fixed;
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+}
+
+.window{
+
+    position:absolute;
+
+    width:260px;
+    height:170px;
+
+    background:#050505;
+
+    border:2px solid #ff2d2d;
+
+    overflow:hidden;
+
+    opacity:0;
+}
+
+.window::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:18px;
+
+    background:#ff2d2d;
+}
+
+.window::after{
+
+    content:"[] [] []";
+
+    position:absolute;
+
+    top:4px;
+    left:8px;
+
+    font-size:8px;
+
+    color:#000;
+}
+
+.window img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    image-rendering:pixelated;
+
+    filter:
+
+    grayscale(1)
+
+    contrast(2)
+
+    brightness(.5)
+
+    sepia(1)
+
+    hue-rotate(-45deg)
+
+    saturate(15);
+
+    opacity:.32;
+
+    transform:scale(1.08);
+}
+
+/* popup */
+
+.popup{
+    animation:popup .08s linear forwards;
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        scale(.85)
+        translateY(12px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        translateY(0);
+    }
+}
+
+/* sections */
 
 #enter,
 #bio,
 #main{
+
     position:absolute;
+
     width:100%;
+    height:100%;
+
     display:flex;
     flex-direction:column;
+
     justify-content:center;
     align-items:center;
+
     text-align:center;
+
+    z-index:10;
 }
 
 #bio,
@@ -53,293 +251,360 @@ body{
     display:none;
 }
 
-.enter-wrapper{
+/* first */
+
+.enter{
+
     display:flex;
+
     align-items:center;
-    gap:20px;
+
+    gap:14px;
+
     cursor:pointer;
 }
 
-.enter-arrow{
-    font-size:3rem;
-    animation:pulseX 1.2s infinite;
-    text-shadow:0 0 15px red;
+.arrow{
+
+    font-size:28px;
+
+    color:#ff2d2d;
+
+    animation:pulse 1s infinite;
 }
 
-h1{
-    font-size:4rem;
-    text-shadow:0 0 20px red;
-    margin:0;
-    animation:flicker 1.5s infinite alternate;
+.logo{
+
+    font-size:clamp(18px, 4vw, 42px);
+
+    line-height:1.6;
+
+    color:#ff2d2d;
+
+    text-shadow:
+    0 0 8px rgba(255,0,0,.2);
+
+    text-transform:uppercase;
 }
 
-#typed-text{
+/* second */
+
+#typed{
+
     width:80%;
+
     max-width:900px;
-    font-size:1.6rem;
-    line-height:2.2rem;
-    text-shadow:0 0 10px red;
-    white-space:pre-line;
+
+    line-height:2.2;
+
+    font-size:12px;
+
+    color:#ff2d2d;
+
+    text-shadow:
+    0 0 6px rgba(255,0,0,.1);
 }
 
-.telegram-container{
-    margin-top:40px;
+/* third */
+
+.telegram-box{
+
+    margin-top:38px;
+
     opacity:0;
 }
 
-.telegram-btn{
-    color:red;
+.telegram{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    padding:18px 28px;
+
+    border:2px solid #ff2d2d;
+
+    background:#050505;
+
+    color:#ff2d2d;
+
     text-decoration:none;
-    font-size:1.3rem;
-    border:2px solid red;
-    padding:14px 32px;
-    border-radius:999px;
-    text-shadow:0 0 12px red;
-    box-shadow:0 0 20px rgba(255,0,0,0.5);
-    background:rgba(0,0,0,0.45);
-    display:inline-block;
+
+    font-size:10px;
+
+    text-transform:uppercase;
 }
 
-.telegram-logo{
-    width:90px;
-    margin-top:30px;
-    filter:
-        brightness(0)
-        saturate(100%)
-        invert(14%)
-        sepia(96%)
-        saturate(7161%)
-        hue-rotate(356deg)
-        brightness(104%)
-        contrast(124%);
+.telegram svg{
+
+    width:18px;
+    height:18px;
+
+    fill:#ff2d2d;
 }
+
+/* glitch */
 
 .glitch{
-    animation:glitch 0.22s infinite;
+    animation:glitch 1s infinite;
 }
 
-@keyframes flicker{
-    from{opacity:1;}
-    to{opacity:0.72;}
-}
-
-@keyframes pulseX{
-    0%{transform:translateX(0px);}
-    50%{transform:translateX(8px);}
-    100%{transform:translateX(0px);}
-}
-
-@keyframes glitch {
+@keyframes glitch{
 
     0%{
-        opacity:1;
-        filter:
-        drop-shadow(0 0 8px red);
-        clip-path: inset(0 0 0 0);
+        transform:none;
     }
 
     8%{
-        clip-path: inset(15% 0 55% 0);
-        filter:
-        drop-shadow(-6px 0 red)
-        drop-shadow(6px 0 darkred);
+        transform:translateX(-1px);
+    }
+
+    10%{
+        transform:translateX(1px);
     }
 
     12%{
-        clip-path: inset(80% 0 5% 0);
+        clip-path:inset(12% 0 45% 0);
     }
 
-    18%{
-        clip-path: inset(25% 0 35% 0);
-        opacity:0.65;
-    }
-
-    24%{
-        clip-path: inset(60% 0 12% 0);
-    }
-
-    30%{
-        clip-path: inset(8% 0 72% 0);
-        filter:
-        drop-shadow(8px 0 red)
-        drop-shadow(-8px 0 darkred);
-    }
-
-    36%{
-        clip-path: inset(45% 0 22% 0);
-    }
-
-    42%{
-        clip-path: inset(5% 0 80% 0);
-        opacity:0.8;
-    }
-
-    48%{
-        clip-path: inset(70% 0 10% 0);
-    }
-
-    54%{
-        clip-path: inset(18% 0 45% 0);
-        filter:
-        drop-shadow(-5px 0 red)
-        drop-shadow(5px 0 darkred);
-    }
-
-    60%{
-        clip-path: inset(85% 0 3% 0);
-    }
-
-    68%{
-        clip-path: inset(38% 0 28% 0);
-        opacity:0.7;
-    }
-
-    76%{
-        clip-path: inset(12% 0 65% 0);
-    }
-
-    84%{
-        clip-path: inset(55% 0 18% 0);
-    }
-
-    92%{
-        clip-path: inset(20% 0 40% 0);
-        filter:
-        drop-shadow(10px 0 red)
-        drop-shadow(-10px 0 darkred);
+    14%{
+        transform:none;
     }
 
     100%{
-        opacity:1;
-        clip-path: inset(0 0 0 0);
-        filter:
-        drop-shadow(0 0 18px red);
+        transform:none;
     }
 }
+
+/* misc */
+
+.fade{
+    animation:fade .6s ease forwards;
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:translateX(0);
+        opacity:.4;
+    }
+
+    50%{
+        transform:translateX(6px);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateX(0);
+        opacity:.4;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="scanlines"></div>
+<div class="bg"></div>
+<div class="crt"></div>
+<div class="vignette"></div>
+
+<!-- windows -->
+
+<div class="fake-windows">
+
+<div class="window" style="top:8%;left:5%;">
+<img src="https://i.imgur.com/9f4QK3x.jpeg">
+</div>
+
+<div class="window" style="top:14%;left:68%;">
+<img src="https://i.imgur.com/v0JXau2.jpeg">
+</div>
+
+<div class="window" style="top:70%;left:10%;">
+<img src="https://i.imgur.com/Doq8GQx.jpeg">
+</div>
+
+<div class="window" style="top:58%;left:64%;">
+<img src="https://i.imgur.com/4g7K6YX.jpeg">
+</div>
+
+<div class="window" style="top:34%;left:74%;">
+<img src="https://i.imgur.com/YR7xV7L.jpeg">
+</div>
+
+<div class="window" style="top:46%;left:4%;">
+<img src="https://i.imgur.com/sT8hJfN.jpeg">
+</div>
+
+</div>
+
+<!-- first -->
 
 <div id="enter">
-    <div class="enter-wrapper" onclick="startSequence()">
-        <div class="enter-arrow">→</div>
-        <h1>SOFICATED</h1>
-    </div>
+
+<div class="enter" onclick="startSequence()">
+
+<div class="arrow">></div>
+
+<div class="logo">
+SOFICATED
 </div>
 
-<div id="bio">
-    <div id="typed-text"></div>
 </div>
+
+</div>
+
+<!-- second -->
+
+<div id="bio">
+
+<div id="typed"></div>
+
+</div>
+
+<!-- third -->
 
 <div id="main">
 
-    <h1>@spicefool</h1>
+<div class="logo fade">
+@SPICEFool
+</div>
 
-    <div class="telegram-container">
+<div class="telegram-box">
 
-        <a class="telegram-btn glitch"
-           href="https://t.me/soficateded"
-           target="_blank">
-            TELEGRAM
-        </a>
+<a
+class="telegram glitch"
+href="https://t.me/soficateded"
+target="_blank">
 
-        <br>
+<svg viewBox="0 0 24 24">
+<path d="M9.993 15.674 9.58 21.49c.588 0 .843-.253 1.149-.556l2.757-2.64 5.714 4.182c1.048.583 1.79.276 2.073-.97L24 1.748 23.999 1.747c.333-1.553-.561-2.16-1.582-1.78L1.33 8.07C-.162 8.65-.14 9.48 1.077 9.853l5.77 1.804L20.24 3.34c.63-.417 1.203-.186.73.23"/>
+</svg>
 
-        <img class="telegram-logo glitch"
-        src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+TELEGRAM
 
-    </div>
+</a>
+
+</div>
 
 </div>
 
 <audio id="music">
-    <source src="sound.mp3.mp3" type="audio/mpeg">
+<source src="sound.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
 const text =
-"𝚜𝚘𝚏𝚒𝚌𝚊𝚝𝚎𝚍\n\n𝚘𝚜𝚒𝚗𝚝 • 𝚙𝚛𝚒𝚟𝚊𝚌𝚢 • 𝚍𝚒𝚐𝚒𝚝𝚊𝚕 𝚊𝚗𝚘𝚗𝚢𝚖𝚒𝚝𝚢";
+"OSINT • PRIVACY • DIGITAL ANONYMITY";
 
 function startSequence(){
 
-    const enter = document.getElementById("enter");
-    const bio = document.getElementById("bio");
-    const main = document.getElementById("main");
-    const typed = document.getElementById("typed-text");
-    const music = document.getElementById("music");
-    const tg = document.querySelector(".telegram-container");
+const enter = document.getElementById("enter");
+const bio = document.getElementById("bio");
+const main = document.getElementById("main");
 
-    enter.style.transition = "all 0.8s ease";
-    enter.style.opacity = "0";
+const typed = document.getElementById("typed");
 
-    setTimeout(() => {
+const music = document.getElementById("music");
 
-        enter.style.display = "none";
-        bio.style.display = "flex";
+const tg = document.querySelector(".telegram-box");
 
-        music.play();
+const windows = document.querySelectorAll(".window");
 
-        let i = 0;
+enter.style.transition=".6s ease";
+enter.style.opacity="0";
 
-        const typing = setInterval(() => {
+setTimeout(()=>{
 
-            typed.innerHTML += text.charAt(i);
+enter.style.display="none";
 
-            i++;
+bio.style.display="flex";
 
-            if(i >= text.length){
+music.play();
 
-                clearInterval(typing);
+let i = 0;
 
-                setTimeout(() => {
+const typing = setInterval(()=>{
 
-                    bio.style.transition = "all 1s ease";
-                    bio.style.opacity = "0";
+typed.innerHTML += text.charAt(i);
 
-                    setTimeout(() => {
+i++;
 
-                        bio.style.display = "none";
+if(i >= text.length){
 
-                        main.style.display = "flex";
-                        main.style.opacity = "0";
-                        main.style.transform = "translateY(60px)";
+clearInterval(typing);
 
-                        setTimeout(() => {
+setTimeout(()=>{
 
-                            main.style.transition = "all 1.2s ease";
-                            main.style.opacity = "1";
-                            main.style.transform = "translateY(0px)";
+bio.style.transition="1s ease";
+bio.style.opacity="0";
 
-                        },50);
+setTimeout(()=>{
 
-                        setTimeout(() => {
+bio.style.display="none";
 
-                            tg.style.transition = "opacity 0.3s ease";
-                            tg.style.opacity = "1";
+main.style.display="flex";
 
-                            setTimeout(() => {
+main.classList.add("fade");
 
-                                document.querySelectorAll(".glitch").forEach(el=>{
-                                    el.classList.remove("glitch");
-                                });
+setTimeout(()=>{
 
-                            },4000);
+tg.style.transition="1s ease";
+tg.style.opacity="1";
 
-                        },1000);
+/* windows */
 
-                    },1000);
+windows.forEach((win,index)=>{
 
-                },2000);
+setTimeout(()=>{
 
-            }
+win.classList.add("popup");
 
-        },40);
+},index * 500);
 
-    },800);
+});
+
+/* remove glitch */
+
+setTimeout(()=>{
+
+document.querySelectorAll(".glitch").forEach(el=>{
+
+el.classList.remove("glitch");
+
+});
+
+},4500);
+
+},700);
+
+},900);
+
+},1700);
+
+}
+
+},60);
+
+},650);
 
 }
 

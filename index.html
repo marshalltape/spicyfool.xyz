@@ -23,12 +23,14 @@ image-rendering:crisp-edges;
 }
 
 body{
+
 overflow:hidden;
 background:#000;
 height:100vh;
 
 font-family:'Press Start 2P', monospace;
-color:#ff2d2d;
+
+color:#ff3b3b;
 }
 
 /* =========================
@@ -36,9 +38,12 @@ FIRST SCENE
 ========================= */
 
 .first-scene{
+
 position:fixed;
 inset:0;
+
 z-index:1;
+
 transition:1s ease;
 }
 
@@ -52,7 +57,7 @@ inset:0;
 background:
 
 linear-gradient(
-rgba(0,0,0,.72),
+rgba(0,0,0,.68),
 rgba(0,0,0,.92)
 ),
 
@@ -352,7 +357,7 @@ saturate(.7);
 mix-blend-mode:normal;
 }
 
-/* POPUP */
+/* WINDOW POPUP */
 
 .popup{
 animation:popup .28s cubic-bezier(.16,.84,.44,1) forwards;
@@ -784,6 +789,8 @@ transform:translateY(0);
 <div class="drop" style="left:6%;height:430px;animation-duration:6s;"></div>
 <div class="drop" style="left:11%;height:610px;animation-duration:10s;"></div>
 <div class="drop" style="left:18%;height:480px;animation-duration:7s;"></div>
+<div class="drop" style="left:24%;height:390px;animation-duration:8s;"></div>
+<div class="drop" style="left:31%;height:700px;animation-duration:11s;"></div>
 
 </div>
 
@@ -872,6 +879,8 @@ TELEGRAM
 </div>
 
 </div>
+
+<!-- AUDIO -->
 
 <audio id="introMusic" loop>
 <source src="./memo.mp3.mp3" type="audio/mpeg">
@@ -973,6 +982,8 @@ setTimeout(()=>{
 
 tg.style.opacity="1";
 
+/* FIRST WINDOWS */
+
 windows.forEach((win,index)=>{
 
 setTimeout(()=>{
@@ -982,6 +993,103 @@ win.classList.add("popup");
 },index * 500);
 
 });
+
+/* WINDOWS OVER WINDOWS */
+
+setTimeout(()=>{
+
+const positions = [
+
+{ top:"6%", left:"32%" },
+{ top:"18%", left:"82%" },
+{ top:"76%", left:"36%" },
+{ top:"64%", left:"82%" },
+{ top:"42%", left:"52%" },
+{ top:"82%", left:"68%" },
+
+{ top:"12%", left:"48%" },
+{ top:"26%", left:"12%" },
+{ top:"74%", left:"58%" },
+{ top:"52%", left:"28%" },
+
+{ top:"20%", left:"58%" },
+{ top:"62%", left:"12%" },
+
+{ top:"8%", left:"56%" },
+{ top:"44%", left:"84%" },
+
+{ top:"72%", left:"76%" },
+{ top:"28%", left:"40%" }
+
+];
+
+/* 6 SECOND CHAOS */
+
+for(let i = 0; i < 60; i++){
+
+setTimeout(()=>{
+
+const source =
+windows[i % windows.length];
+
+const clone =
+source.cloneNode(true);
+
+clone.classList.remove("popup");
+
+clone.style.opacity = "0";
+
+clone.style.top =
+positions[
+Math.floor(
+Math.random() * positions.length
+)
+].top;
+
+clone.style.left =
+positions[
+Math.floor(
+Math.random() * positions.length
+)
+].left;
+
+clone.style.zIndex =
+Math.floor(Math.random()*20);
+
+document
+.querySelector(".fake-windows")
+.appendChild(clone);
+
+requestAnimationFrame(()=>{
+
+clone.classList.add("popup");
+
+});
+
+/* AUTO REMOVE */
+
+setTimeout(()=>{
+
+clone.style.transition=".5s ease";
+
+clone.style.opacity="0";
+
+clone.style.transform=
+"scale(.9)";
+
+setTimeout(()=>{
+
+clone.remove();
+
+},500);
+
+},6000);
+
+},i * 100);
+
+}
+
+},2500);
 
 },700);
 

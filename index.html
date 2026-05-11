@@ -23,13 +23,11 @@ image-rendering:crisp-edges;
 }
 
 body{
-
 overflow:hidden;
 background:#000;
 height:100vh;
 
 font-family:'Press Start 2P', monospace;
-
 color:#ff2d2d;
 }
 
@@ -38,12 +36,9 @@ FIRST SCENE
 ========================= */
 
 .first-scene{
-
 position:fixed;
 inset:0;
-
 z-index:1;
-
 transition:1s ease;
 }
 
@@ -61,20 +56,19 @@ rgba(0,0,0,.72),
 rgba(0,0,0,.92)
 ),
 
-url('D505272C-274C-4DFB-8062-40CEAFD3C776.jpeg');
+url('./D505272C-274C-4DFB-8062-40CEAFD3C776.jpeg');
 
 background-size:cover;
 background-position:center;
 
 filter:
-brightness(.45)
-contrast(1.35)
-saturate(.85)
-blur(.3px);
+brightness(.48)
+contrast(1.2)
+saturate(.8);
 
 transform:scale(1.08);
 
-animation:bgMove 12s ease-in-out infinite alternate;
+animation:bgMove 14s ease-in-out infinite alternate;
 }
 
 @keyframes bgMove{
@@ -84,7 +78,7 @@ transform:scale(1.08) translateX(0);
 }
 
 to{
-transform:scale(1.12) translateX(-12px);
+transform:scale(1.12) translateX(-14px);
 }
 }
 
@@ -99,19 +93,19 @@ background:
 
 radial-gradient(
 circle at center,
-rgba(255,0,0,.12),
-transparent 60%
+rgba(255,0,0,.08),
+transparent 65%
 ),
 
 linear-gradient(
 to bottom,
-rgba(80,0,0,.14),
+rgba(70,0,0,.12),
 rgba(0,0,0,.2)
 );
 
 mix-blend-mode:screen;
 
-animation:fog 6s ease-in-out infinite;
+animation:fog 7s ease-in-out infinite;
 
 pointer-events:none;
 }
@@ -119,17 +113,17 @@ pointer-events:none;
 @keyframes fog{
 
 0%{
-opacity:.4;
+opacity:.35;
 transform:scale(1);
 }
 
 50%{
-opacity:.8;
-transform:scale(1.08);
+opacity:.7;
+transform:scale(1.06);
 }
 
 100%{
-opacity:.4;
+opacity:.35;
 transform:scale(1);
 }
 }
@@ -145,28 +139,28 @@ background:
 
 repeating-linear-gradient(
 to bottom,
-rgba(255,255,255,.04),
-rgba(255,255,255,.04) 1px,
+rgba(255,255,255,.03),
+rgba(255,255,255,.03) 1px,
 transparent 1px,
 transparent 4px
 ),
 
 repeating-linear-gradient(
 to right,
-rgba(255,0,0,.03),
-rgba(255,0,0,.03) 1px,
+rgba(255,0,0,.02),
+rgba(255,0,0,.02) 1px,
 transparent 1px,
 transparent 3px
 );
 
-opacity:.24;
+opacity:.22;
 
 pointer-events:none;
 
 z-index:999;
 }
 
-/* BLOOD RAIN */
+/* BLOOD */
 
 .blood-rain{
 
@@ -193,49 +187,24 @@ background:
 linear-gradient(
 to bottom,
 rgba(255,0,0,0),
-rgba(180,0,0,.95),
-rgba(255,40,40,1)
+rgba(180,0,0,.9),
+rgba(255,50,50,1)
 );
 
 box-shadow:
 
-0 0 14px rgba(255,0,0,.45),
-0 0 40px rgba(255,0,0,.12);
+0 0 12px rgba(255,0,0,.35),
+0 0 32px rgba(255,0,0,.1);
 
-opacity:.95;
-
-filter:blur(.3px);
+opacity:.9;
 
 animation:blood linear infinite;
-}
-
-.drop::after{
-
-content:"";
-
-position:absolute;
-
-bottom:-14px;
-left:-4px;
-
-width:12px;
-height:12px;
-
-background:#8f0000;
-
-border-radius:2px;
-
-filter:blur(.5px);
 }
 
 @keyframes blood{
 
 from{
-
-transform:
-translateY(-120vh)
-scaleY(.8);
-
+transform:translateY(-120vh);
 opacity:0;
 }
 
@@ -244,12 +213,8 @@ opacity:1;
 }
 
 to{
-
-transform:
-translateY(140vh)
-scaleY(1.2);
-
-opacity:.95;
+transform:translateY(140vh);
+opacity:.9;
 }
 }
 
@@ -264,7 +229,7 @@ background:
 radial-gradient(
 circle at center,
 transparent 35%,
-rgba(0,0,0,.92) 100%
+rgba(0,0,0,.9) 100%
 );
 
 pointer-events:none;
@@ -295,20 +260,31 @@ position:absolute;
 width:260px;
 height:170px;
 
-background:#050505;
+background:
 
-border:2px solid #ff2d2d;
+linear-gradient(
+145deg,
+rgba(15,0,0,.82),
+rgba(0,0,0,.94)
+);
 
-border-radius:22px;
+border:2px solid #ff3b3b;
+
+border-radius:24px;
 
 overflow:hidden;
 
 opacity:0;
 
+backdrop-filter:blur(2px);
+
 box-shadow:
 
-0 0 14px rgba(255,0,0,.12),
-0 0 60px rgba(255,0,0,.06);
+0 0 20px rgba(255,0,0,.16),
+
+0 0 90px rgba(255,0,0,.08),
+
+inset 0 0 18px rgba(255,0,0,.04);
 }
 
 .window::before{
@@ -321,9 +297,15 @@ top:0;
 left:0;
 right:0;
 
-height:18px;
+height:22px;
 
-background:#ff2d2d;
+background:
+
+linear-gradient(
+to right,
+#ff3b3b,
+#8f0000
+);
 
 z-index:2;
 }
@@ -334,14 +316,18 @@ content:"[] [] []";
 
 position:absolute;
 
-top:4px;
-left:8px;
+top:5px;
+left:10px;
 
 font-size:8px;
 
-color:#000;
+letter-spacing:2px;
+
+color:#140000;
 
 z-index:3;
+
+opacity:.95;
 }
 
 .window img{
@@ -353,25 +339,23 @@ object-fit:cover;
 
 image-rendering:pixelated;
 
-mix-blend-mode:screen;
+transform:scale(1.02);
 
-transform:scale(1.12);
-
-opacity:.42;
+opacity:.84;
 
 filter:
 
-grayscale(1)
-contrast(2.4)
-brightness(.52)
-sepia(1)
-hue-rotate(-55deg)
-saturate(18)
-blur(.2px);
+brightness(.92)
+contrast(1.45)
+saturate(.7);
+
+mix-blend-mode:normal;
 }
 
+/* POPUP */
+
 .popup{
-animation:popup .25s cubic-bezier(.16,.84,.44,1) forwards;
+animation:popup .28s cubic-bezier(.16,.84,.44,1) forwards;
 }
 
 @keyframes popup{
@@ -381,10 +365,12 @@ from{
 opacity:0;
 
 transform:
-scale(.75)
-translateY(20px);
+scale(.72)
+translateY(26px);
 
-filter:blur(4px);
+filter:
+blur(5px)
+brightness(1.4);
 }
 
 60%{
@@ -395,7 +381,9 @@ transform:
 scale(1.03)
 translateY(-2px);
 
-filter:blur(0);
+filter:
+blur(0)
+brightness(1.08);
 }
 
 to{
@@ -406,7 +394,7 @@ transform:
 scale(1)
 translateY(0);
 
-filter:blur(0);
+filter:none;
 }
 }
 
@@ -570,6 +558,43 @@ inset 0 0 20px rgba(255,0,0,.06);
 animation:
 float 4s ease-in-out infinite,
 logoGlitch 5s infinite;
+
+transition:
+transform .12s ease,
+background .18s ease,
+box-shadow .18s ease,
+border-color .18s ease,
+color .18s ease;
+}
+
+.logo:hover{
+
+transform:scale(1.02);
+
+box-shadow:
+
+0 0 18px rgba(255,0,0,.24),
+0 0 50px rgba(255,0,0,.12),
+inset 0 0 18px rgba(255,0,0,.08);
+}
+
+.logo:active{
+
+transform:
+scale(.96)
+translateY(2px);
+
+background:#220000;
+
+border-color:#ff5c5c;
+
+color:#ff6666;
+
+box-shadow:
+
+0 0 8px rgba(255,0,0,.2),
+inset 0 0 22px rgba(255,0,0,.22),
+0 0 40px rgba(255,0,0,.12);
 }
 
 @keyframes float{
@@ -625,96 +650,6 @@ filter:none;
 }
 }
 
-/* GLITCH */
-
-.logo::before,
-.logo::after{
-
-content:"SOFICATED";
-
-position:absolute;
-inset:0;
-
-display:flex;
-
-align-items:center;
-justify-content:center;
-
-background:#050505;
-
-border-radius:999px;
-}
-
-.logo::before{
-
-color:#ff0000;
-
-opacity:.7;
-
-mix-blend-mode:screen;
-
-animation:
-glitchTop 2s infinite linear;
-}
-
-.logo::after{
-
-color:#ff6666;
-
-opacity:.35;
-
-mix-blend-mode:screen;
-
-animation:
-glitchBottom 1.3s infinite linear;
-}
-
-@keyframes glitchTop{
-
-0%{
-clip-path:inset(0 0 85% 0);
-transform:translate(-2px,-2px);
-}
-
-20%{
-clip-path:inset(80% 0 5% 0);
-transform:translate(2px,2px);
-}
-
-40%{
-clip-path:inset(30% 0 40% 0);
-transform:translate(-1px,1px);
-}
-
-100%{
-clip-path:inset(0 0 85% 0);
-transform:translate(-2px,-2px);
-}
-}
-
-@keyframes glitchBottom{
-
-0%{
-clip-path:inset(85% 0 0 0);
-transform:translate(2px,2px);
-}
-
-20%{
-clip-path:inset(60% 0 10% 0);
-transform:translate(-2px,-1px);
-}
-
-40%{
-clip-path:inset(40% 0 40% 0);
-transform:translate(1px,2px);
-}
-
-100%{
-clip-path:inset(85% 0 0 0);
-transform:translate(2px,2px);
-}
-}
-
 /* SECOND */
 
 #typed{
@@ -760,6 +695,44 @@ text-decoration:none;
 color:#ff2d2d;
 
 font-size:10px;
+
+transition:
+
+transform .12s ease,
+background .18s ease,
+box-shadow .18s ease,
+border-color .18s ease,
+color .18s ease;
+}
+
+.telegram:hover{
+
+transform:scale(1.02);
+
+box-shadow:
+
+0 0 18px rgba(255,0,0,.24),
+0 0 50px rgba(255,0,0,.12),
+inset 0 0 18px rgba(255,0,0,.08);
+}
+
+.telegram:active{
+
+transform:
+scale(.96)
+translateY(2px);
+
+background:#220000;
+
+border-color:#ff5c5c;
+
+color:#ff6666;
+
+box-shadow:
+
+0 0 8px rgba(255,0,0,.2),
+inset 0 0 22px rgba(255,0,0,.22),
+0 0 40px rgba(255,0,0,.12);
 }
 
 .telegram svg{
@@ -768,6 +741,13 @@ width:18px;
 height:18px;
 
 fill:#ff2d2d;
+}
+
+.telegram:active svg{
+
+fill:#ff6666;
+
+transform:scale(.92);
 }
 
 .fade{
@@ -792,8 +772,6 @@ transform:translateY(0);
 
 <body>
 
-<!-- FIRST SCENE -->
-
 <div class="first-scene" id="firstScene">
 
 <div class="bg"></div>
@@ -806,10 +784,6 @@ transform:translateY(0);
 <div class="drop" style="left:6%;height:430px;animation-duration:6s;"></div>
 <div class="drop" style="left:11%;height:610px;animation-duration:10s;"></div>
 <div class="drop" style="left:18%;height:480px;animation-duration:7s;"></div>
-<div class="drop" style="left:24%;height:390px;animation-duration:8s;"></div>
-<div class="drop" style="left:31%;height:700px;animation-duration:11s;"></div>
-<div class="drop" style="left:37%;height:440px;animation-duration:6s;"></div>
-<div class="drop" style="left:43%;height:530px;animation-duration:9s;"></div>
 
 </div>
 
@@ -899,8 +873,6 @@ TELEGRAM
 
 </div>
 
-<!-- MUSIC -->
-
 <audio id="introMusic" loop>
 <source src="./memo.mp3.mp3" type="audio/mpeg">
 </audio>
@@ -922,12 +894,8 @@ intro.play().catch(()=>{});
 
 });
 
-/* TEXT */
-
 const text =
 "osint • privacy tools • network research";
-
-/* START */
 
 function startSequence(){
 
@@ -958,14 +926,10 @@ document.querySelector(".telegram-box");
 const windows =
 document.querySelectorAll(".window");
 
-/* INTRO OUT */
-
 enter.style.transition=".7s ease";
 enter.style.opacity="0";
 
 firstScene.style.opacity="0";
-
-/* NEXT */
 
 setTimeout(()=>{
 
@@ -980,8 +944,6 @@ intro.currentTime = 0;
 
 music.play().catch(()=>{});
 
-/* TYPING */
-
 let i = 0;
 
 const typing = setInterval(()=>{
@@ -994,14 +956,10 @@ if(i >= text.length){
 
 clearInterval(typing);
 
-/* SECOND OUT */
-
 setTimeout(()=>{
 
 bio.style.transition="1s ease";
 bio.style.opacity="0";
-
-/* MAIN */
 
 setTimeout(()=>{
 
@@ -1015,8 +973,6 @@ setTimeout(()=>{
 
 tg.style.opacity="1";
 
-/* FIRST WINDOWS */
-
 windows.forEach((win,index)=>{
 
 setTimeout(()=>{
@@ -1026,73 +982,6 @@ win.classList.add("popup");
 },index * 500);
 
 });
-
-/* WINDOWS OVER WINDOWS */
-
-setTimeout(()=>{
-
-const positions = [
-
-{ top:"6%", left:"32%" },
-{ top:"18%", left:"82%" },
-{ top:"76%", left:"36%" },
-{ top:"64%", left:"82%" },
-{ top:"42%", left:"52%" },
-{ top:"82%", left:"68%" },
-
-{ top:"12%", left:"48%" },
-{ top:"26%", left:"12%" },
-{ top:"74%", left:"58%" },
-{ top:"52%", left:"28%" },
-
-{ top:"20%", left:"58%" },
-{ top:"62%", left:"12%" },
-
-{ top:"8%", left:"56%" },
-{ top:"44%", left:"84%" },
-
-{ top:"72%", left:"76%" },
-{ top:"28%", left:"40%" }
-
-];
-
-for(let i = 0; i < 42; i++){
-
-setTimeout(()=>{
-
-const source =
-windows[i % windows.length];
-
-const clone =
-source.cloneNode(true);
-
-clone.classList.remove("popup");
-
-clone.style.opacity = "0";
-
-clone.style.top =
-positions[i % positions.length].top;
-
-clone.style.left =
-positions[i % positions.length].left;
-
-clone.style.zIndex =
-Math.floor(Math.random()*20);
-
-document.querySelector(".fake-windows")
-.appendChild(clone);
-
-requestAnimationFrame(()=>{
-
-clone.classList.add("popup");
-
-});
-
-},i * 380);
-
-}
-
-},2500);
 
 },700);
 

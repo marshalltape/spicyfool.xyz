@@ -1,624 +1,1023 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soficated // Kali Presentation</title>
+  <meta name="description" content="Kali Linux inspired cinematic landing with premium presentation transitions and Telegram destination mockup." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.82rem + 0.28vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.28vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.7vw, 1.5rem);
+      --text-xl: clamp(1.4rem, 1.1rem + 1.2vw, 2.1rem);
+      --text-2xl: clamp(2rem, 1.25rem + 2.5vw, 3.4rem);
+      --text-3xl: clamp(2.8rem, 1.3rem + 4vw, 5.2rem);
+      --text-hero: clamp(3.6rem, 1.1rem + 8vw, 8.5rem);
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
 
-<title>AMBER</title>
+      --radius-sm: 0.5rem;
+      --radius-md: 0.9rem;
+      --radius-lg: 1.4rem;
+      --radius-xl: 2rem;
+      --radius-2xl: 2.6rem;
+      --radius-full: 9999px;
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-display: 'JetBrains Mono', 'Inter', system-ui, monospace;
 
-<style>
+      --color-bg: #03070b;
+      --color-bg-2: #071018;
+      --color-surface: rgba(9, 18, 27, 0.76);
+      --color-surface-2: rgba(12, 24, 36, 0.86);
+      --color-panel: rgba(8, 14, 22, 0.92);
+      --color-card: rgba(10, 18, 28, 0.82);
+      --color-border: rgba(115, 194, 255, 0.16);
+      --color-border-strong: rgba(115, 194, 255, 0.3);
+      --color-divider: rgba(255, 255, 255, 0.08);
+      --color-text: #eef6ff;
+      --color-text-muted: #9aafc3;
+      --color-text-faint: #6f8396;
+      --color-primary: #4cc2ff;
+      --color-primary-strong: #18a7f4;
+      --color-primary-deep: #0d6ea7;
+      --color-primary-soft: rgba(76, 194, 255, 0.12);
+      --color-accent: #7af7c4;
+      --color-accent-soft: rgba(122, 247, 196, 0.1);
+      --color-telegram: #229ed9;
+      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.22);
+      --shadow-md: 0 24px 60px rgba(0, 0, 0, 0.36);
+      --shadow-lg: 0 40px 120px rgba(0, 0, 0, 0.52);
+      --glow-primary: 0 0 0 1px rgba(76, 194, 255, 0.16), 0 0 36px rgba(76, 194, 255, 0.14);
+      --transition-smooth: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slower: 820ms cubic-bezier(0.16, 1, 0.3, 1);
+      --content-wide: 1320px;
+      --content-default: 1080px;
+    }
 
-:root{
---amber:#C96A1B;
---bg:#F6F7F9;
---card:#FFFFFF;
---text:#111111;
---sub:#6E6E73;
---line:#E8E8EC;
-}
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      text-size-adjust: none;
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
 
-body{
-background:var(--bg);
-color:var(--text);
-overflow:hidden;
-}
+    body {
+      min-height: 100dvh;
+      overflow: hidden;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at 20% 18%, rgba(76, 194, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 80% 22%, rgba(24, 167, 244, 0.12), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(122, 247, 196, 0.06), transparent 35%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 48%, #020406 100%);
+    }
 
-button{
-border:none;
-cursor:pointer;
-}
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
 
-input{
-outline:none;
-border:none;
-}
+    button,
+    a {
+      color: inherit;
+      font: inherit;
+    }
 
-#loginScreen{
-position:fixed;
-inset:0;
-background:linear-gradient(
-180deg,
-#ffffff 0%,
-#f7f7f8 100%
-);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:999;
-}
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition:
+        transform var(--transition-smooth),
+        opacity var(--transition-smooth),
+        border-color var(--transition-smooth),
+        background var(--transition-smooth),
+        box-shadow var(--transition-smooth),
+        color var(--transition-smooth);
+    }
 
-.login-card{
-width:420px;
-background:white;
-border-radius:32px;
-padding:40px;
-box-shadow:
-0 20px 60px rgba(0,0,0,.08);
-}
+    :focus-visible {
+      outline: 2px solid rgba(76, 194, 255, 0.94);
+      outline-offset: 3px;
+    }
 
-.logo-large{
-width:96px;
-height:96px;
-margin:auto;
-display:block;
-object-fit:contain;
-}
+    .screen {
+      position: relative;
+      min-height: 100dvh;
+      isolation: isolate;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 20%, transparent 80%, rgba(255, 255, 255, 0.02)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018), transparent 16%, transparent 84%, rgba(255, 255, 255, 0.018));
+    }
 
-.amber-title{
-text-align:center;
-font-size:42px;
-font-weight:800;
-margin-top:18px;
-}
+    .screen::before,
+    .screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
 
-.amber-sub{
-text-align:center;
-color:var(--sub);
-margin-top:4px;
-margin-bottom:30px;
-}
+    .screen::before {
+      background:
+        radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.54) 100%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 14%, transparent 86%, rgba(255, 255, 255, 0.02));
+      z-index: 2;
+    }
 
-.field{
-width:100%;
-height:56px;
-background:#f3f3f5;
-border-radius:16px;
-padding:0 18px;
-margin-bottom:12px;
-font-size:15px;
-}
+    .screen::after {
+      z-index: 3;
+      opacity: 0.11;
+      background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.5) 0.7px, transparent 0.75px);
+      background-size: 4px 4px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.85));
+    }
 
-.login-btn{
-width:100%;
-height:56px;
-border-radius:16px;
-background:var(--amber);
-color:white;
-font-weight:700;
-font-size:15px;
-margin-top:8px;
-transition:.25s;
-}
+    .grid-overlay,
+    .scan-overlay,
+    .beam-overlay,
+    .particle-layer,
+    .rain-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
 
-.login-btn:hover{
-transform:translateY(-2px);
-}
+    .grid-overlay {
+      z-index: 0;
+      background:
+        linear-gradient(rgba(76, 194, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(76, 194, 255, 0.045) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.95), transparent 92%);
+      opacity: 0.75;
+    }
 
-.register-btn{
-width:100%;
-height:56px;
-border-radius:16px;
-background:#111;
-color:white;
-font-weight:700;
-font-size:15px;
-margin-top:12px;
-}
+    .scan-overlay {
+      z-index: 1;
+      background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.08) 48%, transparent 100%);
+      background-size: 100% 160px;
+      animation: scanLines 12s linear infinite;
+      opacity: 0.2;
+      mix-blend-mode: screen;
+    }
 
-#app{
-display:none;
-height:100vh;
-}
+    .beam-overlay {
+      z-index: 1;
+      background:
+        radial-gradient(circle at 12% 50%, rgba(76, 194, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 86% 40%, rgba(122, 247, 196, 0.08), transparent 20%),
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05), transparent 26%);
+      filter: blur(14px);
+      animation: beamPulse 8s ease-in-out infinite;
+      opacity: 0.9;
+    }
 
-.sidebar{
-width:260px;
-background:white;
-border-right:1px solid var(--line);
-padding:24px;
-display:flex;
-flex-direction:column;
-}
+    .particle-layer {
+      z-index: 1;
+      overflow: hidden;
+    }
 
-.brand{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:35px;
-}
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: rgba(150, 220, 255, 0.88);
+      box-shadow: 0 0 12px rgba(76, 194, 255, 0.36);
+      animation: particleFloat linear infinite;
+      opacity: 0.8;
+    }
 
-.brand img{
-width:42px;
-height:42px;
-}
+    .rain-layer {
+      z-index: 1;
+      overflow: hidden;
+      opacity: 0.9;
+    }
 
-.brand span{
-font-size:24px;
-font-weight:800;
-}
+    .rain-line {
+      position: absolute;
+      top: -20vh;
+      width: 1.5px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(94, 176, 255, 0.8), rgba(9, 69, 121, 0.98));
+      box-shadow: 0 0 10px rgba(76, 194, 255, 0.28);
+      animation: kaliRain linear infinite;
+      transform-origin: center top;
+    }
 
-.nav{
-display:flex;
-flex-direction:column;
-gap:10px;
-}
+    .rain-line::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      width: 6px;
+      height: 12px;
+      border-radius: 0 0 100% 100%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.55), rgba(76, 194, 255, 0.78) 40%, rgba(7, 63, 112, 0.95) 100%);
+    }
 
-.nav-item{
-height:48px;
-display:flex;
-align-items:center;
-padding:0 16px;
-border-radius:14px;
-font-weight:600;
-transition:.2s;
-}
+    .app {
+      position: relative;
+      z-index: 4;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: clamp(var(--space-5), 2.4vw, var(--space-10));
+    }
 
-.nav-item:hover{
-background:#f5f5f7;
-}
+    .hero {
+      width: min(100%, var(--content-wide));
+      min-height: min(92vh, 940px);
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      position: relative;
+    }
 
-.nav-item.active{
-background:rgba(201,106,27,.12);
-color:var(--amber);
-}
+    .intro-scene,
+    .telegram-scene {
+      width: min(100%, 1160px);
+      display: grid;
+      justify-items: center;
+      gap: clamp(var(--space-6), 2vw, var(--space-10));
+      transition: opacity var(--transition-slower), transform var(--transition-slower), visibility 0s linear var(--transition-slower);
+    }
 
-.user-box{
-margin-top:auto;
-background:#f6f6f8;
-border-radius:18px;
-padding:14px;
-display:flex;
-align-items:center;
-gap:12px;
-}
+    .intro-scene {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
 
-.avatar{
-width:42px;
-height:42px;
-border-radius:50%;
-background:var(--amber);
-}
+    .intro-scene.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(24px) scale(0.985);
+      pointer-events: none;
+    }
 
-.main{
-flex:1;
-display:flex;
-}
+    .telegram-scene {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, calc(-50% + 34px)) scale(0.97);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-.feed{
-flex:1;
-overflow:auto;
-padding:30px;
-}
+    .telegram-scene.is-visible {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity var(--transition-slower), transform var(--transition-slower), visibility 0s linear 0s;
+    }
 
-.rightbar{
-width:340px;
-border-left:1px solid var(--line);
-background:white;
-padding:24px;
-overflow:auto;
-}
+    .statusbar {
+      width: min(100%, 980px);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+      padding: var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      background: linear-gradient(180deg, rgba(11, 19, 29, 0.88), rgba(8, 14, 22, 0.72));
+      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
 
-.search{
-height:62px;
-background:white;
-border-radius:20px;
-padding:0 24px;
-width:100%;
-box-shadow:
-0 10px 30px rgba(0,0,0,.05);
-font-size:16px;
-margin-bottom:30px;
-}
+    .status-item {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
 
-.section-title{
-font-size:28px;
-font-weight:800;
-margin-bottom:18px;
-}
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      box-shadow: 0 0 18px rgba(122, 247, 196, 0.56);
+      animation: pulseDot 2.6s ease-in-out infinite;
+    }
 
-.cards{
-display:flex;
-flex-direction:column;
-gap:18px;
-}
+    .intro-panel {
+      width: min(100%, 1080px);
+      padding: clamp(var(--space-8), 3.6vw, var(--space-16));
+      display: grid;
+      gap: clamp(var(--space-6), 2vw, var(--space-10));
+      justify-items: center;
+      border-radius: clamp(2rem, 4vw, 3rem);
+      border: 1px solid var(--color-border);
+      background:
+        linear-gradient(180deg, rgba(10, 19, 30, 0.84), rgba(5, 9, 14, 0.92)),
+        radial-gradient(circle at top, rgba(76, 194, 255, 0.12), transparent 38%);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.06), var(--glow-primary);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
 
-.topic{
-background:white;
-padding:22px;
-border-radius:24px;
-box-shadow:
-0 12px 30px rgba(0,0,0,.05);
-transition:.2s;
-}
+    .intro-panel::before,
+    .intro-panel::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
 
-.topic:hover{
-transform:translateY(-3px);
-}
+    .intro-panel::before {
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.04) 50%, transparent 100%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.03));
+      mix-blend-mode: screen;
+      opacity: 0.6;
+    }
 
-.topic-title{
-font-size:20px;
-font-weight:700;
-margin-bottom:10px;
-}
+    .intro-panel::after {
+      inset: 18px;
+      border-radius: calc(3rem - 18px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
 
-.topic-meta{
-color:var(--sub);
-font-size:14px;
-}
+    .kali-mark {
+      width: min(100%, 200px);
+      display: grid;
+      place-items: center;
+      opacity: 0.92;
+      color: #a5d7ff;
+      filter: drop-shadow(0 16px 28px rgba(9, 115, 182, 0.26));
+    }
 
-.topic-stats{
-margin-top:16px;
-font-weight:700;
-color:var(--amber);
-}
+    .kali-mark svg {
+      width: 100%;
+      height: auto;
+    }
 
-.widget{
-background:#fafafa;
-border-radius:22px;
-padding:20px;
-margin-bottom:18px;
-}
+    .eyebrow {
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: rgba(229, 241, 255, 0.78);
+      text-align: center;
+    }
 
-.widget-title{
-font-weight:800;
-margin-bottom:14px;
-}
+    .hero-title {
+      max-width: 10ch;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: var(--text-hero);
+      line-height: 0.88;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #f4fbff;
+      text-shadow: 0 10px 40px rgba(5, 74, 118, 0.24), 0 20px 80px rgba(0, 0, 0, 0.5);
+    }
 
-.online-user{
-display:flex;
-align-items:center;
-gap:10px;
-margin-bottom:12px;
-}
+    .hero-title .accent {
+      display: block;
+      color: #8fd8ff;
+    }
 
-.dot{
-width:10px;
-height:10px;
-border-radius:50%;
-background:#26d367;
-}
+    .hero-copy {
+      max-width: 50ch;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: var(--text-base);
+    }
 
-.layout{
-display:flex;
-height:100vh;
-}
+    .hero-metrics {
+      width: min(100%, 920px);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
 
-</style>
+    .metric-card {
+      min-height: 122px;
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      display: grid;
+      gap: var(--space-2);
+      align-content: start;
+      text-align: left;
+    }
 
+    .metric-label {
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+    }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      line-height: 1;
+      color: var(--color-text);
+    }
+
+    .metric-copy {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      max-width: 26ch;
+    }
+
+    .cta-zone {
+      min-height: 88px;
+      display: grid;
+      place-items: center;
+    }
+
+    .enter-button {
+      position: relative;
+      min-width: clamp(240px, 34vw, 360px);
+      min-height: 64px;
+      padding: 0 var(--space-8);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(143, 216, 255, 0.24);
+      background:
+        linear-gradient(180deg, rgba(17, 39, 58, 0.98), rgba(7, 22, 35, 0.98));
+      color: var(--color-text);
+      font-family: var(--font-display);
+      font-size: clamp(0.95rem, 1vw, 1.05rem);
+      font-weight: 800;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      box-shadow:
+        0 20px 50px rgba(2, 24, 41, 0.54),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 0 1px rgba(76, 194, 255, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(22px) scale(0.97);
+      overflow: hidden;
+    }
+
+    .enter-button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 216, 255, 0.2) 48%, transparent 100%);
+      transform: translateX(-120%);
+      transition: transform 700ms ease;
+    }
+
+    .enter-button::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .enter-button.is-ready {
+      visibility: visible;
+      pointer-events: auto;
+      animation: buttonReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .enter-button:hover,
+    .enter-button:focus-visible {
+      transform: translateY(-2px) scale(1.01);
+      border-color: rgba(143, 216, 255, 0.34);
+      box-shadow:
+        0 28px 56px rgba(2, 24, 41, 0.62),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        0 0 0 1px rgba(76, 194, 255, 0.12),
+        0 0 44px rgba(76, 194, 255, 0.18);
+    }
+
+    .enter-button:hover::before,
+    .enter-button:focus-visible::before {
+      transform: translateX(120%);
+    }
+
+    .footer-meta {
+      width: min(100%, 920px);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      color: var(--color-text-faint);
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .telegram-panel {
+      width: min(100%, 960px);
+      padding: clamp(var(--space-8), 4vw, var(--space-16));
+      display: grid;
+      justify-items: center;
+      gap: clamp(var(--space-5), 2vw, var(--space-8));
+      border-radius: clamp(2rem, 4vw, 3rem);
+      border: 1px solid rgba(132, 212, 255, 0.18);
+      background:
+        linear-gradient(180deg, rgba(8, 16, 25, 0.92), rgba(4, 8, 13, 0.94)),
+        radial-gradient(circle at top, rgba(34, 158, 217, 0.14), transparent 42%);
+      box-shadow: var(--shadow-lg), inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 54px rgba(34, 158, 217, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .telegram-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 20%, transparent 78%, rgba(255, 255, 255, 0.03)),
+        linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+    }
+
+    .telegram-orb {
+      position: relative;
+      width: clamp(140px, 20vw, 200px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 18%, rgba(255, 255, 255, 0.28), transparent 24%),
+        linear-gradient(180deg, #44bbf4 0%, #229ed9 60%, #1170a8 100%);
+      box-shadow:
+        0 30px 80px rgba(34, 158, 217, 0.28),
+        inset 0 2px 8px rgba(255, 255, 255, 0.3),
+        inset 0 -18px 28px rgba(5, 57, 86, 0.28);
+    }
+
+    .telegram-orb::before,
+    .telegram-orb::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .telegram-orb::before {
+      inset: -16px;
+      border: 1px solid rgba(34, 158, 217, 0.26);
+      box-shadow: 0 0 42px rgba(34, 158, 217, 0.18);
+    }
+
+    .telegram-orb::after {
+      inset: -38px;
+      border: 1px solid rgba(34, 158, 217, 0.08);
+    }
+
+    .telegram-mark {
+      width: 54%;
+      color: #ffffff;
+      transform: translateX(4px) rotate(-8deg);
+      filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.2));
+    }
+
+    .telegram-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 5vw, 4.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    .telegram-copy {
+      max-width: 38ch;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: var(--text-base);
+    }
+
+    .telegram-button {
+      min-width: clamp(180px, 24vw, 250px);
+      min-height: 60px;
+      padding: 0 var(--space-8);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 800;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 36px rgba(0, 0, 0, 0.32);
+    }
+
+    .telegram-button:hover,
+    .telegram-button:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(34, 158, 217, 0.42);
+      background: linear-gradient(180deg, rgba(34, 158, 217, 0.26), rgba(255, 255, 255, 0.05));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 22px 40px rgba(7, 53, 82, 0.42);
+    }
+
+    .telegram-bottom {
+      width: min(100%, 760px);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+
+    .telegram-chip {
+      min-height: 70px;
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: grid;
+      align-content: center;
+      gap: var(--space-1);
+      text-align: center;
+    }
+
+    .telegram-chip span {
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+    }
+
+    .telegram-chip strong {
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      font-weight: 700;
+    }
+
+    .corner-caption {
+      position: absolute;
+      left: clamp(var(--space-4), 2vw, var(--space-8));
+      bottom: clamp(var(--space-4), 2vw, var(--space-8));
+      z-index: 5;
+      color: rgba(211, 232, 255, 0.42);
+      font-family: var(--font-display);
+      font-size: var(--text-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    @keyframes kaliRain {
+      0% {
+        transform: translate3d(0, 0, 0) scaleY(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(16px, 135vh, 0) scaleY(1.08);
+        opacity: 0.05;
+      }
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate3d(40px, -110vh, 0) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    @keyframes scanLines {
+      0% {
+        transform: translateY(-30px);
+      }
+      100% {
+        transform: translateY(160px);
+      }
+    }
+
+    @keyframes beamPulse {
+      0%, 100% {
+        transform: scale(1) translateY(0);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.04) translateY(-8px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulseDot {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.35);
+        opacity: 1;
+      }
+    }
+
+    @keyframes buttonReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.97);
+        filter: blur(10px);
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-metrics,
+      .telegram-bottom,
+      .statusbar {
+        grid-template-columns: 1fr;
+      }
+
+      .status-item {
+        justify-content: flex-start;
+        padding-inline: var(--space-4);
+      }
+
+      .footer-meta {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hero {
+        min-height: 100dvh;
+      }
+
+      .intro-panel,
+      .telegram-panel {
+        padding: var(--space-6);
+        border-radius: var(--radius-xl);
+      }
+
+      .hero-title {
+        letter-spacing: -0.05em;
+      }
+
+      .eyebrow,
+      .footer-meta,
+      .corner-caption {
+        letter-spacing: 0.14em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .enter-button {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<div id="loginScreen">
-
-<div class="login-card">
-
-<img
-class="logo-large"
-src="logo.png"
-alt="logo">
-
-<div class="amber-title">
-AMBER
-</div>
-
-<div class="amber-sub">
-new generation community
-</div>
-
-<input class="field" placeholder="Username">
-
-<input
-class="field"
-type="password"
-placeholder="Password">
-
-<button
-class="login-btn"
-onclick="enterApp()">
-LOG IN
-</button>
-
-<button
-class="register-btn"
-onclick="enterApp()">
-REGISTER
-</button>
-
-</div>
-
-</div>
-
-<div id="app">
-
-<div class="layout">
-
-<div class="sidebar">
-
-<div class="brand">
-
-<img src="logo.png">
-
-<span>AMBER</span>
-
-</div>
-
-<div class="nav">
-
-<div class="nav-item active">
-Home
-</div>
-
-<div class="nav-item">
-Trending
-</div>
-
-<div class="nav-item">
-Latest
-</div>
-
-<div class="nav-item">
-Categories
-</div>
-
-<div class="nav-item">
-Bookmarks
-</div>
-
-<div class="nav-item">
-Profile
-</div>
-
-</div>
-
-<div class="user-box">
-
-<div class="avatar"></div>
-
-<div>
-<b>boss</b><br>
-<small>online</small>
-</div>
-
-</div>
-
-</div>
-
-<div class="main">
-
-<div class="feed">
-
-<input
-class="search"
-placeholder="Search discussions...">
-
-<div class="section-title">
-🔥 Trending this week
-</div>
-
-<div class="cards">
-
-<div class="topic">
-<div class="topic-title">
-Building a home server in 2026
-</div>
-
-<div class="topic-meta">
-Started by boss • 2 hours ago
-</div>
-
-<div class="topic-stats">
-43 replies
-</div>
-</div>
-
-<div class="topic">
-<div class="topic-title">
-Show your setup
-</div>
-
-<div class="topic-meta">
-Photos, racks, desks and labs
-</div>
-
-<div class="topic-stats">
-117 replies
-</div>
-</div>
-
-<div class="topic">
-<div class="topic-title">
-Linux as daily driver
-</div>
-
-<div class="topic-meta">
-Discussion
-</div>
-
-<div class="topic-stats">
-28 replies
-</div>
-</div>
-
-</div>
-
-</div>
-
-<div class="rightbar">
-
-<div class="widget">
-
-<div class="widget-title">
-Popular today
-</div>
-
-<p>
-Mini PCs under $300
-</p>
-
-</div>
-
-<div class="widget">
-
-<div class="widget-title">
-Online now
-</div>
-
-<div class="online-user">
-<div class="dot"></div>
-boss
-</div>
-
-<div class="online-user">
-<div class="dot"></div>
-katya
-</div>
-
-<div class="online-user">
-<div class="dot"></div>
-root
-</div>
-
-</div>
-
-<div class="widget">
-
-<div class="widget-title">
-Statistics
-</div>
-
-Topics: 1241<br>
-Users: 432<br>
-Posts: 12844
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<script>
-
-<script>
-
-function enterApp(){
-
-const login = document.getElementById("loginScreen");
-const app = document.getElementById("app");
-
-login.style.transition = "all .35s ease";
-login.style.opacity = "0";
-login.style.pointerEvents = "none";
-
-setTimeout(() => {
-
-login.style.display = "none";
-app.style.display = "block";
-
-app.animate(
-[
-{
-opacity:0,
-transform:"translateY(15px)"
-},
-{
-opacity:1,
-transform:"translateY(0)"
-}
-],
-{
-duration:500,
-easing:"ease-out"
-}
-);
-
-},300);
-
-}
-
-const navItems = document.querySelectorAll(".nav-item");
-
-navItems.forEach(item => {
-
-item.addEventListener("click",()=>{
-
-navItems.forEach(i=>{
-i.classList.remove("active");
-});
-
-item.classList.add("active");
-
-});
-
-});
-
-const topics = document.querySelectorAll(".topic");
-
-topics.forEach(topic=>{
-
-topic.addEventListener("mouseenter",()=>{
-
-topic.style.boxShadow =
-"0 20px 50px rgba(0,0,0,.08)";
-
-});
-
-topic.addEventListener("mouseleave",()=>{
-
-topic.style.boxShadow =
-"0 12px 30px rgba(0,0,0,.05)";
-
-});
-
-});
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-const cards = document.querySelectorAll(".topic");
-
-cards.forEach((card,index)=>{
-
-card.style.opacity = "0";
-card.style.transform = "translateY(25px)";
-
-setTimeout(()=>{
-
-card.style.transition =
-"all .45s cubic-bezier(.2,.8,.2,1)";
-
-card.style.opacity = "1";
-card.style.transform = "translateY(0)";
-
-},100 * index);
-
-});
-
-});
-
-</script>
-
-
+  <div class="screen">
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="scan-overlay" aria-hidden="true"></div>
+    <div class="beam-overlay" aria-hidden="true"></div>
+    <div class="particle-layer" id="particleLayer" aria-hidden="true"></div>
+    <div class="rain-layer" id="rainLayer" aria-hidden="true"></div>
+
+    <main class="app">
+      <section class="hero" aria-label="Soficated landing presentation">
+        <div class="intro-scene" id="introScene">
+          <div class="statusbar" aria-hidden="true">
+            <div class="status-item"><span class="status-dot"></span> secure aesthetic</div>
+            <div class="status-item"><span class="status-dot"></span> motion sequence</div>
+            <div class="status-item"><span class="status-dot"></span> visual concept</div>
+          </div>
+
+          <div class="intro-panel">
+            <div class="kali-mark" aria-hidden="true">
+              <svg viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M37 74C57 43 86 32 127 32C148 32 164 38 181 50C195 59 207 72 221 80C239 90 261 94 289 92" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <path d="M38 74C52 61 66 56 84 56C100 56 111 61 119 72C125 80 127 88 130 98" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <path d="M132 32L111 64" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <path d="M159 32L136 70" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <path d="M182 50L160 84" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="242" cy="69" r="6" fill="currentColor"/>
+                <circle cx="264" cy="79" r="5" fill="currentColor" opacity="0.75"/>
+              </svg>
+            </div>
+
+            <p class="eyebrow">precision interface // keynote motion</p>
+            <h1 class="hero-title">soficated <span class="accent">terminal-grade presence</span></h1>
+            <p class="hero-copy">Чистая подача без лишних описаний: сначала фирменная сцена в стиле Kali Linux, затем через 2 секунды появляется кнопка, после нажатия открывается визуальный блок Telegram.</p>
+
+            <div class="hero-metrics" aria-hidden="true">
+              <article class="metric-card">
+                <span class="metric-label">style</span>
+                <strong class="metric-value">Kali</strong>
+                <p class="metric-copy">Холодный киберпанк без дешёвого шаблонного вайба.</p>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">motion</span>
+                <strong class="metric-value">2 sec</strong>
+                <p class="metric-copy">Кнопка входит в сцену только после короткой задержки.</p>
+              </article>
+              <article class="metric-card">
+                <span class="metric-label">output</span>
+                <strong class="metric-value">HTML</strong>
+                <p class="metric-copy">Один готовый файл для GitHub Pages или локального показа.</p>
+              </article>
+            </div>
+
+            <div class="cta-zone">
+              <button class="enter-button" id="enterButton" type="button" aria-label="Open Telegram visual block">SOFICATED</button>
+            </div>
+
+            <div class="footer-meta" aria-hidden="true">
+              <span>dark presentation layer</span>
+              <span>designed for impact</span>
+              <span>telegram handoff mockup</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="telegram-scene" id="telegramScene">
+          <div class="telegram-panel">
+            <div class="telegram-orb" aria-hidden="true">
+              <svg class="telegram-mark" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Telegram icon">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01-.567.225-.595.442c-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294q.39.01.868-.32 3.269-2.206 3.374-2.23c.05-.012.12-.026.166.016s.042.12.037.141c-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8 8 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629q.14.092.27.187c.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.4 1.4 0 0 0-.013-.315.34.34 0 0 0-.114-.217.53.53 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09"/>
+              </svg>
+            </div>
+
+            <p class="eyebrow">destination preview</p>
+            <h2 class="telegram-title">Telegram handoff</h2>
+            <p class="telegram-copy">Это чистый визуальный экран без ссылок — только показать, как будет выглядеть переход после первого клика.</p>
+            <button class="telegram-button" type="button" aria-label="Go button mockup">GO</button>
+
+            <div class="telegram-bottom" aria-hidden="true">
+              <div class="telegram-chip">
+                <span>button</span>
+                <strong>Ready for link</strong>
+              </div>
+              <div class="telegram-chip">
+                <span>layout</span>
+                <strong>Centered premium card</strong>
+              </div>
+              <div class="telegram-chip">
+                <span>state</span>
+                <strong>Concept only</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="corner-caption" aria-hidden="true">soficated // kali keynote mode</div>
+  </div>
+
+  <script>
+    const rainLayer = document.getElementById('rainLayer');
+    const particleLayer = document.getElementById('particleLayer');
+    const enterButton = document.getElementById('enterButton');
+    const introScene = document.getElementById('introScene');
+    const telegramScene = document.getElementById('telegramScene');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function createRain(count) {
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < count; i += 1) {
+        const drop = document.createElement('span');
+        drop.className = 'rain-line';
+        const left = Math.random() * 100;
+        const height = 30 + Math.random() * 95;
+        const width = 1 + Math.random() * 1.4;
+        const delay = Math.random() * -8;
+        const duration = 1.4 + Math.random() * 2.2;
+        const opacity = 0.24 + Math.random() * 0.72;
+        drop.style.left = `${left}%`;
+        drop.style.height = `${height}px`;
+        drop.style.width = `${width}px`;
+        drop.style.animationDelay = `${delay}s`;
+        drop.style.animationDuration = `${duration.toFixed(2)}s`;
+        drop.style.opacity = opacity.toFixed(2);
+        fragment.appendChild(drop);
+      }
+      rainLayer.appendChild(fragment);
+    }
+
+    function createParticles(count) {
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < count; i += 1) {
+        const particle = document.createElement('span');
+        particle.className = 'particle';
+        const left = Math.random() * 100;
+        const top = 40 + Math.random() * 60;
+        const size = 1 + Math.random() * 2.6;
+        const delay = Math.random() * -14;
+        const duration = 7 + Math.random() * 11;
+        const opacity = 0.12 + Math.random() * 0.72;
+        particle.style.left = `${left}%`;
+        particle.style.top = `${top}%`;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration.toFixed(2)}s`;
+        particle.style.opacity = opacity.toFixed(2);
+        fragment.appendChild(particle);
+      }
+      particleLayer.appendChild(fragment);
+    }
+
+    function revealPrimaryButton() {
+      if (prefersReducedMotion) {
+        enterButton.classList.add('is-ready');
+        return;
+      }
+      window.setTimeout(() => {
+        enterButton.classList.add('is-ready');
+      }, 2000);
+    }
+
+    function openTelegramScene() {
+      introScene.classList.add('is-hidden');
+      window.setTimeout(() => {
+        telegramScene.classList.add('is-visible');
+      }, 320);
+    }
+
+    createRain(window.innerWidth < 768 ? 90 : 140);
+    createParticles(window.innerWidth < 768 ? 30 : 54);
+    revealPrimaryButton();
+    enterButton.addEventListener('click', openTelegramScene);
+  </script>
 </body>
 </html>

@@ -1071,7 +1071,7 @@
   </style>
 </head>
 <body>
-
+<audio id="bgMusic" src="Neoperr.mp3" loop preload="auto"></audio>
   <!-- custom cursor -->
   <div class="cursor-dot"  id="cursorDot"  aria-hidden="true"></div>
   <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
@@ -1207,6 +1207,29 @@
     /* ─────────────────────────────
        REDUCED MOTION CHECK
     ───────────────────────────── */
+    /* MUSIC */
+(function initMusic() {
+  const music = document.getElementById('bgMusic');
+  if (!music) return;
+  music.volume = 0.55;
+  function tryPlay() { music.play().catch(function(){}); }
+  function onFirst() {
+    tryPlay();
+    document.removeEventListener('click', onFirst);
+    document.removeEventListener('touchstart', onFirst);
+  }
+  document.addEventListener('click', onFirst, { once: true, passive: true });
+  document.addEventListener('touchstart', onFirst, { once: true, passive: true });
+  tryPlay();
+  window.__music = {
+    stop: function() {
+      var t = setInterval(function() {
+        if (music.volume > 0.05) { music.volume = Math.max(0, music.volume - 0.05); }
+        else { music.pause(); clearInterval(t); }
+      }, 60);
+    }
+  };
+}());
     const NO_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ─────────────────────────────
@@ -1476,6 +1499,7 @@
        SCENE SWITCH
     ───────────────────────────── */
     btnMain.addEventListener('click', function onEnter() {
+      if (window.__music) window.__music.stop();
       btnMain.removeEventListener('click', onEnter);
 
       if (window.__rain)      window.__rain.fade();

@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VÖLKER & CO. — Ultra-Luxury Digital Engineering</title>
+    <title>SOFICATED</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050507;
-            --surface: #0a0a0e;
-            --surface-elevated: #111116;
-            --border: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(255, 255, 255, 0.15);
-            --text-primary: #ededed;
-            --text-secondary: #8c8c96;
-            --accent: #d4af37;
-            --accent-glow: rgba(212, 175, 55, 0.08);
+            --bg: #030000;
+            --surface: #0a0303;
+            --border: rgba(255, 30, 30, 0.12);
+            --border-hover: rgba(255, 50, 50, 0.4);
+            --text-primary: #f5f5f7;
+            --text-secondary: #8c8282;
+            --accent: #ff1a1a;
+            --accent-glow: rgba(255, 0, 0, 0.2);
             --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            --font-serif: 'Instrument Serif', Georgia, serif;
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -29,21 +27,18 @@
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
+        html, body {
+            width: 100%;
+            height: 100vh;
             background-color: var(--bg);
             color: var(--text-primary);
             font-family: var(--font-sans);
+            overflow: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        body {
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Subtle Noise Texture Overlay */
+        /* High-End Procedural Noise Overlay */
         body::before {
             content: "";
             position: fixed;
@@ -53,512 +48,323 @@
             height: 100vh;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
             pointer-events: none;
-            z-index: 999;
+            z-index: 10;
         }
 
-        /* Ambient Lighting */
-        .ambient-light {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
-            top: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Navigation */
-        nav {
+        /* Cinematic WebGL Canvas Layer */
+        #fogCanvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            z-index: 100;
-            background: rgba(5, 5, 7, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 3rem;
-            height: 96px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-family: var(--font-sans);
-            font-weight: 500;
-            font-size: 1rem;
-            letter-spacing: 0.25em;
-            color: var(--text-primary);
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .btn-text {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            position: relative;
-            padding-bottom: 2px;
-        }
-
-        .btn-text::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--text-primary);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s var(--ease-out-expo);
-        }
-
-        .btn-text:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* Hero Section */
-        header.hero {
-            position: relative;
+            width: 100vw;
+            height: 100vh;
             z-index: 1;
-            padding: 220px 3rem 140px;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 4rem;
-            align-items: flex-end;
+            pointer-events: none;
         }
 
-        .hero-content h1 {
-            font-size: clamp(3.5rem, 6.5vw, 7rem);
-            font-weight: 300;
-            letter-spacing: -0.03em;
-            line-height: 0.95;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-content h1 span {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-weight: 400;
-            color: var(--accent);
-        }
-
-        .hero-description {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 580px;
-            font-weight: 300;
-        }
-
-        .hero-sidebar {
-            border-left: 1px solid var(--border);
-            padding-left: 3rem;
+        /* Center Stage Layout */
+        .stage {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-        }
-
-        .hero-stat-block .stat-num {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.25rem;
-        }
-
-        .hero-stat-block .stat-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.02em;
-        }
-
-        /* Showcase Frame */
-        .showcase-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 3rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .showcase-frame {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            height: 600px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
             align-items: center;
             justify-content: center;
+            gap: 2.75rem;
+            padding: 2rem;
         }
 
-        .showcase-inner {
+        /* Luxury Typography */
+        .brand-title {
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            font-weight: 200;
+            letter-spacing: 0.35em;
+            text-transform: lowercase;
+            color: var(--text-primary);
             text-align: center;
+            text-shadow: 0 0 50px rgba(255, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInScale 1.4s var(--ease-out-expo) forwards;
+            animation-delay: 0.2s;
+            user-select: none;
+        }
+
+        /* Interactive Magnetic Wrapper */
+        .magnetic-wrapper {
             position: relative;
-            z-index: 2;
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeInScale 1.4s var(--ease-out-expo) forwards;
+            animation-delay: 0.4s;
         }
 
-        .showcase-inner p {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Editorial Sections */
-        section {
+        /* Premium Apple-Grade Telegram Button */
+        .tg-button {
             position: relative;
-            z-index: 1;
-            padding: 160px 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 6rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 2rem;
-        }
-
-        .section-header h2 {
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .section-header span {
-            font-family: var(--font-serif);
-            color: var(--accent);
-            font-style: italic;
-        }
-
-        .section-tag {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--text-secondary);
-        }
-
-        /* Grid Layouts */
-        .grid-editorial {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .editorial-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 3.5rem 3rem;
-            position: relative;
-            transition: border-color 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
-        }
-
-        .editorial-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-        }
-
-        .editorial-card .card-index {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        .editorial-card h3 {
-            font-size: 1.5rem;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            margin-bottom: 1rem;
-        }
-
-        .editorial-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        /* Minimal Split Row */
-        .split-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-            padding: 100px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .split-content h3 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .split-content p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-        }
-
-        .interactive-display {
-            background: var(--surface-elevated);
-            border: 1px solid var(--border);
-            height: 450px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
+            width: 84px;
+            height: 84px;
+            background: rgba(12, 2, 2, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: border-color 0.5s var(--ease-out-expo), background 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
         }
 
-        .interactive-display::before {
+        .tg-button::before {
             content: "";
             position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 70%);
-            opacity: 0.5;
+            inset: -1px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 40, 40, 0.5), transparent 70%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .cursor-tracker-text {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            color: var(--text-primary);
-            font-style: italic;
-            letter-spacing: 0.05em;
-            position: relative;
-            z-index: 2;
+        .tg-button:hover {
+            border-color: var(--border-hover);
+            background: rgba(25, 4, 4, 0.85);
+            box-shadow: 0 35px 70px rgba(255, 0, 0, 0.3), inset 0 1px 0 rgba(255, 60, 60, 0.3);
         }
 
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 80px 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 1;
+        .tg-button:hover::before {
+            opacity: 1;
         }
 
-        .footer-left {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
+        .tg-icon {
+            width: 34px;
+            height: 34px;
+            fill: var(--text-primary);
+            transition: transform 0.5s var(--ease-out-expo), fill 0.3s ease, filter 0.3s ease;
         }
 
-        .footer-right {
-            display: flex;
-            gap: 3rem;
+        .tg-button:hover .tg-icon {
+            transform: scale(1.12);
+            fill: #ff2a2a;
+            filter: drop-shadow(0 0 12px rgba(255, 0, 0, 0.6));
         }
 
-        .footer-right a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
-        }
-
-        .footer-right a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 1024px) {
-            header.hero {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .hero-sidebar {
-                border-left: none;
-                padding-left: 0;
-                border-top: 1px solid var(--border);
-                padding-top: 2rem;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-            .grid-editorial {
-                grid-template-columns: 1fr;
-            }
-            .split-row {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .nav-container, header.hero, .showcase-container, section, footer {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-light"></div>
+    <!-- Cinematic Custom Canvas Fog -->
+    <canvas id="fogCanvas"></canvas>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">Völker & Co.</a>
-            <ul class="nav-links">
-                <li><a href="#philosophy">Философия</a></li>
-                <li><a href="#engineering">Инженерия</a></li>
-                <li><a href="#systems">Системы</a></li>
-            </ul>
-            <a href="#contact" class="btn-text">Связаться</a>
+    <!-- Main Content Area -->
+    <main class="stage">
+        <h1 class="brand-title">soficated</h1>
+        
+        <div class="magnetic-wrapper" id="magneticWrapper">
+            <a href="https://t.me/soficateded" target="_blank" rel="noopener noreferrer" class="tg-button" aria-label="Telegram Channel">
+                <svg class="tg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.73-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.06-.78 4.16-1.81 6.94-3 8.34-3.58 3.97-1.66 4.79-1.95 5.33-1.96.12 0 .39.03.56.17.14.12.18.28.2.4-.02.07-.02.2-.04.33z"/>
+                </svg>
+            </a>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Цифровая архитектура <span>высшей пробы</span>.</h1>
-            <p class="hero-description">Проектируем эксклюзивные программные экосистемы, переопределяющие стандарты интерфейсного совершенства и технологического превосходства.</p>
-        </div>
-        <div class="hero-sidebar">
-            <div class="hero-stat-block">
-                <div class="stat-num">01</div>
-                <div class="stat-desc">Без компромиссов</div>
-            </div>
-            <div class="hero-stat-block">
-                <div class="stat-num">100%</div>
-                <div class="stat-desc">Ручная инженерия</div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Visual Anchor / Showcase Frame -->
-    <div class="showcase-container">
-        <div class="showcase-frame">
-            <div class="showcase-inner">
-                <p>«Совершенство достигается не тогда, когда нечего добавить, а тогда, когда нечего убрать.»</p>
-                <span style="font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary);">Манифест студии</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Philosophy Section -->
-    <section id="philosophy">
-        <div class="section-header">
-            <h2>Принципы <span>абсолютной</span> эстетики</h2>
-            <div class="section-tag">01 / Philosophy</div>
-        </div>
-
-        <div class="grid-editorial">
-            <div class="editorial-card">
-                <span class="card-index">I</span>
-                <h3>Бескомпромиссная точность</h3>
-                <p>Каждый пиксель и каждый узел кода выверен с точностью часового механизма высшего швейцарского класса.</p>
-            </div>
-            <div class="editorial-card">
-                <span class="card-index">II</span>
-                <h3>Тактильная глубина</h3>
-                <p>Интерфейсы создают физическое ощущение премиального продукта через выверенные световые градиенты и текстуры.</p>
-            </div>
-            <div class="editorial-card">
-                <span class="card-index">III</span>
-                <h3>Тишина в деталях</h3>
-                <p>Никакого визуального шума, отвлекающих элементов или лишних движений. Только чистая смысловая иерархия.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Engineering Section -->
-    <section id="engineering" style="padding-top: 0;">
-        <div class="split-row">
-            <div class="split-content">
-                <h3>Динамика, лишенная трения.</h3>
-                <p>Мы используем собственные алгоритмы рендеринга и микроанимаций, работающие на стыке аппаратного ускорения и когнитивной психологии.</p>
-                <a href="#contact" class="btn-text">Исследовать методологию</a>
-            </div>
-            <div class="interactive-display" id="interactiveBox">
-                <div class="cursor-tracker-text">Völker Core</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-left">
-            © 2026 Völker & Co. Все права защищены.
-        </div>
-        <div class="footer-right">
-            <a href="#">Конфиденциальность</a>
-            <a href="#">Запрос доступа</a>
-            <a href="#">LinkedIn</a>
-        </div>
-    </footer>
+    </main>
 
     <script>
-        // Minimalist reactive tilt/glow effect for the showcase display
-        const displayBox = document.getElementById('interactiveBox');
-        
-        displayBox.addEventListener('mousemove', (e) => {
-            const rect = displayBox.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            displayBox.style.background = `radial-gradient(circle 300px at ${x}px ${y}px, rgba(212, 175, 55, 0.08), var(--surface-elevated))`;
+        // High-end volumetric crimson fog and particle orchestration engine
+        const canvas = document.getElementById('fogCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+        let ambientOrbs = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Architectural Volumetric Fog Plume Class
+        class FogPlume {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * Math.max(width, height) * 0.45 + 250;
+                this.baseAlpha = Math.random() * 0.12 + 0.04;
+                this.alpha = this.baseAlpha;
+                this.vx = (Math.random() - 0.5) * 0.15;
+                this.vy = (Math.random() - 0.5) * 0.15 - 0.08;
+                this.phase = Math.random() * Math.PI * 2;
+                this.speed = Math.random() * 0.003 + 0.001;
+            }
+
+            update(timestamp) {
+                this.phase += this.speed;
+                this.x += this.vx + Math.sin(this.phase) * 0.25;
+                this.y += this.vy + Math.cos(this.phase) * 0.25;
+                this.alpha = this.baseAlpha + Math.sin(this.phase) * 0.035;
+
+                if (this.x < -this.size) this.x = width + this.size;
+                if (this.x > width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = height + this.size;
+                if (this.y > height + this.size) this.y = -this.size;
+            }
+
+            draw() {
+                const gradient = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size
+                );
+                gradient.addColorStop(0, `rgba(190, 10, 10, ${Math.max(0, this.alpha)})`);
+                gradient.addColorStop(0.45, `rgba(80, 2, 2, ${Math.max(0, this.alpha * 0.45)})`);
+                gradient.addColorStop(1, 'rgba(3, 0, 0, 0)');
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Ambient Depth Light Orbs
+        class AmbientOrb {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.radius = Math.random() * 2 + 0.5;
+                this.baseAlpha = Math.random() * 0.3 + 0.1;
+                this.alpha = this.baseAlpha;
+                this.vy = -Math.random() * 0.3 - 0.1;
+                this.vx = (Math.random() - 0.5) * 0.1;
+                this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+                this.twinklePhase = Math.random() * Math.PI * 2;
+            }
+
+            update() {
+                this.y += this.vy;
+                this.x += this.vx;
+                this.twinklePhase += this.twinkleSpeed;
+                this.alpha = this.baseAlpha + Math.sin(this.twinklePhase) * 0.15;
+
+                if (this.y < -10) this.y = height + 10;
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(255, 80, 80, ${Math.max(0, this.alpha)})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initialize Dense Systems
+        for (let i = 0; i < 18; i++) {
+            particles.push(new FogPlume());
+        }
+
+        for (let i = 0; i < 45; i++) {
+            ambientOrbs.push(new AmbientOrb());
+        }
+
+        let lastTime = 0;
+        function renderLoop(timestamp) {
+            const dt = timestamp - lastTime;
+            lastTime = timestamp;
+
+            ctx.fillStyle = '#030000';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.globalCompositeOperation = 'screen';
+
+            particles.forEach(p => {
+                p.update(timestamp);
+                p.draw();
+            });
+
+            ambientOrbs.forEach(orb => {
+                orb.update();
+                orb.draw();
+            });
+
+            ctx.globalCompositeOperation = 'source-over';
+            requestAnimationFrame(renderLoop);
+        }
+
+        requestAnimationFrame(renderLoop);
+
+        // Apple-Grade Micro-Interaction Physics Engine for Magnetic Button
+        const wrapper = document.getElementById('magneticWrapper');
+        const button = wrapper.querySelector('.tg-button');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let currentX = 0;
+        let currentY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        const maxPullDistance = 140;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            const rect = button.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const distX = mouseX - centerX;
+            const distY = mouseY - centerY;
+            const distance = Math.hypot(distX, distY);
+
+            if (distance < maxPullDistance) {
+                targetX = distX * 0.42;
+                targetY = distY * 0.42;
+            } else {
+                targetX = 0;
+                targetY = 0;
+            }
         });
 
-        displayBox.addEventListener('mouseleave', () => {
-            displayBox.style.background = 'var(--surface-elevated)';
+        window.addEventListener('mouseleave', () => {
+            targetX = 0;
+            targetY = 0;
         });
+
+        function updatePhysics() {
+            currentX += (targetX - currentX) * 0.1;
+            currentY += (targetY - currentY) * 0.1;
+
+            wrapper.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            button.style.transform = `translate(${currentX * 0.45}px, ${currentY * 0.45}px)`;
+
+            requestAnimationFrame(updatePhysics);
+        }
+
+        requestAnimationFrame(updatePhysics);
     </script>
 </body>
 </html>

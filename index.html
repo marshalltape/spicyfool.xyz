@@ -3,489 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOFICATED — Ultra-Luxury Digital Architectural Suite</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Plus+Jakarta+Sans:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+    <title>Premium Digital Services</title>
     <style>
-        :root {
-            --bg-deep: #010000;
-            --bg-surface: #080000;
-            --bg-elevated: #100202;
-            --border-subtle: rgba(255, 20, 20, 0.12);
-            --border-active: rgba(255, 40, 40, 0.45);
-            --text-primary: #ffffff;
-            --text-secondary: #9c8484;
-            --text-muted: #5e4f4f;
-            --accent-primary: #ff1111;
-            --font-display: 'Cinzel Decorative', serif;
-            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
+        /* === RESET & BASE === */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        html, body {
-            width: 100%;
-            height: 100vh;
-            background-color: var(--bg-deep);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
-            overflow: hidden;
-            position: relative;
+        body {
+            /* Smooth red-blue-purple morphing background */
+            background: linear-gradient(-45deg, #ff0055, #4a00e0, #8e2de2, #ff0055);
+            background-size: 400% 400%;
+            animation: gradientCloud 15s ease infinite;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Procedural Cinematic Film Grain & Vignette */
-        body::before {
-            content: "";
+        @keyframes gradientCloud {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* === CURSOR GLOW === */
+        #glow {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
             pointer-events: none;
-            z-index: 20;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            mix-blend-mode: overlay;
+            transition: width 0.2s ease, height 0.2s ease; /* Smooth expansion on click */
         }
 
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at center, transparent 20%, rgba(1, 0, 0, 0.95) 100%);
-            pointer-events: none;
-            z-index: 15;
-        }
-
-        #fogCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Optically centered stage with precise optical right shift */
-        .stage {
+        /* === LAYOUT & GLASSMORPHISM === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
             position: relative;
-            z-index: 25;
-            width: 100%;
-            height: 100%;
+            z-index: 10;
+        }
+
+        /* Header & Search */
+        .header {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 3.5rem;
-            padding: 2rem;
-            padding-left: calc(2rem + 1.8vw);
+            margin-bottom: 50px;
         }
 
-        .brand-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            position: relative;
-        }
-
-        .brand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7.5vw, 6.8rem);
+        .header h1 {
+            font-size: 3rem;
             font-weight: 700;
-            letter-spacing: 0.32em;
-            text-transform: lowercase;
-            color: var(--text-primary);
-            text-align: center;
-            background: linear-gradient(180deg, #ffffff 15%, #d19e9e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 80px rgba(255, 0, 0, 0.45);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInScale 1.4s var(--ease-out-expo) forwards;
-            animation-delay: 0.2s;
-            user-select: none;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 600px;
             position: relative;
         }
 
-        .brand-subtitle {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 300;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInScale 1.4s var(--ease-out-expo) forwards;
-            animation-delay: 0.35s;
-            user-select: none;
+        .search-input {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.1rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            outline: none;
+            backdrop-filter: blur(15px); /* Glass effect */
+            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
         }
 
-        .brand-title::after {
-            content: '';
-            position: absolute;
-            bottom: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 20, 20, 0.8), transparent);
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .magnetic-wrapper {
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInScale 1.4s var(--ease-out-expo) forwards;
-            animation-delay: 0.5s;
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
         }
 
-        .tg-button {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 96px;
-            height: 96px;
-            background: rgba(14, 2, 2, 0.75);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid var(--border-subtle);
-            border-radius: 50%;
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: border-color 0.5s var(--ease-out-expo), background 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
-        .tg-button::before {
-            content: "";
-            position: absolute;
-            inset: -1px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 25, 25, 0.7), transparent 70%);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .tg-button:hover {
-            border-color: var(--border-active);
-            background: rgba(30, 3, 3, 0.95);
-            box-shadow: 0 50px 100px rgba(255, 0, 0, 0.45), inset 0 1px 0 rgba(255, 80, 80, 0.5);
-        }
-
-        .tg-button:hover::before {
-            opacity: 1;
-        }
-
-        .tg-icon {
-            width: 40px;
-            height: 40px;
-            fill: var(--text-primary);
-            transition: transform 0.5s var(--ease-out-expo), fill 0.3s ease, filter 0.3s ease;
-            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
-        }
-
-        .tg-button:hover .tg-icon {
-            transform: scale(1.18);
-            fill: #ff1a1a;
-            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.85));
-        }
-
-        @keyframes fadeInScale {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hud-telemetry {
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        /* Service Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            opacity: 0.6;
-            z-index: 30;
-            user-select: none;
-            pointer-events: none;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         }
 
-        .hud-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-primary);
-            animation: pulseHud 2s infinite ease-in-out;
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        @keyframes pulseHud {
-            0%, 100% { opacity: 0.3; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.1); }
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
+
+        .card-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .card-btn {
+            padding: 12px 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-btn {
+            background: #fff;
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.4);
+        }
+
     </style>
 </head>
 <body>
 
-    <canvas id="fogCanvas"></canvas>
+    <!-- Glow element -->
+    <div id="glow"></div>
 
-    <main class="stage">
-        <div class="brand-container">
-            <h1 class="brand-title">soficated</h1>
-            <span class="brand-subtitle">Encrypted Ecosystem</span>
-        </div>
-        
-        <div class="magnetic-wrapper" id="magneticWrapper">
-            <a href="https://t.me/soficateded" target="_blank" rel="noopener noreferrer" class="tg-button" aria-label="Telegram Channel">
-                <svg class="tg-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.73-.53.36-1.01.54-1.44.53-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.06-.78 4.16-1.81 6.94-3 8.34-3.58 3.97-1.66 4.79-1.95 5.33-1.96.12 0 .39.03.56.17.14.12.18.28.2.4-.02.07-.02.2-.04.33z"/>
-                </svg>
-            </a>
-        </div>
-    </main>
+    <div class="container">
+        <header class="header">
+            <h1>Premium Digital Accounts</h1>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for accounts, services, VPNs...">
+            </div>
+        </header>
 
-    <div class="hud-telemetry">
-        <div class="hud-dot"></div>
-        <span>System Active // Secure Link v4.8</span>
+        <main class="services-grid">
+            <!-- Example Card 1 -->
+            <div class="card">
+                <h2 class="card-title">Premium Accounts</h2>
+                <p class="card-desc">High-quality, verified digital accounts ready for immediate use. Secure and reliable.</p>
+                <button class="card-btn">View Details</button>
+            </div>
+
+            <!-- Example Card 2 -->
+            <div class="card">
+                <h2 class="card-title">Private VPN</h2>
+                <p class="card-desc">Exclusive private network setups. Ensure your traffic remains completely anonymous.</p>
+                <button class="card-btn">View Details</button>
+            </div>
+
+            <!-- Example Card 3 -->
+            <div class="card">
+                <h2 class="card-title">Cloud Storage</h2>
+                <p class="card-desc">Unlimited encrypted cloud space for your personal or business data needs.</p>
+                <button class="card-btn">View Details</button>
+            </div>
+
+            <!-- Example Card 4 -->
+            <div class="card">
+                <h2 class="card-title">Custom Setup</h2>
+                <p class="card-desc">Tailored configurations and personalized network environments.</p>
+                <button class="card-btn">View Details</button>
+            </div>
+        </main>
     </div>
 
     <script>
-        'use strict';
+        const glow = document.getElementById('glow');
 
-        const EngineConfig = {
-            canvasId: 'fogCanvas',
-            baseColor: '#010000',
-            fogPlumeCount: 65,
-            ambientParticleCount: 180,
-            magneticPullRadius: 200,
-            springTension: 0.12
-        };
+        // Mouse move logic
+        window.addEventListener('mousemove', (e) => {
+            // Using requestAnimationFrame inside mousemove isn't strictly necessary for left/top, 
+            // but for absolute perfection we just update directly for minimal latency
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
 
-        class VolumetricCrimsonEngine {
-            constructor(config) {
-                this.config = config;
-                this.canvas = document.getElementById(config.canvasId);
-                this.ctx = this.canvas.getContext('2d', { alpha: false });
-                
-                this.width = 0;
-                this.height = 0;
-                this.plumes = [];
-                this.orbs = [];
+        // Touch logic for mobile/tablets
+        window.addEventListener('touchmove', (e) => {
+            glow.style.left = e.touches[0].clientX + 'px';
+            glow.style.top = e.touches[0].clientY + 'px';
+        });
 
-                this.initializeViewport();
-                this.bindEventListeners();
-                this.constructEcosystem();
-                this.initRenderPipeline();
-            }
+        // Click / Tap expansion effect
+        window.addEventListener('mousedown', () => {
+            glow.style.width = '450px';
+            glow.style.height = '450px';
+        });
 
-            initializeViewport() {
-                this.width = this.canvas.width = window.innerWidth;
-                this.height = this.canvas.height = window.innerHeight;
-            }
+        window.addEventListener('mouseup', () => {
+            glow.style.width = '300px';
+            glow.style.height = '300px';
+        });
 
-            bindEventListeners() {
-                window.addEventListener('resize', () => {
-                    this.initializeViewport();
-                });
-            }
+        window.addEventListener('touchstart', () => {
+            glow.style.width = '450px';
+            glow.style.height = '450px';
+        });
 
-            constructEcosystem() {
-                for (let i = 0; i < this.config.fogPlumeCount; i++) {
-                    this.plumes.push(new VolumetricPlumeNode(this.width, this.height));
-                }
-                for (let i = 0; i < this.config.ambientParticleCount; i++) {
-                    this.orbs.push(new DepthAmbientNode(this.width, this.height));
-                }
-            }
-
-            initRenderPipeline() {
-                const renderLoop = (timestamp) => {
-                    this.renderFrame(timestamp);
-                    requestAnimationFrame(renderLoop);
-                };
-                requestAnimationFrame(renderLoop);
-            }
-
-            renderFrame(timestamp) {
-                this.ctx.fillStyle = this.config.baseColor;
-                this.ctx.fillRect(0, 0, this.width, this.height);
-
-                this.ctx.globalCompositeOperation = 'screen';
-
-                for (let i = 0; i < this.plumes.length; i++) {
-                    this.plumes[i].update(this.width, this.height, timestamp);
-                    this.plumes[i].draw(this.ctx);
-                }
-
-                for (let i = 0; i < this.orbs.length; i++) {
-                    this.orbs[i].update(this.width, this.height);
-                    this.orbs[i].draw(this.ctx);
-                }
-
-                this.ctx.globalCompositeOperation = 'source-over';
-            }
-        }
-
-        class VolumetricPlumeNode {
-            constructor(w, h) {
-                this.reset(w, h);
-            }
-
-            reset(w, h) {
-                this.x = Math.random() * w;
-                this.y = Math.random() * h;
-                this.size = Math.random() * Math.max(w, h) * 0.65 + 450;
-                this.baseAlpha = Math.random() * 0.18 + 0.05;
-                this.alpha = this.baseAlpha;
-                this.vx = (Math.random() - 0.5) * 0.14;
-                this.vy = (Math.random() - 0.5) * 0.14 - 0.07;
-                this.phase = Math.random() * Math.PI * 2;
-                this.speed = Math.random() * 0.0022 + 0.0008;
-            }
-
-            update(w, h, timestamp) {
-                this.phase += this.speed;
-                this.x += this.vx + Math.sin(this.phase) * 0.25;
-                this.y += this.vy + Math.cos(this.phase) * 0.25;
-                this.alpha = this.baseAlpha + Math.sin(this.phase) * 0.045;
-
-                if (this.x < -this.size) this.x = w + this.size;
-                if (this.x > w + this.size) this.x = -this.size;
-                if (this.y < -this.size) this.y = h + this.size;
-                if (this.y > h + this.size) this.y = -this.size;
-            }
-
-            draw(ctx) {
-                const gradient = ctx.createRadialGradient(
-                    this.x, this.y, 0,
-                    this.x, this.y, this.size
-                );
-                gradient.addColorStop(0, `rgba(250, 15, 15, ${Math.max(0, this.alpha)})`);
-                gradient.addColorStop(0.32, `rgba(120, 2, 2, ${Math.max(0, this.alpha * 0.52)})`);
-                gradient.addColorStop(1, 'rgba(1, 0, 0, 0)');
-
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        class DepthAmbientNode {
-            constructor(w, h) {
-                this.reset(w, h);
-            }
-
-            reset(w, h) {
-                this.x = Math.random() * w;
-                this.y = Math.random() * h;
-                this.radius = Math.random() * 2.8 + 0.7;
-                this.baseAlpha = Math.random() * 0.5 + 0.12;
-                this.alpha = this.baseAlpha;
-                this.vy = -Math.random() * 0.25 - 0.08;
-                this.vx = (Math.random() - 0.5) * 0.08;
-                this.twinkleSpeed = Math.random() * 0.016 + 0.006;
-                this.twinklePhase = Math.random() * Math.PI * 2;
-            }
-
-            update(w, h) {
-                this.y += this.vy;
-                this.x += this.vx;
-                this.twinklePhase += this.twinkleSpeed;
-                this.alpha = this.baseAlpha + Math.sin(this.twinklePhase) * 0.2;
-
-                if (this.y < -20) this.y = h + 20;
-                if (this.x < 0) this.x = w;
-                if (this.x > w) this.x = 0;
-            }
-
-            draw(ctx) {
-                ctx.fillStyle = `rgba(255, 120, 120, ${Math.max(0, this.alpha)})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        class AppleGradeMagneticEngine {
-            constructor() {
-                this.wrapper = document.getElementById('magneticWrapper');
-                this.button = this.wrapper.querySelector('.tg-button');
-                
-                this.mouseX = window.innerWidth / 2;
-                this.mouseY = window.innerHeight / 2;
-                this.currentX = 0;
-                this.currentY = 0;
-                this.targetX = 0;
-                this.targetY = 0;
-
-                this.bindTrackingListeners();
-                this.initSpringDynamics();
-            }
-
-            bindTrackingListeners() {
-                window.addEventListener('mousemove', (e) => {
-                    this.mouseX = e.clientX;
-                    this.mouseY = e.clientY;
-
-                    const rect = this.button.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-
-                    const distX = this.mouseX - centerX;
-                    const distY = this.mouseY - centerY;
-                    const distance = Math.hypot(distX, distY);
-
-                    if (distance < EngineConfig.magneticPullRadius) {
-                        this.targetX = distX * 0.55;
-                        this.targetY = distY * 0.55;
-                    } else {
-                        this.targetX = 0;
-                        this.targetY = 0;
-                    }
-                });
-
-                window.addEventListener('mouseleave', () => {
-                    this.targetX = 0;
-                    this.targetY = 0;
-                });
-            }
-
-            initSpringDynamics() {
-                const springLoop = () => {
-                    this.currentX += (this.targetX - this.currentX) * EngineConfig.springTension;
-                    this.currentY += (this.targetY - this.currentY) * EngineConfig.springTension;
-
-                    this.wrapper.style.transform = `translate(${this.currentX}px, ${this.currentY}px)`;
-                    this.button.style.transform = `translate(${this.currentX * 0.42}px, ${this.currentY * 0.42}px)`;
-
-                    requestAnimationFrame(springLoop);
-                };
-                requestAnimationFrame(springLoop);
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            new VolumetricCrimsonEngine(EngineConfig);
-            new AppleGradeMagneticEngine();
+        window.addEventListener('touchend', () => {
+            glow.style.width = '300px';
+            glow.style.height = '300px';
         });
     </script>
 </body>

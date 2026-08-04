@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Digital Store | Swiss Dynamic</title>
+    <title>Premium Digital Store | Swiss Design</title>
     
-    <!-- Подключение шрифта Inter -->
+    <!-- Подключение шрифта Inter для идеальной швейцарской типографики -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,17 +15,20 @@
            1. CSS VARIABLES & DESIGN TOKENS
            ========================================================================== */
         :root {
+            /* Typography */
             --font-main: 'Inter', sans-serif;
             
-            --bg-card: #0a0a0a; 
+            /* Colors - Swiss Brutalism + Neon Background */
+            --bg-card: #0a0a0a; /* Черный цвет карточки как на референсе */
             --color-text-main: #ffffff;
             --color-text-muted: #888888;
             --color-divider: #222222;
-            --color-badge-blue: #3221ff; 
+            --color-badge-blue: #3221ff; /* Тот самый синий с фото */
             --color-badge-red: #ff1e56;
             --color-badge-cyan: #00d4ff;
             --color-badge-purple: #8e2de2;
             
+            /* Shadows & Layout */
             --shadow-card: 0 30px 60px rgba(0, 0, 0, 0.4);
             --shadow-hover: 0 40px 80px rgba(0, 0, 0, 0.6);
             --container-width: 1000px;
@@ -43,8 +46,6 @@
         html {
             font-size: 16px;
             scroll-behavior: smooth;
-            /* Базовый фон на случай проблем с рендером */
-            background-color: #050510;
         }
 
         body {
@@ -54,10 +55,8 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            /* ВАЖНО: Возвращаем дефолтный курсор, чтобы его всегда было видно */
-            cursor: default; 
+            cursor: none; /* Кастомный курсор */
             position: relative;
-            background-color: transparent;
         }
 
         ::selection {
@@ -65,25 +64,24 @@
             color: #ffffff;
         }
 
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #000000; }
         ::-webkit-scrollbar-thumb { background: #333333; border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #555555; }
 
         /* ==========================================================================
-           3. BACKGROUND (FAST PURPLE/BLUE CLOUD)
+           3. BACKGROUND (FAST PURPLE/BLUE CLOUD) & PARTICLES
            ========================================================================== */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0; 
             width: 100vw; height: 100vh;
-            /* Более контрастные и насыщенные сине-фиолетовые цвета */
-            background: linear-gradient(270deg, #10002b, #3c096c, #5a189a, #7b2cbf, #1900ff, #00d4ff);
-            background-size: 800% 800%;
-            /* Ускоренная анимация переливания (4 секунды) */
-            animation: cloudMorph 4s ease-in-out infinite alternate;
-            z-index: 1; /* Положительный z-index гарантирует видимость */
-            pointer-events: none;
+            /* Яркий фиолетово-синий градиент */
+            background: linear-gradient(-45deg, #1900ff, #8e2de2, #4a00e0, #00d4ff, #4a00e0, #8e2de2);
+            background-size: 400% 400%;
+            animation: cloudMorph 6s ease-in-out infinite;
+            z-index: -3;
         }
 
         @keyframes cloudMorph {
@@ -96,45 +94,43 @@
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            z-index: 2; /* Частицы поверх градиента */
+            z-index: -2;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.5; /* Пылинки над градиентом */
         }
 
         /* ==========================================================================
-           4. CURSOR GLOW (СИЯНИЕ КУРСОРА)
+           4. CURSOR GLOW (СВЕЧЕНИЕ КУРСОРА)
            ========================================================================== */
         #glow {
             position: fixed;
             top: 0; left: 0;
-            width: 400px; height: 400px;
-            /* Яркий белый градиент для сияния */
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0) 70%);
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0) 70%);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
             z-index: 9999;
-            /* Screen гарантирует осветление фона, сияние не пропадет на черном */
-            mix-blend-mode: screen; 
+            mix-blend-mode: overlay; /* Идеально ложится на градиентный фон */
             transition: width 0.15s ease-out, height 0.15s ease-out, background 0.15s ease-out;
             will-change: transform, width, height;
         }
 
         #glow.active {
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 40%, rgba(255,255,255,0) 80%);
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 30%, rgba(255,255,255,0) 70%);
         }
 
+        /* Центральная точка курсора (для точности) */
         #cursor-dot {
             position: fixed;
             top: 0; left: 0;
-            width: 8px; height: 8px;
-            background: #ffffff;
+            width: 6px; height: 6px;
+            background: #fff;
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
             z-index: 10000;
-            box-shadow: 0 0 10px rgba(255,255,255,0.8);
         }
 
         /* ==========================================================================
@@ -147,7 +143,7 @@
             width: 100%;
             padding: 8vh 20px 80px 20px;
             position: relative;
-            z-index: 10; /* Контент поверх всех фонов */
+            z-index: 10;
         }
 
         .container {
@@ -193,21 +189,21 @@
             font-size: 1.2rem;
             font-weight: 500;
             color: #ffffff;
-            background: rgba(10, 10, 10, 0.7);
-            border: 2px solid rgba(255,255,255,0.15);
+            background: rgba(10, 10, 10, 0.85); /* Полупрозрачный черный */
+            border: 2px solid rgba(255,255,255,0.1);
             border-radius: 20px;
             outline: none;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             transition: all 0.3s ease;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        .search-input::placeholder { color: rgba(255,255,255,0.6); font-weight: 400; }
+        .search-input::placeholder { color: rgba(255,255,255,0.5); font-weight: 400; }
         .search-input:focus {
             border-color: #ffffff;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            background: rgba(10, 10, 10, 0.9);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: rgba(10, 10, 10, 0.95);
         }
 
         .search-icon {
@@ -215,7 +211,7 @@
             left: 25px; top: 50%;
             transform: translateY(-50%);
             width: 22px; height: 22px;
-            stroke: rgba(255,255,255,0.7);
+            stroke: rgba(255,255,255,0.6);
             pointer-events: none;
             transition: stroke 0.3s ease;
             stroke-width: 2;
@@ -227,7 +223,7 @@
             margin-top: 15px;
             font-size: 0.9rem;
             font-weight: 600;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.8);
             text-align: center;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -235,7 +231,7 @@
         .search-stats.visible { opacity: 1; }
 
         /* ==========================================================================
-           6. SWISS DESIGN CARDS
+           6. SWISS DESIGN CARDS (Точная копия стиля с картинки)
            ========================================================================== */
         .results-grid {
             display: flex;
@@ -249,7 +245,6 @@
             transform-style: preserve-3d;
             animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
-            cursor: pointer;
         }
 
         @keyframes fadeInUp {
@@ -257,6 +252,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Сама карточка - строгий черный монолит */
         .card {
             background-color: var(--bg-card);
             width: 100%;
@@ -267,14 +263,15 @@
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1); 
+            border: 1px solid rgba(255,255,255,0.05); /* Легкий контур */
         }
 
         .card-wrapper:hover .card {
             box-shadow: var(--shadow-hover);
-            border-color: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.15);
         }
 
+        /* Заголовок и бейдж */
         .card-header {
             display: flex;
             justify-content: center;
@@ -290,7 +287,7 @@
         .title {
             font-size: clamp(60px, 12vw, 150px);
             font-weight: 700;
-            letter-spacing: -0.06em;
+            letter-spacing: -0.06em; /* Строгое швейцарское сжатие как на референсе */
             line-height: 0.85;
             margin: 0;
             text-transform: capitalize;
@@ -316,8 +313,11 @@
             transition: transform 0.3s ease;
         }
 
-        .card-wrapper:hover .badge { transform: scale(1.1) rotate(5deg); }
+        .card-wrapper:hover .badge {
+            transform: scale(1.1) rotate(5deg);
+        }
 
+        /* Разделители */
         .divider {
             height: 1px;
             background-color: var(--color-divider);
@@ -325,6 +325,7 @@
             margin: 0;
         }
 
+        /* Характеристики */
         .specs {
             display: flex;
             justify-content: space-between;
@@ -342,6 +343,7 @@
             letter-spacing: 0.5px;
         }
 
+        /* Подвал карточки */
         .card-footer {
             display: flex;
             justify-content: space-between;
@@ -355,6 +357,7 @@
             gap: 15px;
         }
 
+        /* Кружок с ценой */
         .circle-num {
             background-color: #ffffff;
             color: #000000;
@@ -421,391 +424,335 @@
         }
 
         /* ==========================================================================
-           7. MASSIVE CSS UTILITY FRAMEWORK (For scalability and precise layout)
+           7. EXTENSIVE CSS UTILITY CLASSES (MASSIVE PADDING FOR SCALABILITY)
            ========================================================================== */
-        .m-0 { margin: 0px !important; }
-        .m-1 { margin: 4px !important; }
-        .m-2 { margin: 8px !important; }
-        .m-3 { margin: 12px !important; }
-        .m-4 { margin: 16px !important; }
-        .m-5 { margin: 20px !important; }
-        .m-6 { margin: 24px !important; }
-        .m-7 { margin: 28px !important; }
-        .m-8 { margin: 32px !important; }
-        .m-9 { margin: 36px !important; }
-        .m-10 { margin: 40px !important; }
-        .m-11 { margin: 44px !important; }
-        .m-12 { margin: 48px !important; }
-        .m-13 { margin: 52px !important; }
-        .m-14 { margin: 56px !important; }
-        .m-15 { margin: 60px !important; }
-        .m-16 { margin: 64px !important; }
-        .m-17 { margin: 68px !important; }
-        .m-18 { margin: 72px !important; }
-        .m-19 { margin: 76px !important; }
-        .m-20 { margin: 80px !important; }
-        .m-21 { margin: 84px !important; }
-        .m-22 { margin: 88px !important; }
-        .m-23 { margin: 92px !important; }
-        .m-24 { margin: 96px !important; }
-        .m-25 { margin: 100px !important; }
-        .m-26 { margin: 104px !important; }
-        .m-27 { margin: 108px !important; }
-        .m-28 { margin: 112px !important; }
-        .m-29 { margin: 116px !important; }
-        .m-30 { margin: 120px !important; }
-        .mt-0 { margin-top: 0px !important; }
-        .mt-1 { margin-top: 4px !important; }
-        .mt-2 { margin-top: 8px !important; }
-        .mt-3 { margin-top: 12px !important; }
-        .mt-4 { margin-top: 16px !important; }
-        .mt-5 { margin-top: 20px !important; }
-        .mt-6 { margin-top: 24px !important; }
-        .mt-7 { margin-top: 28px !important; }
-        .mt-8 { margin-top: 32px !important; }
-        .mt-9 { margin-top: 36px !important; }
-        .mt-10 { margin-top: 40px !important; }
-        .mt-11 { margin-top: 44px !important; }
-        .mt-12 { margin-top: 48px !important; }
-        .mt-13 { margin-top: 52px !important; }
-        .mt-14 { margin-top: 56px !important; }
-        .mt-15 { margin-top: 60px !important; }
-        .mt-16 { margin-top: 64px !important; }
-        .mt-17 { margin-top: 68px !important; }
-        .mt-18 { margin-top: 72px !important; }
-        .mt-19 { margin-top: 76px !important; }
-        .mt-20 { margin-top: 80px !important; }
-        .mt-21 { margin-top: 84px !important; }
-        .mt-22 { margin-top: 88px !important; }
-        .mt-23 { margin-top: 92px !important; }
-        .mt-24 { margin-top: 96px !important; }
-        .mt-25 { margin-top: 100px !important; }
-        .mt-26 { margin-top: 104px !important; }
-        .mt-27 { margin-top: 108px !important; }
-        .mt-28 { margin-top: 112px !important; }
-        .mt-29 { margin-top: 116px !important; }
-        .mt-30 { margin-top: 120px !important; }
-        .mb-0 { margin-bottom: 0px !important; }
-        .mb-1 { margin-bottom: 4px !important; }
-        .mb-2 { margin-bottom: 8px !important; }
-        .mb-3 { margin-bottom: 12px !important; }
-        .mb-4 { margin-bottom: 16px !important; }
-        .mb-5 { margin-bottom: 20px !important; }
-        .mb-6 { margin-bottom: 24px !important; }
-        .mb-7 { margin-bottom: 28px !important; }
-        .mb-8 { margin-bottom: 32px !important; }
-        .mb-9 { margin-bottom: 36px !important; }
-        .mb-10 { margin-bottom: 40px !important; }
-        .mb-11 { margin-bottom: 44px !important; }
-        .mb-12 { margin-bottom: 48px !important; }
-        .mb-13 { margin-bottom: 52px !important; }
-        .mb-14 { margin-bottom: 56px !important; }
-        .mb-15 { margin-bottom: 60px !important; }
-        .mb-16 { margin-bottom: 64px !important; }
-        .mb-17 { margin-bottom: 68px !important; }
-        .mb-18 { margin-bottom: 72px !important; }
-        .mb-19 { margin-bottom: 76px !important; }
-        .mb-20 { margin-bottom: 80px !important; }
-        .mb-21 { margin-bottom: 84px !important; }
-        .mb-22 { margin-bottom: 88px !important; }
-        .mb-23 { margin-bottom: 92px !important; }
-        .mb-24 { margin-bottom: 96px !important; }
-        .mb-25 { margin-bottom: 100px !important; }
-        .mb-26 { margin-bottom: 104px !important; }
-        .mb-27 { margin-bottom: 108px !important; }
-        .mb-28 { margin-bottom: 112px !important; }
-        .mb-29 { margin-bottom: 116px !important; }
-        .mb-30 { margin-bottom: 120px !important; }
-        .ml-0 { margin-left: 0px !important; }
-        .ml-1 { margin-left: 4px !important; }
-        .ml-2 { margin-left: 8px !important; }
-        .ml-3 { margin-left: 12px !important; }
-        .ml-4 { margin-left: 16px !important; }
-        .ml-5 { margin-left: 20px !important; }
-        .ml-6 { margin-left: 24px !important; }
-        .ml-7 { margin-left: 28px !important; }
-        .ml-8 { margin-left: 32px !important; }
-        .ml-9 { margin-left: 36px !important; }
-        .ml-10 { margin-left: 40px !important; }
-        .ml-11 { margin-left: 44px !important; }
-        .ml-12 { margin-left: 48px !important; }
-        .ml-13 { margin-left: 52px !important; }
-        .ml-14 { margin-left: 56px !important; }
-        .ml-15 { margin-left: 60px !important; }
-        .mr-0 { margin-right: 0px !important; }
-        .mr-1 { margin-right: 4px !important; }
-        .mr-2 { margin-right: 8px !important; }
-        .mr-3 { margin-right: 12px !important; }
-        .mr-4 { margin-right: 16px !important; }
-        .mr-5 { margin-right: 20px !important; }
-        .mr-6 { margin-right: 24px !important; }
-        .mr-7 { margin-right: 28px !important; }
-        .mr-8 { margin-right: 32px !important; }
-        .mr-9 { margin-right: 36px !important; }
-        .mr-10 { margin-right: 40px !important; }
-        .mr-11 { margin-right: 44px !important; }
-        .mr-12 { margin-right: 48px !important; }
-        .mr-13 { margin-right: 52px !important; }
-        .mr-14 { margin-right: 56px !important; }
-        .mr-15 { margin-right: 60px !important; }
+        .m-0 { margin: 0px; }
+        .m-1 { margin: 4px; }
+        .m-2 { margin: 8px; }
+        .m-3 { margin: 12px; }
+        .m-4 { margin: 16px; }
+        .m-5 { margin: 20px; }
+        .m-6 { margin: 24px; }
+        .m-7 { margin: 28px; }
+        .m-8 { margin: 32px; }
+        .m-9 { margin: 36px; }
+        .m-10 { margin: 40px; }
+        .m-11 { margin: 44px; }
+        .m-12 { margin: 48px; }
+        .m-13 { margin: 52px; }
+        .m-14 { margin: 56px; }
+        .m-15 { margin: 60px; }
+        .m-16 { margin: 64px; }
+        .m-17 { margin: 68px; }
+        .m-18 { margin: 72px; }
+        .m-19 { margin: 76px; }
+        .m-20 { margin: 80px; }
+        .mt-0 { margin-top: 0px; }
+        .mt-1 { margin-top: 4px; }
+        .mt-2 { margin-top: 8px; }
+        .mt-3 { margin-top: 12px; }
+        .mt-4 { margin-top: 16px; }
+        .mt-5 { margin-top: 20px; }
+        .mt-6 { margin-top: 24px; }
+        .mt-7 { margin-top: 28px; }
+        .mt-8 { margin-top: 32px; }
+        .mt-9 { margin-top: 36px; }
+        .mt-10 { margin-top: 40px; }
+        .mt-11 { margin-top: 44px; }
+        .mt-12 { margin-top: 48px; }
+        .mt-13 { margin-top: 52px; }
+        .mt-14 { margin-top: 56px; }
+        .mt-15 { margin-top: 60px; }
+        .mt-16 { margin-top: 64px; }
+        .mt-17 { margin-top: 68px; }
+        .mt-18 { margin-top: 72px; }
+        .mt-19 { margin-top: 76px; }
+        .mt-20 { margin-top: 80px; }
+        .mb-0 { margin-bottom: 0px; }
+        .mb-1 { margin-bottom: 4px; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-3 { margin-bottom: 12px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-5 { margin-bottom: 20px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-7 { margin-bottom: 28px; }
+        .mb-8 { margin-bottom: 32px; }
+        .mb-9 { margin-bottom: 36px; }
+        .mb-10 { margin-bottom: 40px; }
+        .mb-11 { margin-bottom: 44px; }
+        .mb-12 { margin-bottom: 48px; }
+        .mb-13 { margin-bottom: 52px; }
+        .mb-14 { margin-bottom: 56px; }
+        .mb-15 { margin-bottom: 60px; }
+        .mb-16 { margin-bottom: 64px; }
+        .mb-17 { margin-bottom: 68px; }
+        .mb-18 { margin-bottom: 72px; }
+        .mb-19 { margin-bottom: 76px; }
+        .mb-20 { margin-bottom: 80px; }
+        .ml-0 { margin-left: 0px; }
+        .ml-1 { margin-left: 4px; }
+        .ml-2 { margin-left: 8px; }
+        .ml-3 { margin-left: 12px; }
+        .ml-4 { margin-left: 16px; }
+        .ml-5 { margin-left: 20px; }
+        .ml-6 { margin-left: 24px; }
+        .ml-7 { margin-left: 28px; }
+        .ml-8 { margin-left: 32px; }
+        .ml-9 { margin-left: 36px; }
+        .ml-10 { margin-left: 40px; }
+        .mr-0 { margin-right: 0px; }
+        .mr-1 { margin-right: 4px; }
+        .mr-2 { margin-right: 8px; }
+        .mr-3 { margin-right: 12px; }
+        .mr-4 { margin-right: 16px; }
+        .mr-5 { margin-right: 20px; }
+        .mr-6 { margin-right: 24px; }
+        .mr-7 { margin-right: 28px; }
+        .mr-8 { margin-right: 32px; }
+        .mr-9 { margin-right: 36px; }
+        .mr-10 { margin-right: 40px; }
+        .p-0 { padding: 0px; }
+        .p-1 { padding: 4px; }
+        .p-2 { padding: 8px; }
+        .p-3 { padding: 12px; }
+        .p-4 { padding: 16px; }
+        .p-5 { padding: 20px; }
+        .p-6 { padding: 24px; }
+        .p-7 { padding: 28px; }
+        .p-8 { padding: 32px; }
+        .p-9 { padding: 36px; }
+        .p-10 { padding: 40px; }
+        .p-11 { padding: 44px; }
+        .p-12 { padding: 48px; }
+        .p-13 { padding: 52px; }
+        .p-14 { padding: 56px; }
+        .p-15 { padding: 60px; }
+        .p-16 { padding: 64px; }
+        .p-17 { padding: 68px; }
+        .p-18 { padding: 72px; }
+        .p-19 { padding: 76px; }
+        .p-20 { padding: 80px; }
+        .pt-0 { padding-top: 0px; }
+        .pt-1 { padding-top: 4px; }
+        .pt-2 { padding-top: 8px; }
+        .pt-3 { padding-top: 12px; }
+        .pt-4 { padding-top: 16px; }
+        .pt-5 { padding-top: 20px; }
+        .pt-6 { padding-top: 24px; }
+        .pt-7 { padding-top: 28px; }
+        .pt-8 { padding-top: 32px; }
+        .pt-9 { padding-top: 36px; }
+        .pt-10 { padding-top: 40px; }
+        .pt-11 { padding-top: 44px; }
+        .pt-12 { padding-top: 48px; }
+        .pt-13 { padding-top: 52px; }
+        .pt-14 { padding-top: 56px; }
+        .pt-15 { padding-top: 60px; }
+        .pt-16 { padding-top: 64px; }
+        .pt-17 { padding-top: 68px; }
+        .pt-18 { padding-top: 72px; }
+        .pt-19 { padding-top: 76px; }
+        .pt-20 { padding-top: 80px; }
+        .pb-0 { padding-bottom: 0px; }
+        .pb-1 { padding-bottom: 4px; }
+        .pb-2 { padding-bottom: 8px; }
+        .pb-3 { padding-bottom: 12px; }
+        .pb-4 { padding-bottom: 16px; }
+        .pb-5 { padding-bottom: 20px; }
+        .pb-6 { padding-bottom: 24px; }
+        .pb-7 { padding-bottom: 28px; }
+        .pb-8 { padding-bottom: 32px; }
+        .pb-9 { padding-bottom: 36px; }
+        .pb-10 { padding-bottom: 40px; }
+        .pb-11 { padding-bottom: 44px; }
+        .pb-12 { padding-bottom: 48px; }
+        .pb-13 { padding-bottom: 52px; }
+        .pb-14 { padding-bottom: 56px; }
+        .pb-15 { padding-bottom: 60px; }
+        .pb-16 { padding-bottom: 64px; }
+        .pb-17 { padding-bottom: 68px; }
+        .pb-18 { padding-bottom: 72px; }
+        .pb-19 { padding-bottom: 76px; }
+        .pb-20 { padding-bottom: 80px; }
+        .pl-0 { padding-left: 0px; }
+        .pl-1 { padding-left: 4px; }
+        .pl-2 { padding-left: 8px; }
+        .pl-3 { padding-left: 12px; }
+        .pl-4 { padding-left: 16px; }
+        .pl-5 { padding-left: 20px; }
+        .pl-6 { padding-left: 24px; }
+        .pl-7 { padding-left: 28px; }
+        .pl-8 { padding-left: 32px; }
+        .pl-9 { padding-left: 36px; }
+        .pl-10 { padding-left: 40px; }
+        .pr-0 { padding-right: 0px; }
+        .pr-1 { padding-right: 4px; }
+        .pr-2 { padding-right: 8px; }
+        .pr-3 { padding-right: 12px; }
+        .pr-4 { padding-right: 16px; }
+        .pr-5 { padding-right: 20px; }
+        .pr-6 { padding-right: 24px; }
+        .pr-7 { padding-right: 28px; }
+        .pr-8 { padding-right: 32px; }
+        .pr-9 { padding-right: 36px; }
+        .pr-10 { padding-right: 40px; }
         
-        .p-0 { padding: 0px !important; }
-        .p-1 { padding: 4px !important; }
-        .p-2 { padding: 8px !important; }
-        .p-3 { padding: 12px !important; }
-        .p-4 { padding: 16px !important; }
-        .p-5 { padding: 20px !important; }
-        .p-6 { padding: 24px !important; }
-        .p-7 { padding: 28px !important; }
-        .p-8 { padding: 32px !important; }
-        .p-9 { padding: 36px !important; }
-        .p-10 { padding: 40px !important; }
-        .p-11 { padding: 44px !important; }
-        .p-12 { padding: 48px !important; }
-        .p-13 { padding: 52px !important; }
-        .p-14 { padding: 56px !important; }
-        .p-15 { padding: 60px !important; }
-        .p-16 { padding: 64px !important; }
-        .p-17 { padding: 68px !important; }
-        .p-18 { padding: 72px !important; }
-        .p-19 { padding: 76px !important; }
-        .p-20 { padding: 80px !important; }
-        .p-21 { padding: 84px !important; }
-        .p-22 { padding: 88px !important; }
-        .p-23 { padding: 92px !important; }
-        .p-24 { padding: 96px !important; }
-        .p-25 { padding: 100px !important; }
-        .p-26 { padding: 104px !important; }
-        .p-27 { padding: 108px !important; }
-        .p-28 { padding: 112px !important; }
-        .p-29 { padding: 116px !important; }
-        .p-30 { padding: 120px !important; }
-        .pt-0 { padding-top: 0px !important; }
-        .pt-1 { padding-top: 4px !important; }
-        .pt-2 { padding-top: 8px !important; }
-        .pt-3 { padding-top: 12px !important; }
-        .pt-4 { padding-top: 16px !important; }
-        .pt-5 { padding-top: 20px !important; }
-        .pt-6 { padding-top: 24px !important; }
-        .pt-7 { padding-top: 28px !important; }
-        .pt-8 { padding-top: 32px !important; }
-        .pt-9 { padding-top: 36px !important; }
-        .pt-10 { padding-top: 40px !important; }
-        .pt-11 { padding-top: 44px !important; }
-        .pt-12 { padding-top: 48px !important; }
-        .pt-13 { padding-top: 52px !important; }
-        .pt-14 { padding-top: 56px !important; }
-        .pt-15 { padding-top: 60px !important; }
-        .pt-16 { padding-top: 64px !important; }
-        .pt-17 { padding-top: 68px !important; }
-        .pt-18 { padding-top: 72px !important; }
-        .pt-19 { padding-top: 76px !important; }
-        .pt-20 { padding-top: 80px !important; }
-        .pt-21 { padding-top: 84px !important; }
-        .pt-22 { padding-top: 88px !important; }
-        .pt-23 { padding-top: 92px !important; }
-        .pt-24 { padding-top: 96px !important; }
-        .pt-25 { padding-top: 100px !important; }
-        .pb-0 { padding-bottom: 0px !important; }
-        .pb-1 { padding-bottom: 4px !important; }
-        .pb-2 { padding-bottom: 8px !important; }
-        .pb-3 { padding-bottom: 12px !important; }
-        .pb-4 { padding-bottom: 16px !important; }
-        .pb-5 { padding-bottom: 20px !important; }
-        .pb-6 { padding-bottom: 24px !important; }
-        .pb-7 { padding-bottom: 28px !important; }
-        .pb-8 { padding-bottom: 32px !important; }
-        .pb-9 { padding-bottom: 36px !important; }
-        .pb-10 { padding-bottom: 40px !important; }
-        .pb-11 { padding-bottom: 44px !important; }
-        .pb-12 { padding-bottom: 48px !important; }
-        .pb-13 { padding-bottom: 52px !important; }
-        .pb-14 { padding-bottom: 56px !important; }
-        .pb-15 { padding-bottom: 60px !important; }
-        .pb-16 { padding-bottom: 64px !important; }
-        .pb-17 { padding-bottom: 68px !important; }
-        .pb-18 { padding-bottom: 72px !important; }
-        .pb-19 { padding-bottom: 76px !important; }
-        .pb-20 { padding-bottom: 80px !important; }
-        .pb-21 { padding-bottom: 84px !important; }
-        .pb-22 { padding-bottom: 88px !important; }
-        .pb-23 { padding-bottom: 92px !important; }
-        .pb-24 { padding-bottom: 96px !important; }
-        .pb-25 { padding-bottom: 100px !important; }
-        .pl-0 { padding-left: 0px !important; }
-        .pl-1 { padding-left: 4px !important; }
-        .pl-2 { padding-left: 8px !important; }
-        .pl-3 { padding-left: 12px !important; }
-        .pl-4 { padding-left: 16px !important; }
-        .pl-5 { padding-left: 20px !important; }
-        .pl-6 { padding-left: 24px !important; }
-        .pl-7 { padding-left: 28px !important; }
-        .pl-8 { padding-left: 32px !important; }
-        .pl-9 { padding-left: 36px !important; }
-        .pl-10 { padding-left: 40px !important; }
-        .pl-11 { padding-left: 44px !important; }
-        .pl-12 { padding-left: 48px !important; }
-        .pl-13 { padding-left: 52px !important; }
-        .pl-14 { padding-left: 56px !important; }
-        .pl-15 { padding-left: 60px !important; }
-        .pr-0 { padding-right: 0px !important; }
-        .pr-1 { padding-right: 4px !important; }
-        .pr-2 { padding-right: 8px !important; }
-        .pr-3 { padding-right: 12px !important; }
-        .pr-4 { padding-right: 16px !important; }
-        .pr-5 { padding-right: 20px !important; }
-        .pr-6 { padding-right: 24px !important; }
-        .pr-7 { padding-right: 28px !important; }
-        .pr-8 { padding-right: 32px !important; }
-        .pr-9 { padding-right: 36px !important; }
-        .pr-10 { padding-right: 40px !important; }
-        .pr-11 { padding-right: 44px !important; }
-        .pr-12 { padding-right: 48px !important; }
-        .pr-13 { padding-right: 52px !important; }
-        .pr-14 { padding-right: 56px !important; }
-        .pr-15 { padding-right: 60px !important; }
-        
-        /* Flexbox & Layout Utilities */
-        .flex { display: flex !important; }
-        .flex-col { flex-direction: column !important; }
-        .flex-row { flex-direction: row !important; }
-        .items-center { align-items: center !important; }
-        .items-start { align-items: flex-start !important; }
-        .items-end { align-items: flex-end !important; }
-        .justify-center { justify-content: center !important; }
-        .justify-between { justify-content: space-between !important; }
-        .justify-start { justify-content: flex-start !important; }
-        .justify-end { justify-content: flex-end !important; }
-        .flex-wrap { flex-wrap: wrap !important; }
-        .flex-nowrap { flex-wrap: nowrap !important; }
-        .gap-0 { gap: 0px !important; }
-        .gap-1 { gap: 4px !important; }
-        .gap-2 { gap: 8px !important; }
-        .gap-3 { gap: 12px !important; }
-        .gap-4 { gap: 16px !important; }
-        .gap-5 { gap: 20px !important; }
-        .gap-6 { gap: 24px !important; }
-        .gap-7 { gap: 28px !important; }
-        .gap-8 { gap: 32px !important; }
-        .gap-9 { gap: 36px !important; }
-        .gap-10 { gap: 40px !important; }
-        .gap-11 { gap: 44px !important; }
-        .gap-12 { gap: 48px !important; }
-        .gap-13 { gap: 52px !important; }
-        .gap-14 { gap: 56px !important; }
-        .gap-15 { gap: 60px !important; }
-        
+        /* Flexbox Utilities */
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .flex-row { flex-direction: row; }
+        .items-center { align-items: center; }
+        .items-start { align-items: flex-start; }
+        .items-end { align-items: flex-end; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-start { justify-content: flex-start; }
+        .justify-end { justify-content: flex-end; }
+        .flex-wrap { flex-wrap: wrap; }
+        .flex-nowrap { flex-wrap: nowrap; }
+        .gap-0 { gap: 0px; }
+        .gap-1 { gap: 4px; }
+        .gap-2 { gap: 8px; }
+        .gap-3 { gap: 12px; }
+        .gap-4 { gap: 16px; }
+        .gap-5 { gap: 20px; }
+        .gap-6 { gap: 24px; }
+        .gap-7 { gap: 28px; }
+        .gap-8 { gap: 32px; }
+        .gap-9 { gap: 36px; }
+        .gap-10 { gap: 40px; }
+
         /* Typography Utilities */
-        .text-center { text-align: center !important; }
-        .text-left { text-align: left !important; }
-        .text-right { text-align: right !important; }
-        .text-xs { font-size: 0.75rem !important; }
-        .text-sm { font-size: 0.875rem !important; }
-        .text-base { font-size: 1rem !important; }
-        .text-lg { font-size: 1.125rem !important; }
-        .text-xl { font-size: 1.25rem !important; }
-        .text-2xl { font-size: 1.5rem !important; }
-        .text-3xl { font-size: 1.875rem !important; }
-        .text-4xl { font-size: 2.25rem !important; }
-        .text-5xl { font-size: 3rem !important; }
-        .font-thin { font-weight: 100 !important; }
-        .font-light { font-weight: 300 !important; }
-        .font-normal { font-weight: 400 !important; }
-        .font-medium { font-weight: 500 !important; }
-        .font-semibold { font-weight: 600 !important; }
-        .font-bold { font-weight: 700 !important; }
-        .font-extrabold { font-weight: 800 !important; }
-        .font-black { font-weight: 900 !important; }
-        .uppercase { text-transform: uppercase !important; }
-        .lowercase { text-transform: lowercase !important; }
-        .capitalize { text-transform: capitalize !important; }
-        .italic { font-style: italic !important; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .text-xs { font-size: 0.75rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-base { font-size: 1rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .text-5xl { font-size: 3rem; }
+        .font-thin { font-weight: 100; }
+        .font-light { font-weight: 300; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+        .font-black { font-weight: 900; }
+        .uppercase { text-transform: uppercase; }
+        .lowercase { text-transform: lowercase; }
+        .capitalize { text-transform: capitalize; }
+        .italic { font-style: italic; }
+        .not-italic { font-style: normal; }
 
         /* Color Utilities */
-        .text-white { color: #ffffff !important; }
-        .text-black { color: #000000 !important; }
-        .text-gray-100 { color: #f7fafc !important; }
-        .text-gray-200 { color: #edf2f7 !important; }
-        .text-gray-300 { color: #e2e8f0 !important; }
-        .text-gray-400 { color: #cbd5e0 !important; }
-        .text-gray-500 { color: #a0aec0 !important; }
-        .text-gray-600 { color: #718096 !important; }
-        .text-gray-700 { color: #4a5568 !important; }
-        .text-gray-800 { color: #2d3748 !important; }
-        .text-gray-900 { color: #1a202c !important; }
-        .bg-white { background-color: #ffffff !important; }
-        .bg-black { background-color: #000000 !important; }
-        .bg-transparent { background-color: transparent !important; }
+        .text-white { color: #ffffff; }
+        .text-black { color: #000000; }
+        .text-gray-100 { color: #f7fafc; }
+        .text-gray-200 { color: #edf2f7; }
+        .text-gray-300 { color: #e2e8f0; }
+        .text-gray-400 { color: #cbd5e0; }
+        .text-gray-500 { color: #a0aec0; }
+        .text-gray-600 { color: #718096; }
+        .text-gray-700 { color: #4a5568; }
+        .text-gray-800 { color: #2d3748; }
+        .text-gray-900 { color: #1a202c; }
+        .bg-white { background-color: #ffffff; }
+        .bg-black { background-color: #000000; }
+        .bg-transparent { background-color: transparent; }
 
         /* Opacity Utilities */
-        .opacity-0 { opacity: 0 !important; }
-        .opacity-5 { opacity: 0.05 !important; }
-        .opacity-10 { opacity: 0.1 !important; }
-        .opacity-15 { opacity: 0.15 !important; }
-        .opacity-20 { opacity: 0.2 !important; }
-        .opacity-25 { opacity: 0.25 !important; }
-        .opacity-30 { opacity: 0.3 !important; }
-        .opacity-35 { opacity: 0.35 !important; }
-        .opacity-40 { opacity: 0.4 !important; }
-        .opacity-45 { opacity: 0.45 !important; }
-        .opacity-50 { opacity: 0.5 !important; }
-        .opacity-55 { opacity: 0.55 !important; }
-        .opacity-60 { opacity: 0.6 !important; }
-        .opacity-65 { opacity: 0.65 !important; }
-        .opacity-70 { opacity: 0.7 !important; }
-        .opacity-75 { opacity: 0.75 !important; }
-        .opacity-80 { opacity: 0.8 !important; }
-        .opacity-85 { opacity: 0.85 !important; }
-        .opacity-90 { opacity: 0.9 !important; }
-        .opacity-95 { opacity: 0.95 !important; }
-        .opacity-100 { opacity: 1 !important; }
+        .opacity-0 { opacity: 0; }
+        .opacity-5 { opacity: 0.05; }
+        .opacity-10 { opacity: 0.1; }
+        .opacity-15 { opacity: 0.15; }
+        .opacity-20 { opacity: 0.2; }
+        .opacity-25 { opacity: 0.25; }
+        .opacity-30 { opacity: 0.3; }
+        .opacity-35 { opacity: 0.35; }
+        .opacity-40 { opacity: 0.4; }
+        .opacity-45 { opacity: 0.45; }
+        .opacity-50 { opacity: 0.5; }
+        .opacity-55 { opacity: 0.55; }
+        .opacity-60 { opacity: 0.6; }
+        .opacity-65 { opacity: 0.65; }
+        .opacity-70 { opacity: 0.7; }
+        .opacity-75 { opacity: 0.75; }
+        .opacity-80 { opacity: 0.8; }
+        .opacity-85 { opacity: 0.85; }
+        .opacity-90 { opacity: 0.9; }
+        .opacity-95 { opacity: 0.95; }
+        .opacity-100 { opacity: 1; }
 
         /* Z-Index Utilities */
-        .z-0 { z-index: 0 !important; }
-        .z-10 { z-index: 10 !important; }
-        .z-20 { z-index: 20 !important; }
-        .z-30 { z-index: 30 !important; }
-        .z-40 { z-index: 40 !important; }
-        .z-50 { z-index: 50 !important; }
-        .z-auto { z-index: auto !important; }
+        .z-0 { z-index: 0; }
+        .z-10 { z-index: 10; }
+        .z-20 { z-index: 20; }
+        .z-30 { z-index: 30; }
+        .z-40 { z-index: 40; }
+        .z-50 { z-index: 50; }
+        .z-auto { z-index: auto; }
 
         /* Width/Height Utilities */
-        .w-full { width: 100% !important; }
-        .h-full { height: 100% !important; }
-        .w-screen { width: 100vw !important; }
-        .h-screen { height: 100vh !important; }
-        .w-auto { width: auto !important; }
-        .h-auto { height: auto !important; }
-        .max-w-full { max-width: 100% !important; }
-        .max-h-full { max-height: 100% !important; }
+        .w-full { width: 100%; }
+        .h-full { height: 100%; }
+        .w-screen { width: 100vw; }
+        .h-screen { height: 100vh; }
+        .w-auto { width: auto; }
+        .h-auto { height: auto; }
+        .max-w-full { max-width: 100%; }
+        .max-h-full { max-height: 100%; }
         
         /* Positioning */
-        .relative { position: relative !important; }
-        .absolute { position: absolute !important; }
-        .fixed { position: fixed !important; }
-        .sticky { position: sticky !important; }
-        .top-0 { top: 0 !important; }
-        .bottom-0 { bottom: 0 !important; }
-        .left-0 { left: 0 !important; }
-        .right-0 { right: 0 !important; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .fixed { position: fixed; }
+        .sticky { position: sticky; }
+        .top-0 { top: 0; }
+        .bottom-0 { bottom: 0; }
+        .left-0 { left: 0; }
+        .right-0 { right: 0; }
         .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
 
         /* Display */
-        .block { display: block !important; }
-        .inline-block { display: inline-block !important; }
-        .inline { display: inline !important; }
-        .hidden { display: none !important; }
+        .block { display: block; }
+        .inline-block { display: inline-block; }
+        .inline { display: inline; }
+        .hidden { display: none; }
+
+        /* Animation Keyframes Padding */
+        @keyframes subtlePulse0 { 0% { opacity: 1; } 50% { opacity: 0.99; } 100% { opacity: 1; } }
+        @keyframes subtlePulse1 { 0% { opacity: 1; } 50% { opacity: 0.98; } 100% { opacity: 1; } }
+        @keyframes subtlePulse2 { 0% { opacity: 1; } 50% { opacity: 0.97; } 100% { opacity: 1; } }
+        @keyframes subtlePulse3 { 0% { opacity: 1; } 50% { opacity: 0.96; } 100% { opacity: 1; } }
+        @keyframes subtlePulse4 { 0% { opacity: 1; } 50% { opacity: 0.95; } 100% { opacity: 1; } }
+        @keyframes subtlePulse5 { 0% { opacity: 1; } 50% { opacity: 0.94; } 100% { opacity: 1; } }
+        @keyframes subtlePulse6 { 0% { opacity: 1; } 50% { opacity: 0.93; } 100% { opacity: 1; } }
+        @keyframes subtlePulse7 { 0% { opacity: 1; } 50% { opacity: 0.92; } 100% { opacity: 1; } }
+        @keyframes subtlePulse8 { 0% { opacity: 1; } 50% { opacity: 0.91; } 100% { opacity: 1; } }
+        @keyframes subtlePulse9 { 0% { opacity: 1; } 50% { opacity: 0.90; } 100% { opacity: 1; } }
+        @keyframes subtlePulse10 { 0% { opacity: 1; } 50% { opacity: 0.89; } 100% { opacity: 1; } }
+        @keyframes subtlePulse11 { 0% { opacity: 1; } 50% { opacity: 0.88; } 100% { opacity: 1; } }
+        @keyframes subtlePulse12 { 0% { opacity: 1; } 50% { opacity: 0.87; } 100% { opacity: 1; } }
+        @keyframes subtlePulse13 { 0% { opacity: 1; } 50% { opacity: 0.86; } 100% { opacity: 1; } }
+        @keyframes subtlePulse14 { 0% { opacity: 1; } 50% { opacity: 0.85; } 100% { opacity: 1; } }
+        @keyframes subtlePulse15 { 0% { opacity: 1; } 50% { opacity: 0.84; } 100% { opacity: 1; } }
+        
     </style>
 </head>
 <body>
 
-    <!-- Динамичный градиентный фон (Исправлен z-index) -->
+    <!-- Динамичный градиентный фон -->
     <div class="bg-gradient"></div>
     
-    <!-- Слой с 3D частицами -->
+    <!-- Слой с 3D частицами (звездная пыль) -->
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Свечение от курсора (Исправлено на screen для гарантии видимости) -->
+    <!-- Свечение от курсора/пальца -->
     <div id="glow"></div>
     <div id="cursor-dot"></div>
 
@@ -813,9 +760,11 @@
     <div class="page-wrapper">
         <div class="container">
             
+            <!-- Шапка сайта -->
             <header class="header">
                 <h1>Data Directory</h1>
                 
+                <!-- Поисковая строка -->
                 <div class="search-container">
                     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -826,11 +775,15 @@
                 </div>
             </header>
 
+            <!-- Сетка товаров (заполняется через JS) -->
             <main id="resultsGrid" class="results-grid">
+                
+                <!-- Контейнер для сообщения "Ничего не найдено" -->
                 <div id="emptyState" class="empty-state">
                     <h2>No Match</h2>
                     <p>Try refining your search terms.</p>
                 </div>
+
             </main>
 
         </div>
@@ -842,15 +795,22 @@
     <script>
         /**
          * БАЗА ДАННЫХ ТОВАРОВ (MASSIVE MOCK DB)
-         * Генерируем 100+ позиций для полноценного каталога.
+         * Расширенная версия для реализации полноценного каталога.
+         * Каждая запись отформатирована для удобства чтения.
          */
         const productsDatabase = [
             { 
-                id: 'item_1', 
+                id: 'tg_usa_1', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'USA', 
                 badgeColor: '#3221ff', 
-                specs: ['Clean History', 'No Restrictions', 'Instant Delivery', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'Clean History', 
+                    'No Restrictions', 
+                    'Instant Delivery', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 7, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -858,11 +818,17 @@
                 keywords: ['telegram', 'usa', 'account', 'chat', 'телеграм'] 
             },
             { 
-                id: 'item_2', 
+                id: 'tg_ru_1', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'RU', 
                 badgeColor: '#ff1e56', 
-                specs: ['Aged Account', 'Russian Region', 'No Spam Block', 'Session Only', 'Verified'], 
+                specs: [
+                    'Aged Account', 
+                    'Russian Region', 
+                    'No Spam Block', 
+                    'Session Only', 
+                    'Verified'
+                ], 
                 price: 8, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -870,11 +836,17 @@
                 keywords: ['telegram', 'ru', 'russia', 'account', 'chat', 'телеграм', 'ру'] 
             },
             { 
-                id: 'item_3', 
+                id: 'tg_uk_1', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'UK', 
                 badgeColor: '#8e2de2', 
-                specs: ['UK Premium', 'Aged 6 Months', 'Trusted Node', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'UK Premium', 
+                    'Aged 6 Months', 
+                    'Trusted Node', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 12, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -882,11 +854,17 @@
                 keywords: ['telegram', 'uk', 'united kingdom', 'account', 'chat', 'телеграм', 'англия'] 
             },
             { 
-                id: 'item_4', 
+                id: 'tg_de_1', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'DE', 
                 badgeColor: '#00d4ff', 
-                specs: ['German Number', 'Clean IP Reg', 'No Limits', 'Session', 'Secure'], 
+                specs: [
+                    'German Number', 
+                    'Clean IP Reg', 
+                    'No Limits', 
+                    'Session', 
+                    'Secure'
+                ], 
                 price: 9, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -894,11 +872,17 @@
                 keywords: ['telegram', 'de', 'germany', 'account', 'chat', 'телеграм', 'германия'] 
             },
             { 
-                id: 'item_5', 
+                id: 'vpn_nord_1', 
                 hugeTitle: 'NordVPN', 
                 badgeText: '1YR', 
                 badgeColor: '#3221ff', 
-                specs: ['Premium Plan', 'Global Servers', 'No-Logs Policy', 'Instant Login', 'Guarantee'], 
+                specs: [
+                    'Premium Plan', 
+                    'Global Servers', 
+                    'No-Logs Policy', 
+                    'Instant Login', 
+                    'Guarantee'
+                ], 
                 price: 35, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -906,11 +890,17 @@
                 keywords: ['vpn', 'nord', 'security', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_6', 
+                id: 'vpn_express_1', 
                 hugeTitle: 'Express', 
                 badgeText: '6MO', 
                 badgeColor: '#ff1e56', 
-                specs: ['Ultra Fast', 'Streaming Opt', 'All Devices', 'Private Key', 'No-Logs'], 
+                specs: [
+                    'Ultra Fast', 
+                    'Streaming Opt', 
+                    'All Devices', 
+                    'Private Key', 
+                    'No-Logs'
+                ], 
                 price: 25, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -918,11 +908,17 @@
                 keywords: ['vpn', 'express', 'fast', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_7', 
+                id: 'vpn_private_1', 
                 hugeTitle: 'Private', 
                 badgeText: 'NODE', 
                 badgeColor: '#8e2de2', 
-                specs: ['Dedicated IP', '1Gbps Speed', 'Military Grade', 'Custom Setup', 'Anonymity'], 
+                specs: [
+                    'Dedicated IP', 
+                    '1Gbps Speed', 
+                    'Military Grade', 
+                    'Custom Setup', 
+                    'Anonymity'
+                ], 
                 price: 99, 
                 actionText: 'Deploy Node',
                 brand: 'Secure Net',
@@ -930,11 +926,17 @@
                 keywords: ['vpn', 'private', 'node', 'dedicated', 'security', 'впн'] 
             },
             { 
-                id: 'item_8', 
+                id: 'netflix_4k_1', 
                 hugeTitle: 'Netflix', 
                 badgeText: '4K', 
                 badgeColor: '#e50914', 
-                specs: ['UHD Plan', 'Private Profile', '1 Month Subs', 'Multi-Language', 'No Geo-Block'], 
+                specs: [
+                    'UHD Plan', 
+                    'Private Profile', 
+                    '1 Month Subs', 
+                    'Multi-Language', 
+                    'No Geo-Block'
+                ], 
                 price: 10, 
                 actionText: 'Watch Now',
                 brand: 'Stream Lab',
@@ -942,11 +944,17 @@
                 keywords: ['netflix', 'streaming', 'movie', '4k', 'video', 'нетфликс'] 
             },
             { 
-                id: 'item_9', 
+                id: 'spotify_fam_1', 
                 hugeTitle: 'Spotify', 
                 badgeText: 'FAM', 
                 badgeColor: '#1db954', 
-                specs: ['Family Invite', 'Ad-Free', 'High Quality', 'Offline Sync', '1 Year Subs'], 
+                specs: [
+                    'Family Invite', 
+                    'Ad-Free', 
+                    'High Quality', 
+                    'Offline Sync', 
+                    '1 Year Subs'
+                ], 
                 price: 15, 
                 actionText: 'Listen Now',
                 brand: 'Stream Lab',
@@ -954,11 +962,17 @@
                 keywords: ['spotify', 'music', 'audio', 'premium', 'спотифай', 'музыка'] 
             },
             { 
-                id: 'item_10', 
+                id: 'tg_usa_2', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'USA', 
                 badgeColor: '#3221ff', 
-                specs: ['Clean History', 'No Restrictions', 'Instant Delivery', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'Clean History', 
+                    'No Restrictions', 
+                    'Instant Delivery', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 7, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -966,11 +980,17 @@
                 keywords: ['telegram', 'usa', 'account', 'chat', 'телеграм'] 
             },
             { 
-                id: 'item_11', 
+                id: 'tg_ru_2', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'RU', 
                 badgeColor: '#ff1e56', 
-                specs: ['Aged Account', 'Russian Region', 'No Spam Block', 'Session Only', 'Verified'], 
+                specs: [
+                    'Aged Account', 
+                    'Russian Region', 
+                    'No Spam Block', 
+                    'Session Only', 
+                    'Verified'
+                ], 
                 price: 8, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -978,11 +998,17 @@
                 keywords: ['telegram', 'ru', 'russia', 'account', 'chat', 'телеграм', 'ру'] 
             },
             { 
-                id: 'item_12', 
+                id: 'tg_uk_2', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'UK', 
                 badgeColor: '#8e2de2', 
-                specs: ['UK Premium', 'Aged 6 Months', 'Trusted Node', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'UK Premium', 
+                    'Aged 6 Months', 
+                    'Trusted Node', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 12, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -990,11 +1016,17 @@
                 keywords: ['telegram', 'uk', 'united kingdom', 'account', 'chat', 'телеграм', 'англия'] 
             },
             { 
-                id: 'item_13', 
+                id: 'tg_de_2', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'DE', 
                 badgeColor: '#00d4ff', 
-                specs: ['German Number', 'Clean IP Reg', 'No Limits', 'Session', 'Secure'], 
+                specs: [
+                    'German Number', 
+                    'Clean IP Reg', 
+                    'No Limits', 
+                    'Session', 
+                    'Secure'
+                ], 
                 price: 9, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1002,11 +1034,17 @@
                 keywords: ['telegram', 'de', 'germany', 'account', 'chat', 'телеграм', 'германия'] 
             },
             { 
-                id: 'item_14', 
+                id: 'vpn_nord_2', 
                 hugeTitle: 'NordVPN', 
                 badgeText: '1YR', 
                 badgeColor: '#3221ff', 
-                specs: ['Premium Plan', 'Global Servers', 'No-Logs Policy', 'Instant Login', 'Guarantee'], 
+                specs: [
+                    'Premium Plan', 
+                    'Global Servers', 
+                    'No-Logs Policy', 
+                    'Instant Login', 
+                    'Guarantee'
+                ], 
                 price: 35, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1014,11 +1052,17 @@
                 keywords: ['vpn', 'nord', 'security', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_15', 
+                id: 'vpn_express_2', 
                 hugeTitle: 'Express', 
                 badgeText: '6MO', 
                 badgeColor: '#ff1e56', 
-                specs: ['Ultra Fast', 'Streaming Opt', 'All Devices', 'Private Key', 'No-Logs'], 
+                specs: [
+                    'Ultra Fast', 
+                    'Streaming Opt', 
+                    'All Devices', 
+                    'Private Key', 
+                    'No-Logs'
+                ], 
                 price: 25, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1026,11 +1070,17 @@
                 keywords: ['vpn', 'express', 'fast', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_16', 
+                id: 'vpn_private_2', 
                 hugeTitle: 'Private', 
                 badgeText: 'NODE', 
                 badgeColor: '#8e2de2', 
-                specs: ['Dedicated IP', '1Gbps Speed', 'Military Grade', 'Custom Setup', 'Anonymity'], 
+                specs: [
+                    'Dedicated IP', 
+                    '1Gbps Speed', 
+                    'Military Grade', 
+                    'Custom Setup', 
+                    'Anonymity'
+                ], 
                 price: 99, 
                 actionText: 'Deploy Node',
                 brand: 'Secure Net',
@@ -1038,11 +1088,17 @@
                 keywords: ['vpn', 'private', 'node', 'dedicated', 'security', 'впн'] 
             },
             { 
-                id: 'item_17', 
+                id: 'netflix_4k_2', 
                 hugeTitle: 'Netflix', 
                 badgeText: '4K', 
                 badgeColor: '#e50914', 
-                specs: ['UHD Plan', 'Private Profile', '1 Month Subs', 'Multi-Language', 'No Geo-Block'], 
+                specs: [
+                    'UHD Plan', 
+                    'Private Profile', 
+                    '1 Month Subs', 
+                    'Multi-Language', 
+                    'No Geo-Block'
+                ], 
                 price: 10, 
                 actionText: 'Watch Now',
                 brand: 'Stream Lab',
@@ -1050,11 +1106,17 @@
                 keywords: ['netflix', 'streaming', 'movie', '4k', 'video', 'нетфликс'] 
             },
             { 
-                id: 'item_18', 
+                id: 'spotify_fam_2', 
                 hugeTitle: 'Spotify', 
                 badgeText: 'FAM', 
                 badgeColor: '#1db954', 
-                specs: ['Family Invite', 'Ad-Free', 'High Quality', 'Offline Sync', '1 Year Subs'], 
+                specs: [
+                    'Family Invite', 
+                    'Ad-Free', 
+                    'High Quality', 
+                    'Offline Sync', 
+                    '1 Year Subs'
+                ], 
                 price: 15, 
                 actionText: 'Listen Now',
                 brand: 'Stream Lab',
@@ -1062,11 +1124,17 @@
                 keywords: ['spotify', 'music', 'audio', 'premium', 'спотифай', 'музыка'] 
             },
             { 
-                id: 'item_19', 
+                id: 'tg_usa_3', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'USA', 
                 badgeColor: '#3221ff', 
-                specs: ['Clean History', 'No Restrictions', 'Instant Delivery', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'Clean History', 
+                    'No Restrictions', 
+                    'Instant Delivery', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 7, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1074,11 +1142,17 @@
                 keywords: ['telegram', 'usa', 'account', 'chat', 'телеграм'] 
             },
             { 
-                id: 'item_20', 
+                id: 'tg_ru_3', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'RU', 
                 badgeColor: '#ff1e56', 
-                specs: ['Aged Account', 'Russian Region', 'No Spam Block', 'Session Only', 'Verified'], 
+                specs: [
+                    'Aged Account', 
+                    'Russian Region', 
+                    'No Spam Block', 
+                    'Session Only', 
+                    'Verified'
+                ], 
                 price: 8, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1086,11 +1160,17 @@
                 keywords: ['telegram', 'ru', 'russia', 'account', 'chat', 'телеграм', 'ру'] 
             },
             { 
-                id: 'item_21', 
+                id: 'tg_uk_3', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'UK', 
                 badgeColor: '#8e2de2', 
-                specs: ['UK Premium', 'Aged 6 Months', 'Trusted Node', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'UK Premium', 
+                    'Aged 6 Months', 
+                    'Trusted Node', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 12, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1098,11 +1178,17 @@
                 keywords: ['telegram', 'uk', 'united kingdom', 'account', 'chat', 'телеграм', 'англия'] 
             },
             { 
-                id: 'item_22', 
+                id: 'tg_de_3', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'DE', 
                 badgeColor: '#00d4ff', 
-                specs: ['German Number', 'Clean IP Reg', 'No Limits', 'Session', 'Secure'], 
+                specs: [
+                    'German Number', 
+                    'Clean IP Reg', 
+                    'No Limits', 
+                    'Session', 
+                    'Secure'
+                ], 
                 price: 9, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1110,11 +1196,17 @@
                 keywords: ['telegram', 'de', 'germany', 'account', 'chat', 'телеграм', 'германия'] 
             },
             { 
-                id: 'item_23', 
+                id: 'vpn_nord_3', 
                 hugeTitle: 'NordVPN', 
                 badgeText: '1YR', 
                 badgeColor: '#3221ff', 
-                specs: ['Premium Plan', 'Global Servers', 'No-Logs Policy', 'Instant Login', 'Guarantee'], 
+                specs: [
+                    'Premium Plan', 
+                    'Global Servers', 
+                    'No-Logs Policy', 
+                    'Instant Login', 
+                    'Guarantee'
+                ], 
                 price: 35, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1122,11 +1214,17 @@
                 keywords: ['vpn', 'nord', 'security', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_24', 
+                id: 'vpn_express_3', 
                 hugeTitle: 'Express', 
                 badgeText: '6MO', 
                 badgeColor: '#ff1e56', 
-                specs: ['Ultra Fast', 'Streaming Opt', 'All Devices', 'Private Key', 'No-Logs'], 
+                specs: [
+                    'Ultra Fast', 
+                    'Streaming Opt', 
+                    'All Devices', 
+                    'Private Key', 
+                    'No-Logs'
+                ], 
                 price: 25, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1134,11 +1232,17 @@
                 keywords: ['vpn', 'express', 'fast', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_25', 
+                id: 'vpn_private_3', 
                 hugeTitle: 'Private', 
                 badgeText: 'NODE', 
                 badgeColor: '#8e2de2', 
-                specs: ['Dedicated IP', '1Gbps Speed', 'Military Grade', 'Custom Setup', 'Anonymity'], 
+                specs: [
+                    'Dedicated IP', 
+                    '1Gbps Speed', 
+                    'Military Grade', 
+                    'Custom Setup', 
+                    'Anonymity'
+                ], 
                 price: 99, 
                 actionText: 'Deploy Node',
                 brand: 'Secure Net',
@@ -1146,11 +1250,17 @@
                 keywords: ['vpn', 'private', 'node', 'dedicated', 'security', 'впн'] 
             },
             { 
-                id: 'item_26', 
+                id: 'netflix_4k_3', 
                 hugeTitle: 'Netflix', 
                 badgeText: '4K', 
                 badgeColor: '#e50914', 
-                specs: ['UHD Plan', 'Private Profile', '1 Month Subs', 'Multi-Language', 'No Geo-Block'], 
+                specs: [
+                    'UHD Plan', 
+                    'Private Profile', 
+                    '1 Month Subs', 
+                    'Multi-Language', 
+                    'No Geo-Block'
+                ], 
                 price: 10, 
                 actionText: 'Watch Now',
                 brand: 'Stream Lab',
@@ -1158,11 +1268,17 @@
                 keywords: ['netflix', 'streaming', 'movie', '4k', 'video', 'нетфликс'] 
             },
             { 
-                id: 'item_27', 
+                id: 'spotify_fam_3', 
                 hugeTitle: 'Spotify', 
                 badgeText: 'FAM', 
                 badgeColor: '#1db954', 
-                specs: ['Family Invite', 'Ad-Free', 'High Quality', 'Offline Sync', '1 Year Subs'], 
+                specs: [
+                    'Family Invite', 
+                    'Ad-Free', 
+                    'High Quality', 
+                    'Offline Sync', 
+                    '1 Year Subs'
+                ], 
                 price: 15, 
                 actionText: 'Listen Now',
                 brand: 'Stream Lab',
@@ -1170,11 +1286,17 @@
                 keywords: ['spotify', 'music', 'audio', 'premium', 'спотифай', 'музыка'] 
             },
             { 
-                id: 'item_28', 
+                id: 'tg_usa_4', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'USA', 
                 badgeColor: '#3221ff', 
-                specs: ['Clean History', 'No Restrictions', 'Instant Delivery', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'Clean History', 
+                    'No Restrictions', 
+                    'Instant Delivery', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 7, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1182,11 +1304,17 @@
                 keywords: ['telegram', 'usa', 'account', 'chat', 'телеграм'] 
             },
             { 
-                id: 'item_29', 
+                id: 'tg_ru_4', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'RU', 
                 badgeColor: '#ff1e56', 
-                specs: ['Aged Account', 'Russian Region', 'No Spam Block', 'Session Only', 'Verified'], 
+                specs: [
+                    'Aged Account', 
+                    'Russian Region', 
+                    'No Spam Block', 
+                    'Session Only', 
+                    'Verified'
+                ], 
                 price: 8, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1194,11 +1322,17 @@
                 keywords: ['telegram', 'ru', 'russia', 'account', 'chat', 'телеграм', 'ру'] 
             },
             { 
-                id: 'item_30', 
+                id: 'tg_uk_4', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'UK', 
                 badgeColor: '#8e2de2', 
-                specs: ['UK Premium', 'Aged 6 Months', 'Trusted Node', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'UK Premium', 
+                    'Aged 6 Months', 
+                    'Trusted Node', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 12, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1206,11 +1340,17 @@
                 keywords: ['telegram', 'uk', 'united kingdom', 'account', 'chat', 'телеграм', 'англия'] 
             },
             { 
-                id: 'item_31', 
+                id: 'tg_de_4', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'DE', 
                 badgeColor: '#00d4ff', 
-                specs: ['German Number', 'Clean IP Reg', 'No Limits', 'Session', 'Secure'], 
+                specs: [
+                    'German Number', 
+                    'Clean IP Reg', 
+                    'No Limits', 
+                    'Session', 
+                    'Secure'
+                ], 
                 price: 9, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1218,11 +1358,17 @@
                 keywords: ['telegram', 'de', 'germany', 'account', 'chat', 'телеграм', 'германия'] 
             },
             { 
-                id: 'item_32', 
+                id: 'vpn_nord_4', 
                 hugeTitle: 'NordVPN', 
                 badgeText: '1YR', 
                 badgeColor: '#3221ff', 
-                specs: ['Premium Plan', 'Global Servers', 'No-Logs Policy', 'Instant Login', 'Guarantee'], 
+                specs: [
+                    'Premium Plan', 
+                    'Global Servers', 
+                    'No-Logs Policy', 
+                    'Instant Login', 
+                    'Guarantee'
+                ], 
                 price: 35, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1230,11 +1376,17 @@
                 keywords: ['vpn', 'nord', 'security', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_33', 
+                id: 'vpn_express_4', 
                 hugeTitle: 'Express', 
                 badgeText: '6MO', 
                 badgeColor: '#ff1e56', 
-                specs: ['Ultra Fast', 'Streaming Opt', 'All Devices', 'Private Key', 'No-Logs'], 
+                specs: [
+                    'Ultra Fast', 
+                    'Streaming Opt', 
+                    'All Devices', 
+                    'Private Key', 
+                    'No-Logs'
+                ], 
                 price: 25, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1242,11 +1394,17 @@
                 keywords: ['vpn', 'express', 'fast', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_34', 
+                id: 'vpn_private_4', 
                 hugeTitle: 'Private', 
                 badgeText: 'NODE', 
                 badgeColor: '#8e2de2', 
-                specs: ['Dedicated IP', '1Gbps Speed', 'Military Grade', 'Custom Setup', 'Anonymity'], 
+                specs: [
+                    'Dedicated IP', 
+                    '1Gbps Speed', 
+                    'Military Grade', 
+                    'Custom Setup', 
+                    'Anonymity'
+                ], 
                 price: 99, 
                 actionText: 'Deploy Node',
                 brand: 'Secure Net',
@@ -1254,11 +1412,17 @@
                 keywords: ['vpn', 'private', 'node', 'dedicated', 'security', 'впн'] 
             },
             { 
-                id: 'item_35', 
+                id: 'netflix_4k_4', 
                 hugeTitle: 'Netflix', 
                 badgeText: '4K', 
                 badgeColor: '#e50914', 
-                specs: ['UHD Plan', 'Private Profile', '1 Month Subs', 'Multi-Language', 'No Geo-Block'], 
+                specs: [
+                    'UHD Plan', 
+                    'Private Profile', 
+                    '1 Month Subs', 
+                    'Multi-Language', 
+                    'No Geo-Block'
+                ], 
                 price: 10, 
                 actionText: 'Watch Now',
                 brand: 'Stream Lab',
@@ -1266,11 +1430,17 @@
                 keywords: ['netflix', 'streaming', 'movie', '4k', 'video', 'нетфликс'] 
             },
             { 
-                id: 'item_36', 
+                id: 'spotify_fam_4', 
                 hugeTitle: 'Spotify', 
                 badgeText: 'FAM', 
                 badgeColor: '#1db954', 
-                specs: ['Family Invite', 'Ad-Free', 'High Quality', 'Offline Sync', '1 Year Subs'], 
+                specs: [
+                    'Family Invite', 
+                    'Ad-Free', 
+                    'High Quality', 
+                    'Offline Sync', 
+                    '1 Year Subs'
+                ], 
                 price: 15, 
                 actionText: 'Listen Now',
                 brand: 'Stream Lab',
@@ -1278,11 +1448,17 @@
                 keywords: ['spotify', 'music', 'audio', 'premium', 'спотифай', 'музыка'] 
             },
             { 
-                id: 'item_37', 
+                id: 'tg_usa_5', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'USA', 
                 badgeColor: '#3221ff', 
-                specs: ['Clean History', 'No Restrictions', 'Instant Delivery', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'Clean History', 
+                    'No Restrictions', 
+                    'Instant Delivery', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 7, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1290,11 +1466,17 @@
                 keywords: ['telegram', 'usa', 'account', 'chat', 'телеграм'] 
             },
             { 
-                id: 'item_38', 
+                id: 'tg_ru_5', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'RU', 
                 badgeColor: '#ff1e56', 
-                specs: ['Aged Account', 'Russian Region', 'No Spam Block', 'Session Only', 'Verified'], 
+                specs: [
+                    'Aged Account', 
+                    'Russian Region', 
+                    'No Spam Block', 
+                    'Session Only', 
+                    'Verified'
+                ], 
                 price: 8, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1302,11 +1484,17 @@
                 keywords: ['telegram', 'ru', 'russia', 'account', 'chat', 'телеграм', 'ру'] 
             },
             { 
-                id: 'item_39', 
+                id: 'tg_uk_5', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'UK', 
                 badgeColor: '#8e2de2', 
-                specs: ['UK Premium', 'Aged 6 Months', 'Trusted Node', 'Session/TDATA', 'Full Access'], 
+                specs: [
+                    'UK Premium', 
+                    'Aged 6 Months', 
+                    'Trusted Node', 
+                    'Session/TDATA', 
+                    'Full Access'
+                ], 
                 price: 12, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1314,11 +1502,17 @@
                 keywords: ['telegram', 'uk', 'united kingdom', 'account', 'chat', 'телеграм', 'англия'] 
             },
             { 
-                id: 'item_40', 
+                id: 'tg_de_5', 
                 hugeTitle: 'Telegram', 
                 badgeText: 'DE', 
                 badgeColor: '#00d4ff', 
-                specs: ['German Number', 'Clean IP Reg', 'No Limits', 'Session', 'Secure'], 
+                specs: [
+                    'German Number', 
+                    'Clean IP Reg', 
+                    'No Limits', 
+                    'Session', 
+                    'Secure'
+                ], 
                 price: 9, 
                 actionText: 'Purchase Acc',
                 brand: 'Premium Digital',
@@ -1326,11 +1520,17 @@
                 keywords: ['telegram', 'de', 'germany', 'account', 'chat', 'телеграм', 'германия'] 
             },
             { 
-                id: 'item_41', 
+                id: 'vpn_nord_5', 
                 hugeTitle: 'NordVPN', 
                 badgeText: '1YR', 
                 badgeColor: '#3221ff', 
-                specs: ['Premium Plan', 'Global Servers', 'No-Logs Policy', 'Instant Login', 'Guarantee'], 
+                specs: [
+                    'Premium Plan', 
+                    'Global Servers', 
+                    'No-Logs Policy', 
+                    'Instant Login', 
+                    'Guarantee'
+                ], 
                 price: 35, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1338,11 +1538,17 @@
                 keywords: ['vpn', 'nord', 'security', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_42', 
+                id: 'vpn_express_5', 
                 hugeTitle: 'Express', 
                 badgeText: '6MO', 
                 badgeColor: '#ff1e56', 
-                specs: ['Ultra Fast', 'Streaming Opt', 'All Devices', 'Private Key', 'No-Logs'], 
+                specs: [
+                    'Ultra Fast', 
+                    'Streaming Opt', 
+                    'All Devices', 
+                    'Private Key', 
+                    'No-Logs'
+                ], 
                 price: 25, 
                 actionText: 'Get Access',
                 brand: 'Secure Net',
@@ -1350,11 +1556,17 @@
                 keywords: ['vpn', 'express', 'fast', 'proxy', 'впн'] 
             },
             { 
-                id: 'item_43', 
+                id: 'vpn_private_5', 
                 hugeTitle: 'Private', 
                 badgeText: 'NODE', 
                 badgeColor: '#8e2de2', 
-                specs: ['Dedicated IP', '1Gbps Speed', 'Military Grade', 'Custom Setup', 'Anonymity'], 
+                specs: [
+                    'Dedicated IP', 
+                    '1Gbps Speed', 
+                    'Military Grade', 
+                    'Custom Setup', 
+                    'Anonymity'
+                ], 
                 price: 99, 
                 actionText: 'Deploy Node',
                 brand: 'Secure Net',
@@ -1362,11 +1574,17 @@
                 keywords: ['vpn', 'private', 'node', 'dedicated', 'security', 'впн'] 
             },
             { 
-                id: 'item_44', 
+                id: 'netflix_4k_5', 
                 hugeTitle: 'Netflix', 
                 badgeText: '4K', 
                 badgeColor: '#e50914', 
-                specs: ['UHD Plan', 'Private Profile', '1 Month Subs', 'Multi-Language', 'No Geo-Block'], 
+                specs: [
+                    'UHD Plan', 
+                    'Private Profile', 
+                    '1 Month Subs', 
+                    'Multi-Language', 
+                    'No Geo-Block'
+                ], 
                 price: 10, 
                 actionText: 'Watch Now',
                 brand: 'Stream Lab',
@@ -1374,83 +1592,29 @@
                 keywords: ['netflix', 'streaming', 'movie', '4k', 'video', 'нетфликс'] 
             },
             { 
-                id: 'item_45', 
+                id: 'spotify_fam_5', 
                 hugeTitle: 'Spotify', 
                 badgeText: 'FAM', 
                 badgeColor: '#1db954', 
-                specs: ['Family Invite', 'Ad-Free', 'High Quality', 'Offline Sync', '1 Year Subs'], 
+                specs: [
+                    'Family Invite', 
+                    'Ad-Free', 
+                    'High Quality', 
+                    'Offline Sync', 
+                    '1 Year Subs'
+                ], 
                 price: 15, 
                 actionText: 'Listen Now',
                 brand: 'Stream Lab',
                 subBrand: 'Audio Dept',
                 keywords: ['spotify', 'music', 'audio', 'premium', 'спотифай', 'музыка'] 
-            },
-            { 
-                id: 'item_46', 
-                hugeTitle: 'Telegram', 
-                badgeText: 'USA', 
-                badgeColor: '#3221ff', 
-                specs: ['Clean History', 'No Restrictions', 'Instant Delivery', 'Session/TDATA', 'Full Access'], 
-                price: 7, 
-                actionText: 'Purchase Acc',
-                brand: 'Premium Digital',
-                subBrand: 'Accounts Store',
-                keywords: ['telegram', 'usa', 'account', 'chat', 'телеграм'] 
-            },
-            { 
-                id: 'item_47', 
-                hugeTitle: 'Telegram', 
-                badgeText: 'RU', 
-                badgeColor: '#ff1e56', 
-                specs: ['Aged Account', 'Russian Region', 'No Spam Block', 'Session Only', 'Verified'], 
-                price: 8, 
-                actionText: 'Purchase Acc',
-                brand: 'Premium Digital',
-                subBrand: 'Accounts Store',
-                keywords: ['telegram', 'ru', 'russia', 'account', 'chat', 'телеграм', 'ру'] 
-            },
-            { 
-                id: 'item_48', 
-                hugeTitle: 'Telegram', 
-                badgeText: 'UK', 
-                badgeColor: '#8e2de2', 
-                specs: ['UK Premium', 'Aged 6 Months', 'Trusted Node', 'Session/TDATA', 'Full Access'], 
-                price: 12, 
-                actionText: 'Purchase Acc',
-                brand: 'Premium Digital',
-                subBrand: 'Accounts Store',
-                keywords: ['telegram', 'uk', 'united kingdom', 'account', 'chat', 'телеграм', 'англия'] 
-            },
-            { 
-                id: 'item_49', 
-                hugeTitle: 'Telegram', 
-                badgeText: 'DE', 
-                badgeColor: '#00d4ff', 
-                specs: ['German Number', 'Clean IP Reg', 'No Limits', 'Session', 'Secure'], 
-                price: 9, 
-                actionText: 'Purchase Acc',
-                brand: 'Premium Digital',
-                subBrand: 'Accounts Store',
-                keywords: ['telegram', 'de', 'germany', 'account', 'chat', 'телеграм', 'германия'] 
-            },
-            { 
-                id: 'item_50', 
-                hugeTitle: 'NordVPN', 
-                badgeText: '1YR', 
-                badgeColor: '#3221ff', 
-                specs: ['Premium Plan', 'Global Servers', 'No-Logs Policy', 'Instant Login', 'Guarantee'], 
-                price: 35, 
-                actionText: 'Get Access',
-                brand: 'Secure Net',
-                subBrand: 'Proxy Infrastructure',
-                keywords: ['vpn', 'nord', 'security', 'proxy', 'впн'] 
             }
         ];
 
         /**
          * ЛОГИКА СВЕЧЕНИЯ КУРСОРА (GLOW ENGINE)
-         * Теперь всегда работает безотказно. 
-         * На черном фоне белое пятно высветляет цвета через Screen.
+         * Реализует плавное следование светящегося шара за мышью
+         * с эффектом расширения при клике (таппе).
          */
         class CursorGlow {
             constructor(glowElement, dotElement) {
@@ -1468,16 +1632,19 @@
             }
 
             initEvents() {
+                // Отслеживание мыши
                 window.addEventListener('mousemove', (e) => {
                     this.mouseX = e.clientX;
                     this.mouseY = e.clientY;
                 });
                 
+                // Отслеживание касаний (мобилки)
                 window.addEventListener('touchmove', (e) => {
                     this.mouseX = e.touches[0].clientX;
                     this.mouseY = e.touches[0].clientY;
                 });
 
+                // Эффект расширения (Click/Tap)
                 const activate = () => this.glow.classList.add('active');
                 const deactivate = () => this.glow.classList.remove('active');
 
@@ -1488,12 +1655,15 @@
             }
 
             animate() {
+                // Линейная интерполяция (Lerp) для плавности свечения
                 this.currentX += (this.mouseX - this.currentX) * 0.15;
                 this.currentY += (this.mouseY - this.currentY) * 0.15;
                 
+                // Свечение плавно догоняет курсор
                 this.glow.style.left = `${this.currentX}px`;
                 this.glow.style.top = `${this.currentY}px`;
                 
+                // Точка курсора привязана жестко
                 if(this.dot) {
                     this.dot.style.left = `${this.mouseX}px`;
                     this.dot.style.top = `${this.mouseY}px`;
@@ -1503,6 +1673,7 @@
             }
         }
 
+        // Запуск свечения
         const DOM = {
             glow: document.getElementById('glow'),
             dot: document.getElementById('cursor-dot'),
@@ -1517,6 +1688,8 @@
 
         /**
          * 3D ЭФФЕКТ НАКЛОНА КАРТОЧЕК (TILT)
+         * Сохраняет строгую геометрию, наклоняясь слегка, 
+         * чтобы блики на черном фоне выглядели премиально.
          */
         function applyTiltEffect(cardElement) {
             const card = cardElement.querySelector('.card');
@@ -1552,9 +1725,9 @@
 
             renderAll() {
                 this.clearGrid();
-                // Показываем первые 30 для оптимизации
-                this.data.slice(0, 30).forEach((product, index) => this.renderCard(product, index));
-                DOM.searchStats.textContent = `Displaying ${Math.min(this.data.length, 30)} items`;
+                // Показываем первые 10 для производительности, либо все
+                this.data.slice(0, 20).forEach((product, index) => this.renderCard(product, index));
+                DOM.searchStats.textContent = `Displaying ${Math.min(this.data.length, 20)} items`;
                 DOM.searchStats.classList.add('visible');
             }
 
@@ -1608,6 +1781,7 @@
 
                 wrapper.innerHTML = `
                     <div class="card">
+                        <!-- Заголовок -->
                         <div class="card-header">
                             <div class="title-wrapper">
                                 <h2 class="title">${product.hugeTitle}</h2>
@@ -1617,12 +1791,14 @@
                         
                         <div class="divider"></div>
                         
+                        <!-- Характеристики -->
                         <div class="specs">
                             ${specsHtml}
                         </div>
                         
                         <div class="divider"></div>
                         
+                        <!-- Подвал -->
                         <div class="card-footer">
                             <div class="footer-left">
                                 <div class="circle-num">$${product.price}</div>
@@ -1648,6 +1824,7 @@
 
         /**
          * АНИМАЦИЯ ЧАСТИЦ (ЗВЕЗДНАЯ ПЫЛЬ)
+         * Частицы парят над анимированным градиентом, создавая глубину.
          */
         class ParticleEngine {
             constructor(canvas) {

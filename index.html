@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Digital Services</title>
+    <title>Premium Digital Store</title>
     <style>
         /* === RESET & BASE === */
         * {
@@ -14,13 +14,17 @@
         }
 
         body {
-            /* Smooth red-blue-purple morphing background */
-            background: linear-gradient(-45deg, #ff0055, #4a00e0, #8e2de2, #ff0055);
-            background-size: 400% 400%;
-            animation: gradientCloud 15s ease infinite;
+            /* Яркий переливающийся градиент */
+            background: linear-gradient(-45deg, #ff0040, #1900ff, #b700ff, #00d4ff);
+            background-size: 300% 300%;
+            animation: gradientCloud 5s ease infinite;
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 15vh; /* Отступ сверху, чтобы поиск был по центру изначально */
         }
 
         @keyframes gradientCloud {
@@ -34,215 +38,272 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+            width: 400px; 
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 40%, rgba(255, 255, 255, 0) 70%);
             border-radius: 50%;
-            pointer-events: none;
+            pointer-events: none; /* Важно: чтобы не блокировал клики */
             transform: translate(-50%, -50%);
             z-index: 9999;
-            mix-blend-mode: overlay;
-            transition: width 0.2s ease, height 0.2s ease; /* Smooth expansion on click */
+            mix-blend-mode: screen; /* Screen делает свечение намного ярче на цветном фоне */
+            transition: transform 0.1s ease-out, width 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s;
         }
 
-        /* === LAYOUT & GLASSMORPHISM === */
+        /* Класс, который добавляется при клике/нажатии */
+        #glow.active {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 0) 70%);
+        }
+
+        /* === LAYOUT === */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
             position: relative;
             z-index: 10;
-        }
-
-        /* Header & Search */
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 50px;
+            text-align: center;
         }
 
         .header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
+        /* === SEARCH === */
         .search-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
+            margin: 0 auto;
             position: relative;
         }
 
         .search-input {
             width: 100%;
-            padding: 18px 25px;
-            font-size: 1.1rem;
+            padding: 22px 30px;
+            font-size: 1.2rem;
             color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 40px;
             outline: none;
-            backdrop-filter: blur(15px); /* Glass effect */
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             transition: all 0.3s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.2);
         }
 
         .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .search-input:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid #00d4ff;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
         }
 
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        /* === RESULTS GRID === */
+        .results-grid {
+            display: none; /* Скрыто по умолчанию */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 60px;
+            animation: fadeInUP 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* Service Cards */
+        @keyframes fadeInUP {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === PRODUCT CARDS === */
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 40px 30px;
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
+            align-items: center;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(-10px) scale(1.02);
+            border: 1px solid #00d4ff;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .card-icons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .icon-svg {
+            width: 60px;
+            height: 60px;
+            stroke: #fff;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
         }
 
         .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.6rem;
             font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
         }
 
-        .card-desc {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            margin-bottom: 25px;
-            flex-grow: 1;
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00d4ff;
+            margin: 15px 0 25px 0;
+            text-shadow: 0 2px 10px rgba(0, 212, 255, 0.4);
         }
 
-        .card-btn {
-            padding: 12px 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
+        .buy-btn {
+            padding: 15px 40px;
+            background: #fff;
+            color: #000;
             border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 100%;
         }
 
-        .card:hover .card-btn {
-            background: #fff;
-            transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.4);
+        .card:hover .buy-btn {
+            background: #00d4ff;
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
         }
 
     </style>
 </head>
 <body>
 
-    <!-- Glow element -->
+    <!-- Улучшенный элемент свечения -->
     <div id="glow"></div>
 
     <div class="container">
         <header class="header">
             <h1>Premium Digital Accounts</h1>
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search for accounts, services, VPNs...">
+                <!-- Подсказка в placeholder -->
+                <input type="text" id="searchInput" class="search-input" placeholder="Type 'Telegram' to search...">
             </div>
         </header>
 
-        <main class="services-grid">
-            <!-- Example Card 1 -->
+        <!-- Сетка товаров (изначально скрыта) -->
+        <main id="resultsGrid" class="results-grid">
+            
+            <!-- Карточка 1: США -->
             <div class="card">
-                <h2 class="card-title">Premium Accounts</h2>
-                <p class="card-desc">High-quality, verified digital accounts ready for immediate use. Secure and reliable.</p>
-                <button class="card-btn">View Details</button>
+                <div class="card-icons">
+                    <!-- Иконка Telegram (чистый SVG) -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                    </svg>
+                    <!-- Иконка SIM-карты (чистый SVG) -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Контур симки со срезанным углом -->
+                        <path d="M7 2 h10 a2 2 0 0 1 2 2 v16 a2 2 0 0 1 -2 2 h-12 a2 2 0 0 1 -2 -2 v-12 l4 -4 z"></path>
+                        <!-- Контакты чипа -->
+                        <rect x="9" y="10" width="6" height="8" rx="1"></rect>
+                        <line x1="9" y1="14" x2="15" y2="14"></line>
+                        <line x1="12" y1="10" x2="12" y2="18"></line>
+                    </svg>
+                </div>
+                <h2 class="card-title">Telegram Account USA</h2>
+                <div class="price">$7</div>
+                <button class="buy-btn">Purchase</button>
             </div>
 
-            <!-- Example Card 2 -->
+            <!-- Карточка 2: РУ -->
             <div class="card">
-                <h2 class="card-title">Private VPN</h2>
-                <p class="card-desc">Exclusive private network setups. Ensure your traffic remains completely anonymous.</p>
-                <button class="card-btn">View Details</button>
+                <div class="card-icons">
+                    <!-- Иконка Telegram -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                    </svg>
+                    <!-- Иконка SIM-карты -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 2 h10 a2 2 0 0 1 2 2 v16 a2 2 0 0 1 -2 2 h-12 a2 2 0 0 1 -2 -2 v-12 l4 -4 z"></path>
+                        <rect x="9" y="10" width="6" height="8" rx="1"></rect>
+                        <line x1="9" y1="14" x2="15" y2="14"></line>
+                        <line x1="12" y1="10" x2="12" y2="18"></line>
+                    </svg>
+                </div>
+                <h2 class="card-title">Telegram Account RU</h2>
+                <div class="price">$8</div>
+                <button class="buy-btn">Purchase</button>
             </div>
 
-            <!-- Example Card 3 -->
-            <div class="card">
-                <h2 class="card-title">Cloud Storage</h2>
-                <p class="card-desc">Unlimited encrypted cloud space for your personal or business data needs.</p>
-                <button class="card-btn">View Details</button>
-            </div>
-
-            <!-- Example Card 4 -->
-            <div class="card">
-                <h2 class="card-title">Custom Setup</h2>
-                <p class="card-desc">Tailored configurations and personalized network environments.</p>
-                <button class="card-btn">View Details</button>
-            </div>
         </main>
     </div>
 
     <script>
+        // === ЛОГИКА СВЕЧЕНИЯ ===
         const glow = document.getElementById('glow');
 
-        // Mouse move logic
+        // Следование за курсором (с requestAnimationFrame для максимальной плавности)
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
         window.addEventListener('mousemove', (e) => {
-            // Using requestAnimationFrame inside mousemove isn't strictly necessary for left/top, 
-            // but for absolute perfection we just update directly for minimal latency
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            // Убираем задержку через прямой стиль
+            glow.style.left = mouseX + 'px';
+            glow.style.top = mouseY + 'px';
         });
 
-        // Touch logic for mobile/tablets
         window.addEventListener('touchmove', (e) => {
-            glow.style.left = e.touches[0].clientX + 'px';
-            glow.style.top = e.touches[0].clientY + 'px';
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+            glow.style.left = mouseX + 'px';
+            glow.style.top = mouseY + 'px';
         });
 
-        // Click / Tap expansion effect
-        window.addEventListener('mousedown', () => {
-            glow.style.width = '450px';
-            glow.style.height = '450px';
-        });
+        // Резкое и заметное увеличение при нажатии
+        const activateGlow = () => glow.classList.add('active');
+        const deactivateGlow = () => glow.classList.remove('active');
 
-        window.addEventListener('mouseup', () => {
-            glow.style.width = '300px';
-            glow.style.height = '300px';
-        });
+        window.addEventListener('mousedown', activateGlow);
+        window.addEventListener('mouseup', deactivateGlow);
+        window.addEventListener('touchstart', activateGlow);
+        window.addEventListener('touchend', deactivateGlow);
 
-        window.addEventListener('touchstart', () => {
-            glow.style.width = '450px';
-            glow.style.height = '450px';
-        });
 
-        window.addEventListener('touchend', () => {
-            glow.style.width = '300px';
-            glow.style.height = '300px';
+        // === ЛОГИКА ПОИСКА ===
+        const searchInput = document.getElementById('searchInput');
+        const resultsGrid = document.getElementById('resultsGrid');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            
+            // Если ввели 'telegram' или 'телеграм', показываем карточки
+            if (query.includes('telegram') || query.includes('телеграм')) {
+                resultsGrid.style.display = 'grid';
+            } else {
+                resultsGrid.style.display = 'none';
+            }
         });
     </script>
 </body>
